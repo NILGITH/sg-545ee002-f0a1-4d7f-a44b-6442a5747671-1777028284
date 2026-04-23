@@ -1,9 +1,9 @@
 ---
 title: Page catalogue offres d'emploi
-status: todo
+status: done
 priority: high
 type: feature
-tags: [frontend, jobs]
+tags: [frontend, page]
 created_by: agent
 created_at: 2026-04-23T10:56:24Z
 position: 4
