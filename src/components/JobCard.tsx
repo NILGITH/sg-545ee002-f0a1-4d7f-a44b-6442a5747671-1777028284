@@ -12,11 +12,9 @@ interface JobCardProps {
 }
 
 export function JobCard({ job }: JobCardProps) {
-  const formatSalary = (min?: number, max?: number) => {
-    if (!min && !max) return "À négocier";
-    if (min && max) return `${min.toLocaleString()} - ${max.toLocaleString()} USD`;
-    if (min) return `À partir de ${min.toLocaleString()} USD`;
-    return "À négocier";
+  const formatSalary = (range?: string | null) => {
+    if (!range) return "À négocier";
+    return range;
   };
 
   const getContractTypeLabel = (type: string) => {
@@ -57,13 +55,13 @@ export function JobCard({ job }: JobCardProps) {
         
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <DollarSign size={16} />
-          <span>{formatSalary(job.salary_min, job.salary_max)}</span>
+          <span>{formatSalary(job.salary_range)}</span>
         </div>
         
-        {job.experience_required && (
+        {job.experience_level && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Clock size={16} />
-            <span>{job.experience_required}</span>
+            <span>{job.experience_level}</span>
           </div>
         )}
         
