@@ -11,21 +11,21 @@ import Image from "next/image";
 const heroSlides = [
   {
     title: "Connecter les Talents aux Opportunités",
-    subtitle: "Expert en recrutement, conseil RH et développement des talents",
+    subtitle: "Expert en recrutement, conseil RH et développement des talents en Côte d'Ivoire",
     cta: "Découvrir les offres",
     ctaLink: "/jobs",
     image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80",
   },
   {
     title: "Votre Partenaire RH de Confiance",
-    subtitle: "Accompagnement personnalisé pour entreprises et professionnels",
+    subtitle: "Accompagnement personnalisé pour entreprises et professionnels ivoiriens",
     cta: "Nos services",
     ctaLink: "/services/entreprises",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80",
   },
   {
     title: "Excellence et Innovation RH",
-    subtitle: "Plus de 10 ans d'expertise au service de votre réussite",
+    subtitle: "Plus de 8 ans d'expertise au service de votre réussite à Abidjan",
     cta: "À propos de nous",
     ctaLink: "/about",
     image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&q=80",
@@ -47,7 +47,7 @@ export default function Home() {
     <>
       <SEO 
         title="HR Talents Partners - Ambassadeur de Talents et d'Excellence"
-        description="Premier cabinet de recrutement et conseil RH en Afrique de l'Ouest. +50 000 talents, +500 entreprises accompagnées."
+        description="Premier cabinet de recrutement et conseil RH en Côte d'Ivoire. +50 000 talents, +250 entreprises accompagnées à Abidjan."
       />
       
       <Navigation />
@@ -169,7 +169,7 @@ export default function Home() {
                   <Users className="text-accent" size={40} />
                 </div>
                 <div className="text-3xl md:text-4xl font-bold font-serif text-accent">50 000+</div>
-                <p className="text-sm md:text-base text-primary-foreground/80">Talents dans notre réseau africain</p>
+                <p className="text-sm md:text-base text-primary-foreground/80">Talents dans notre réseau ivoirien</p>
               </div>
               <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.3s" }}>
                 <div className="flex justify-center mb-2">
@@ -183,14 +183,14 @@ export default function Home() {
                   <MapPin className="text-accent" size={40} />
                 </div>
                 <div className="text-3xl md:text-4xl font-bold font-serif text-accent">Abidjan</div>
-                <p className="text-sm md:text-base text-primary-foreground/80">Un hub stratégique</p>
+                <p className="text-sm md:text-base text-primary-foreground/80">Notre hub stratégique</p>
               </div>
               <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.5s" }}>
                 <div className="flex justify-center mb-2">
                   <BadgeCheck className="text-accent" size={40} />
                 </div>
                 <div className="text-3xl md:text-4xl font-bold font-serif text-accent">8</div>
-                <p className="text-sm md:text-base text-primary-foreground/80">Années d'excellence sur le continent</p>
+                <p className="text-sm md:text-base text-primary-foreground/80">Années d'excellence en Côte d'Ivoire</p>
               </div>
             </div>
           </div>
@@ -243,8 +243,8 @@ export default function Home() {
                   </div>
                   <h3 className="font-serif text-2xl font-semibold">Analyse Salariale</h3>
                   <p className="text-muted-foreground">
-                    Premier cabinet à publier un Guide des Salaires en Côte d'Ivoire, Sénégal et Bénin. 
-                    Vision 360° des tendances salariales en Afrique de l'Ouest.
+                    Premier cabinet à publier un Guide des Salaires en Côte d'Ivoire. 
+                    Vision 360° des tendances salariales du marché ivoirien.
                   </p>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li className="flex items-start gap-2">
@@ -253,7 +253,7 @@ export default function Home() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Analyse sectorielle pointue et internationale</span>
+                      <span>Analyse sectorielle pointue du marché ivoirien</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
@@ -333,7 +333,7 @@ export default function Home() {
               </div>
               <h2 className="font-serif text-3xl md:text-4xl font-bold">Ils nous font confiance</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Des leaders africains et internationaux qui transforment leurs ambitions en réalités avec HR Talents Partners
+                Des leaders ivoiriens et internationaux qui transforment leurs ambitions en réalités avec HR Talents Partners
               </p>
             </div>
             
@@ -393,7 +393,7 @@ export default function Home() {
             {/* Additional trust indicators */}
             <div className="mt-12 text-center">
               <p className="text-muted-foreground text-sm">
-                <span className="font-semibold text-accent">+250 entreprises</span> nous font confiance à travers l'Afrique de l'Ouest
+                <span className="font-semibold text-accent">+250 entreprises</span> nous font confiance en Côte d'Ivoire
               </p>
             </div>
           </div>
@@ -418,7 +418,7 @@ export default function Home() {
                     </span>
                   </div>
                   <h3 className="font-serif text-2xl md:text-3xl font-bold">Guide des Salaires</h3>
-                  <p className="text-white/90 font-semibold">Côte d'Ivoire • Sénégal • Bénin</p>
+                  <p className="text-white/90 font-semibold">Côte d'Ivoire</p>
                 </div>
               </div>
               <div className="space-y-6">
@@ -428,12 +428,12 @@ export default function Home() {
                   </span>
                 </div>
                 <h2 className="font-serif text-3xl md:text-5xl font-bold">
-                  Guide des Salaires en Afrique de l'Ouest
+                  Guide des Salaires en Côte d'Ivoire
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Pionnier de l'intelligence RH en Afrique de l'Ouest, nous avons été le premier cabinet 
-                  à publier un Guide des Salaires en Côte d'Ivoire, au Sénégal et au Bénin, offrant une 
-                  vision 360° des tendances salariales basée sur une méthodologie rigoureuse.
+                  Pionnier de l'intelligence RH en Côte d'Ivoire, nous avons été le premier cabinet 
+                  à publier un Guide des Salaires, offrant une vision 360° des tendances salariales 
+                  du marché ivoirien basée sur une méthodologie rigoureuse.
                 </p>
                 
                 {/* Méthodologie */}
@@ -446,7 +446,7 @@ export default function Home() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Analyse sectorielle pointue, adaptée aux réalités locales et internationales</span>
+                      <span>Analyse sectorielle pointue, adaptée aux réalités du marché ivoirien</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
@@ -465,8 +465,8 @@ export default function Home() {
                     <p className="text-xs text-muted-foreground">Index publiés</p>
                   </div>
                   <div className="text-center p-4 bg-accent/5 rounded-lg border border-accent/20">
-                    <div className="text-3xl font-bold font-serif text-accent mb-1">3</div>
-                    <p className="text-xs text-muted-foreground">Pays couverts</p>
+                    <div className="text-3xl font-bold font-serif text-accent mb-1">CI</div>
+                    <p className="text-xs text-muted-foreground">Marché couvert</p>
                   </div>
                 </div>
                 <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
@@ -509,7 +509,7 @@ export default function Home() {
                   </p>
                   <div className="pt-4 border-t">
                     <p className="font-semibold">Marie Dupont</p>
-                    <p className="text-sm text-muted-foreground">DRH, Auchan Retail</p>
+                    <p className="text-sm text-muted-foreground">DRH, Auchan Retail Côte d'Ivoire</p>
                   </div>
                 </CardContent>
               </Card>
@@ -520,7 +520,7 @@ export default function Home() {
                     <div className="relative w-16 h-16 rounded-full overflow-hidden bg-muted">
                       <Image
                         src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"
-                        alt="Jean Kabamba"
+                        alt="Kouassi Jean"
                         fill
                         className="object-cover"
                       />
@@ -532,8 +532,8 @@ export default function Home() {
                     Un service de qualité et une écoute attentive."
                   </p>
                   <div className="pt-4 border-t">
-                    <p className="font-semibold">Jean Kabamba</p>
-                    <p className="text-sm text-muted-foreground">Manager Marketing</p>
+                    <p className="font-semibold">Kouassi Jean</p>
+                    <p className="text-sm text-muted-foreground">Manager Marketing, Abidjan</p>
                   </div>
                 </CardContent>
               </Card>
@@ -544,7 +544,7 @@ export default function Home() {
                     <div className="relative w-16 h-16 rounded-full overflow-hidden bg-muted">
                       <Image
                         src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80"
-                        alt="Sophie Mukendi"
+                        alt="Sophie Koffi"
                         fill
                         className="object-cover"
                       />
@@ -556,7 +556,7 @@ export default function Home() {
                     Un partenaire de confiance pour notre développement."
                   </p>
                   <div className="pt-4 border-t">
-                    <p className="font-semibold">Sophie Mukendi</p>
+                    <p className="font-semibold">Sophie Koffi</p>
                     <p className="text-sm text-muted-foreground">CEO, Unilever Côte d'Ivoire</p>
                   </div>
                 </CardContent>
