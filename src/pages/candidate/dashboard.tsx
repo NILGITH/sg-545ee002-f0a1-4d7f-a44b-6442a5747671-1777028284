@@ -35,7 +35,7 @@ export default function CandidateDashboard() {
   }, []);
 
   const checkAuth = async () => {
-    const { session } = await authService.getCurrentSession();
+    const session = await authService.getCurrentSession();
     if (!session) {
       router.push("/candidate/login");
       return;
