@@ -322,37 +322,62 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Clients Section - VRAIS CLIENTS */}
-        <section className="py-20 md:py-32 bg-muted/30">
+        {/* Clients Section - LOGOS DÉFILANTS */}
+        <section className="py-20 md:py-32 bg-muted/30 overflow-hidden">
           <div className="container">
-            <div className="text-center mb-12">
+            <div className="text-center mb-16">
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">Ils nous font confiance</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Ces entreprises africaines nous ont fait confiance et profitent de notre expertise
               </p>
             </div>
-            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16">
-              <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors">Auchan Retail</div>
-              <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors">Unilever</div>
-              <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors">NHL</div>
-              <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors">Studio</div>
-              <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors">Leadway Assurance</div>
-              <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors">Oryx Energies</div>
+            
+            {/* Scrolling logos container */}
+            <div className="relative">
+              {/* Gradient overlays */}
+              <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-muted/30 to-transparent z-10"></div>
+              <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-muted/30 to-transparent z-10"></div>
+              
+              {/* Scrolling track */}
+              <div className="flex gap-16 animate-scroll">
+                <div className="flex gap-16 min-w-max">
+                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Auchan Retail</div>
+                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Unilever</div>
+                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">NHL</div>
+                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Studio</div>
+                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Leadway Assurance</div>
+                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Oryx Energies</div>
+                </div>
+                {/* Duplicate for seamless loop */}
+                <div className="flex gap-16 min-w-max">
+                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Auchan Retail</div>
+                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Unilever</div>
+                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">NHL</div>
+                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Studio</div>
+                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Leadway Assurance</div>
+                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Oryx Energies</div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Guide des Salaires Section */}
+        {/* Guide des Salaires Section - NOUVELLE IMAGE */}
         <section className="py-20 md:py-32 bg-white">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="relative h-[400px] md:h-[500px]">
+              <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20">
                 <Image
-                  src="/salary-guide.png"
-                  alt="Guide des Salaires GSA"
+                  src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80"
+                  alt="Analyse salariale et données RH"
                   fill
-                  className="object-contain"
+                  className="object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+                <div className="absolute bottom-8 left-8 right-8 text-white">
+                  <h3 className="font-serif text-2xl font-bold mb-2">Guide des Salaires 2024-2025</h3>
+                  <p className="text-white/90">Côte d'Ivoire • Sénégal • Bénin</p>
+                </div>
               </div>
               <div className="space-y-6">
                 <div className="inline-block border-2 border-accent px-4 py-2">
