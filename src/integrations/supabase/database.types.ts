@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export type Json =
   | string
   | number
@@ -26,6 +26,7 @@ export type Database = {
           id: string
           job_id: string
           status: string | null
+          user_id: string | null
         }
         Insert: {
           candidate_email: string
@@ -37,6 +38,7 @@ export type Database = {
           id?: string
           job_id: string
           status?: string | null
+          user_id?: string | null
         }
         Update: {
           candidate_email?: string
@@ -48,6 +50,7 @@ export type Database = {
           id?: string
           job_id?: string
           status?: string | null
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -61,6 +64,7 @@ export type Database = {
       }
       candidates: {
         Row: {
+          bio: string | null
           created_at: string | null
           current_position: string | null
           cv_url: string | null
@@ -69,10 +73,13 @@ export type Database = {
           full_name: string
           id: string
           linkedin_url: string | null
+          location: string | null
           phone: string | null
           skills: string[] | null
+          user_id: string | null
         }
         Insert: {
+          bio?: string | null
           created_at?: string | null
           current_position?: string | null
           cv_url?: string | null
@@ -81,10 +88,13 @@ export type Database = {
           full_name: string
           id?: string
           linkedin_url?: string | null
+          location?: string | null
           phone?: string | null
           skills?: string[] | null
+          user_id?: string | null
         }
         Update: {
+          bio?: string | null
           created_at?: string | null
           current_position?: string | null
           cv_url?: string | null
@@ -93,8 +103,10 @@ export type Database = {
           full_name?: string
           id?: string
           linkedin_url?: string | null
+          location?: string | null
           phone?: string | null
           skills?: string[] | null
+          user_id?: string | null
         }
         Relationships: []
       }
