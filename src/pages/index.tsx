@@ -399,27 +399,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Guide des Salaires Section - NOUVELLE IMAGE D'ANALYSE DE DONNÉES */}
+        {/* Guide des Salaires Section - IMAGE LOCALE */}
         <section className="py-20 md:py-32 bg-white">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20 shadow-lg">
                 <Image
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
-                  alt="Analyse de données salariales et statistiques RH"
+                  src="/15685.jpg"
+                  alt="Guide des Salaires en Côte d'Ivoire - Analyse de données salariales"
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent"></div>
-                <div className="absolute bottom-8 left-8 right-8 text-white space-y-3">
-                  <div className="inline-block bg-accent px-4 py-2 rounded">
-                    <span className="font-serif text-sm font-bold uppercase tracking-wider">
-                      Édition 2024-2025
-                    </span>
-                  </div>
-                  <h3 className="font-serif text-2xl md:text-3xl font-bold">Guide des Salaires</h3>
-                  <p className="text-white/90 font-semibold">Côte d'Ivoire</p>
-                </div>
               </div>
               <div className="space-y-6">
                 <div className="inline-block border-2 border-accent px-4 py-2">
