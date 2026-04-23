@@ -10,10 +10,10 @@ import Image from "next/image";
 export default function About() {
   return (
     <>
-      <SEO 
+      <SEO
         title="À propos - HR Talents Partners"
-        description="Découvrez l'histoire et les valeurs de HR Talents Partners, premier cabinet de recrutement et conseil RH en Côte d'Ivoire."
-      />
+        description="Découvrez l'histoire et les valeurs de HR Talents Partners, premier cabinet de recrutement et conseil RH en Côte d'Ivoire." />
+      
       
       <Navigation />
       
@@ -25,8 +25,8 @@ export default function About() {
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80"
               alt="À propos"
               fill
-              className="object-cover"
-            />
+              className="object-cover" />
+            
             <div className="absolute inset-0 bg-primary/85"></div>
           </div>
           <div className="container relative text-center space-y-6 text-white">
@@ -64,11 +64,11 @@ export default function About() {
               </div>
               <div className="relative h-[500px]">
                 <Image
-                  src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&q=80"
+                  src="/2147664377.jpg"
                   alt="Notre équipe à Abidjan"
                   fill
-                  className="object-cover rounded-lg"
-                />
+                  className="object-cover rounded-lg" />
+                
               </div>
             </div>
           </div>
@@ -190,6 +190,6 @@ export default function About() {
       </main>
 
       <Footer />
-    </>
-  );
+    </>);
+
 }
