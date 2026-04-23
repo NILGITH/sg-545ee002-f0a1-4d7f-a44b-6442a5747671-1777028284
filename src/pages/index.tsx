@@ -322,61 +322,103 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Clients Section - LOGOS DÉFILANTS */}
-        <section className="py-20 md:py-32 bg-muted/30 overflow-hidden">
+        {/* Clients Section - LOGOS DÉFILANTS AVEC DESIGN ÉLÉGANT */}
+        <section className="py-20 md:py-32 bg-gradient-to-b from-background to-muted/30 overflow-hidden">
           <div className="container">
-            <div className="text-center mb-16">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">Ils nous font confiance</h2>
+            <div className="text-center mb-16 space-y-4">
+              <div className="inline-block border-2 border-accent px-4 py-2 mb-4">
+                <span className="font-serif text-sm font-semibold uppercase tracking-wider text-accent">
+                  Nos Partenaires
+                </span>
+              </div>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold">Ils nous font confiance</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Ces entreprises africaines nous ont fait confiance et profitent de notre expertise
+                Des leaders africains et internationaux qui transforment leurs ambitions en réalités avec HR Talents Partners
               </p>
             </div>
             
-            {/* Scrolling logos container */}
-            <div className="relative">
-              {/* Gradient overlays */}
-              <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-muted/30 to-transparent z-10"></div>
-              <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-muted/30 to-transparent z-10"></div>
+            {/* Scrolling logos container with elegant cards */}
+            <div className="relative py-8">
+              {/* Gradient overlays for fade effect */}
+              <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-background via-background/80 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-background via-background/80 to-transparent z-10 pointer-events-none"></div>
               
-              {/* Scrolling track */}
-              <div className="flex gap-16 animate-scroll">
-                <div className="flex gap-16 min-w-max">
-                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Auchan Retail</div>
-                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Unilever</div>
-                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">NHL</div>
-                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Studio</div>
-                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Leadway Assurance</div>
-                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Oryx Energies</div>
+              {/* Scrolling track with cards */}
+              <div className="flex gap-8 animate-scroll">
+                {/* First set of logos */}
+                <div className="flex gap-8 min-w-max">
+                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Auchan Retail</span>
+                  </div>
+                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Unilever</span>
+                  </div>
+                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">NHL</span>
+                  </div>
+                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Studio</span>
+                  </div>
+                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Leadway Assurance</span>
+                  </div>
+                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Oryx Energies</span>
+                  </div>
                 </div>
-                {/* Duplicate for seamless loop */}
-                <div className="flex gap-16 min-w-max">
-                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Auchan Retail</div>
-                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Unilever</div>
-                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">NHL</div>
-                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Studio</div>
-                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Leadway Assurance</div>
-                  <div className="text-2xl font-bold text-muted-foreground/60 hover:text-accent transition-colors whitespace-nowrap">Oryx Energies</div>
+                {/* Duplicate set for seamless infinite loop */}
+                <div className="flex gap-8 min-w-max">
+                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Auchan Retail</span>
+                  </div>
+                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Unilever</span>
+                  </div>
+                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">NHL</span>
+                  </div>
+                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Studio</span>
+                  </div>
+                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Leadway Assurance</span>
+                  </div>
+                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Oryx Energies</span>
+                  </div>
                 </div>
               </div>
+            </div>
+
+            {/* Additional trust indicators */}
+            <div className="mt-12 text-center">
+              <p className="text-muted-foreground text-sm">
+                <span className="font-semibold text-accent">+250 entreprises</span> nous font confiance à travers l'Afrique de l'Ouest
+              </p>
             </div>
           </div>
         </section>
 
-        {/* Guide des Salaires Section - NOUVELLE IMAGE */}
+        {/* Guide des Salaires Section - NOUVELLE IMAGE D'ANALYSE DE DONNÉES */}
         <section className="py-20 md:py-32 bg-white">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20">
+              <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20 shadow-lg">
                 <Image
-                  src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80"
-                  alt="Analyse salariale et données RH"
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+                  alt="Analyse de données salariales et statistiques RH"
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
-                <div className="absolute bottom-8 left-8 right-8 text-white">
-                  <h3 className="font-serif text-2xl font-bold mb-2">Guide des Salaires 2024-2025</h3>
-                  <p className="text-white/90">Côte d'Ivoire • Sénégal • Bénin</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent"></div>
+                <div className="absolute bottom-8 left-8 right-8 text-white space-y-3">
+                  <div className="inline-block bg-accent px-4 py-2 rounded">
+                    <span className="font-serif text-sm font-bold uppercase tracking-wider">
+                      Édition 2024-2025
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-2xl md:text-3xl font-bold">Guide des Salaires</h3>
+                  <p className="text-white/90 font-semibold">Côte d'Ivoire • Sénégal • Bénin</p>
                 </div>
               </div>
               <div className="space-y-6">
@@ -388,26 +430,46 @@ export default function Home() {
                 <h2 className="font-serif text-3xl md:text-5xl font-bold">
                   Guide des Salaires en Afrique de l'Ouest
                 </h2>
-                <p className="text-lg text-muted-foreground">
+                <p className="text-lg text-muted-foreground leading-relaxed">
                   Pionnier de l'intelligence RH en Afrique de l'Ouest, nous avons été le premier cabinet 
                   à publier un Guide des Salaires en Côte d'Ivoire, au Sénégal et au Bénin, offrant une 
-                  vision 360° des tendances salariales.
+                  vision 360° des tendances salariales basée sur une méthodologie rigoureuse.
                 </p>
+                
+                {/* Méthodologie */}
+                <div className="bg-muted/30 border-l-4 border-accent p-6 space-y-3">
+                  <h4 className="font-serif text-lg font-semibold">Notre méthodologie</h4>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Collecte de données confidentielles via des entretiens directs avec des professionnels clés</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Analyse sectorielle pointue, adaptée aux réalités locales et internationales</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Benchmarking complet des politiques salariales et avantages compétitifs</span>
+                    </li>
+                  </ul>
+                </div>
+
                 <div className="grid grid-cols-3 gap-4 pt-4">
-                  <div className="text-center">
+                  <div className="text-center p-4 bg-accent/5 rounded-lg border border-accent/20">
                     <div className="text-3xl font-bold font-serif text-accent mb-1">5000+</div>
-                    <p className="text-sm text-muted-foreground">Répondants au sondage</p>
+                    <p className="text-xs text-muted-foreground">Répondants au sondage</p>
                   </div>
-                  <div className="text-center">
+                  <div className="text-center p-4 bg-accent/5 rounded-lg border border-accent/20">
                     <div className="text-3xl font-bold font-serif text-accent mb-1">20</div>
-                    <p className="text-sm text-muted-foreground">Index publiés référencés</p>
+                    <p className="text-xs text-muted-foreground">Index publiés</p>
                   </div>
-                  <div className="text-center">
+                  <div className="text-center p-4 bg-accent/5 rounded-lg border border-accent/20">
                     <div className="text-3xl font-bold font-serif text-accent mb-1">3</div>
-                    <p className="text-sm text-muted-foreground">Pays couverts</p>
+                    <p className="text-xs text-muted-foreground">Pays couverts</p>
                   </div>
                 </div>
-                <Button asChild size="lg" className="bg-accent hover:bg-accent/90">
+                <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
                   <Link href="/contact">
                     Télécharger le Guide GSA <ArrowRight className="ml-2" size={20} />
                   </Link>
