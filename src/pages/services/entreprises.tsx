@@ -86,24 +86,24 @@ export default function ServicesEntreprises() {
                   </div>
                 </div>
               </div>
-              <div className="relative h-[400px] md:h-[500px]">
+              <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20 shadow-lg">
                 <Image
-                  src="/services-info.png"
-                  alt="Recrutement"
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80"
+                  alt="Entretien de recrutement professionnel"
                   fill
-                  className="object-contain"
+                  className="object-cover"
                 />
               </div>
             </div>
 
             {/* 2. Analyse Salariale */}
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="relative h-[400px] md:h-[500px] order-2 lg:order-1">
+              <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20 shadow-lg order-2 lg:order-1">
                 <Image
-                  src="/salary-guide.png"
-                  alt="Analyse Salariale"
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+                  alt="Analyse de données salariales et graphiques"
                   fill
-                  className="object-contain"
+                  className="object-cover"
                 />
               </div>
               <div className="space-y-6 order-1 lg:order-2">
@@ -174,24 +174,24 @@ export default function ServicesEntreprises() {
                   </div>
                 </div>
               </div>
-              <div className="relative h-[400px] md:h-[500px]">
+              <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20 shadow-lg">
                 <Image
-                  src="/team-info.png"
-                  alt="Team Building"
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+                  alt="Équipe collaborative en team building"
                   fill
-                  className="object-contain"
+                  className="object-cover"
                 />
               </div>
             </div>
 
             {/* 4. Formation */}
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="relative h-[400px] md:h-[500px] order-2 lg:order-1">
+              <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20 shadow-lg order-2 lg:order-1">
                 <Image
                   src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80"
-                  alt="Formation"
+                  alt="Formation et coaching professionnel"
                   fill
-                  className="object-cover rounded-lg"
+                  className="object-cover"
                 />
               </div>
               <div className="space-y-6 order-1 lg:order-2">
