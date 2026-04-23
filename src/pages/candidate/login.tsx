@@ -41,14 +41,11 @@ export default function CandidateLogin() {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await authService.signUp(signupForm.email, signupForm.password, {
-      full_name: signupForm.full_name,
-      phone: signupForm.phone,
-    });
+    const { user, error } = await authService.signUp(signupForm.email, signupForm.password);
 
     if (error) {
       alert("Erreur d'inscription: " + error.message);
-    } else {
+    } else if (user) {
       alert("Inscription réussie ! Vérifiez votre email pour confirmer votre compte.");
       router.push("/candidate/dashboard");
     }
