@@ -1,6 +1,6 @@
 ---
 title: Page d'accueil complète
-status: todo
+status: done
 priority: high
 type: feature
 tags: [frontend, page]

@@ -1,6 +1,6 @@
 ---
 title: Design system et composants UI
-status: todo
+status: done
 priority: urgent
 type: feature
 tags: [ui, design]
