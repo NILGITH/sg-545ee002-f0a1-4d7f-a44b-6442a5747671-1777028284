@@ -12,7 +12,7 @@ export default function About() {
     <>
       <SEO 
         title="À propos - HR Talents Partners"
-        description="Découvrez l'histoire et les valeurs de HR Talents Partners, cabinet de recrutement et conseil RH en Afrique de l'Ouest."
+        description="Découvrez l'histoire et les valeurs de HR Talents Partners, premier cabinet de recrutement et conseil RH en Côte d'Ivoire."
       />
       
       <Navigation />
@@ -39,7 +39,7 @@ export default function About() {
               Ambassadeurs de <span className="text-accent">Talents</span> et d'<span className="text-accent">Excellence</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Plus qu'un cabinet de recrutement, nous sommes vos partenaires stratégiques pour bâtir l'avenir de vos organisations
+              Plus qu'un cabinet de recrutement, nous sommes vos partenaires stratégiques pour bâtir l'avenir de vos organisations en Côte d'Ivoire
             </p>
           </div>
         </section>
@@ -52,20 +52,20 @@ export default function About() {
                 <h2 className="font-serif text-3xl md:text-5xl font-bold">Notre Histoire</h2>
                 <div className="space-y-4 text-muted-foreground">
                   <p className="text-lg">
-                    Dans un marché africain en pleine croissance, HR Talents Partners crée des connexions privilégiées entre les entreprises visionnaires et les talents qui transforment leurs ambitions en réalité.
+                    Dans un marché ivoirien en pleine croissance, HR Talents Partners crée des connexions privilégiées entre les entreprises visionnaires et les talents qui transforment leurs ambitions en réalité.
                   </p>
                   <p className="text-lg">
-                    Depuis plus de 10 ans, nous avons accompagné plus de 500 entreprises et connecté plus de 50 000 talents à travers l'Afrique de l'Ouest. Notre expertise s'étend du recrutement stratégique au conseil RH, en passant par l'analyse salariale et le développement des compétences.
+                    Depuis plus de 8 ans, nous avons accompagné plus de 250 entreprises et connecté plus de 50 000 talents à travers la Côte d'Ivoire. Notre expertise s'étend du recrutement stratégique au conseil RH, en passant par l'analyse salariale et le développement des compétences.
                   </p>
                   <p className="text-lg">
-                    Basés à Abidjan, nous sommes reconnus comme le premier cabinet à avoir publié un Guide des Salaires en Côte d'Ivoire, au Sénégal et au Bénin, offrant ainsi une vision 360° des tendances du marché RH africain.
+                    Basés à Abidjan, nous sommes reconnus comme le premier cabinet à avoir publié un Guide des Salaires en Côte d'Ivoire, offrant ainsi une vision 360° des tendances du marché RH ivoirien.
                   </p>
                 </div>
               </div>
               <div className="relative h-[500px]">
                 <Image
                   src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&q=80"
-                  alt="Notre équipe"
+                  alt="Notre équipe à Abidjan"
                   fill
                   className="object-cover rounded-lg"
                 />
@@ -80,7 +80,7 @@ export default function About() {
             <div className="text-center mb-16 space-y-4">
               <h2 className="font-serif text-3xl md:text-5xl font-bold">Nos Valeurs</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Les principes qui guident chacune de nos actions
+                Les principes qui guident chacune de nos actions en Côte d'Ivoire
               </p>
             </div>
 
@@ -128,7 +128,7 @@ export default function About() {
                   </div>
                   <h3 className="font-serif text-2xl font-semibold">Innovation</h3>
                   <p className="text-muted-foreground">
-                    Pionners de l'analyse RH en Afrique, nous innovons constamment pour vous servir mieux
+                    Pionniers de l'analyse RH en Côte d'Ivoire, nous innovons constamment pour vous servir mieux
                   </p>
                 </CardContent>
               </Card>
@@ -140,7 +140,7 @@ export default function About() {
         <section className="py-20 md:py-32">
           <div className="container">
             <div className="text-center mb-12">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">Notre Impact</h2>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">Notre Impact en Côte d'Ivoire</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Des chiffres qui témoignent de notre engagement et de votre confiance
               </p>
@@ -148,19 +148,19 @@ export default function About() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div className="space-y-2">
                 <div className="text-4xl md:text-5xl font-bold font-serif text-accent">50 000+</div>
-                <p className="text-muted-foreground">Talents dans notre réseau</p>
+                <p className="text-muted-foreground">Talents dans notre réseau ivoirien</p>
               </div>
               <div className="space-y-2">
-                <div className="text-4xl md:text-5xl font-bold font-serif text-accent">500+</div>
-                <p className="text-muted-foreground">Entreprises accompagnées</p>
+                <div className="text-4xl md:text-5xl font-bold font-serif text-accent">250+</div>
+                <p className="text-muted-foreground">Entreprises accompagnées à Abidjan</p>
+              </div>
+              <div className="space-y-2">
+                <div className="text-4xl md:text-5xl font-bold font-serif text-accent">15</div>
+                <p className="text-muted-foreground">Experts en capital humain</p>
               </div>
               <div className="space-y-2">
                 <div className="text-4xl md:text-5xl font-bold font-serif text-accent">8</div>
-                <p className="text-muted-foreground">Success stories majeures</p>
-              </div>
-              <div className="space-y-2">
-                <div className="text-4xl md:text-5xl font-bold font-serif text-accent">10+</div>
-                <p className="text-muted-foreground">Années d'expérience</p>
+                <p className="text-muted-foreground">Années d'excellence en Côte d'Ivoire</p>
               </div>
             </div>
           </div>
@@ -173,7 +173,7 @@ export default function About() {
               Prêt à rejoindre l'aventure ?
             </h2>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Que vous soyez entreprise ou candidat, nous avons une solution pour vous
+              Que vous soyez entreprise ou candidat en Côte d'Ivoire, nous avons une solution pour vous
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8">

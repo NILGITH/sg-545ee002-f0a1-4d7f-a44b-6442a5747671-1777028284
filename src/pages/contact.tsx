@@ -61,7 +61,7 @@ export default function Contact() {
     <>
       <SEO 
         title="Contact - HR Talents Partners"
-        description="Contactez HR Talents Partners pour vos besoins en recrutement et conseil RH en Afrique de l'Ouest."
+        description="Contactez HR Talents Partners pour vos besoins en recrutement et conseil RH en Côte d'Ivoire."
       />
       
       <Navigation />
@@ -88,7 +88,7 @@ export default function Contact() {
               Discutons de votre <span className="text-accent">projet</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Notre équipe est à votre écoute pour répondre à toutes vos questions
+              Notre équipe basée à Abidjan est à votre écoute pour répondre à toutes vos questions
             </p>
           </div>
         </section>
@@ -193,7 +193,7 @@ export default function Contact() {
                 <div>
                   <h2 className="font-serif text-3xl font-bold mb-6">Nos coordonnées</h2>
                   <p className="text-muted-foreground mb-8">
-                    N'hésitez pas à nous contacter directement. Notre équipe vous répondra dans les plus brefs délais.
+                    N'hésitez pas à nous contacter directement à notre bureau d'Abidjan. Notre équipe vous répondra dans les plus brefs délais.
                   </p>
                 </div>
 
@@ -224,7 +224,7 @@ export default function Contact() {
                         <div>
                           <h3 className="font-semibold mb-1">Téléphone</h3>
                           <p className="text-muted-foreground">
-                            +225 XX XX XX XX XX<br />
+                            +225 27 XX XX XX XX<br />
                             Lundi - Vendredi : 8h - 18h
                           </p>
                         </div>
