@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" fill="none">
+  <!-- HR (stylized handwriting) -->
+  <path d="M15 30 L15 70 M15 50 L35 50 M35 30 L35 70" stroke="#1a1a1a" stroke-width="2.5" fill="none"/>
+  <path d="M50 45 Q55 30, 65 45 Q70 55, 65 70 Q60 80, 50 70" stroke="#1a1a1a" stroke-width="2.5" fill="none"/>
+  
+  <!-- Talents (elegant script) -->
+  <text x="90" y="65" font-family="'Brush Script MT', cursive" font-size="36" fill="#1a1a1a" font-style="italic">Talents</text>
+  
+  <!-- Partners (elegant script) -->
+  <text x="200" y="65" font-family="'Brush Script MT', cursive" font-size="36" fill="#1a1a1a" font-style="italic">Partners</text>
+  
+  <!-- Decorative frame -->
+  <rect x="10" y="10" width="380" height="100" stroke="#1a1a1a" stroke-width="1.5" fill="none" rx="2"/>
+  <line x1="140" y1="5" x2="140" y2="15" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="260" y1="5" x2="260" y2="15" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="140" y1="105" x2="140" y2="115" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="260" y1="105" x2="260" y2="115" stroke="#1a1a1a" stroke-width="1.5"/>
+  
+  <!-- Tagline -->
+  <text x="200" y="95" font-family="Georgia, serif" font-size="9" fill="#1a1a1a" text-anchor="middle" letter-spacing="2">
+    AMBASSADEUR DE TALENTS ET D'EXCELLENCE
+  </text>
+</svg>
