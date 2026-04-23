@@ -10,10 +10,10 @@ import Image from "next/image";
 export default function ServicesCandidats() {
   return (
     <>
-      <SEO 
+      <SEO
         title="Services pour Candidats - HR Talents Partners"
-        description="Accompagnement personnalisé, conseil carrière et opportunités d'emploi en Côte d'Ivoire."
-      />
+        description="Accompagnement personnalisé, conseil carrière et opportunités d'emploi en Côte d'Ivoire." />
+      
       
       <Navigation />
       
@@ -25,8 +25,8 @@ export default function ServicesCandidats() {
               src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&q=80"
               alt="Services Candidats"
               fill
-              className="object-cover"
-            />
+              className="object-cover" />
+            
             <div className="absolute inset-0 bg-primary/85"></div>
           </div>
           <div className="container relative text-center space-y-6 text-white">
@@ -146,11 +146,11 @@ export default function ServicesCandidats() {
               </div>
               <div className="relative h-[500px]">
                 <Image
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
+                  src="/2148190653.jpg"
                   alt="Candidat"
                   fill
-                  className="object-cover rounded-lg"
-                />
+                  className="object-cover rounded-lg" />
+                
               </div>
             </div>
           </div>
@@ -180,6 +180,6 @@ export default function ServicesCandidats() {
       </main>
 
       <Footer />
-    </>
-  );
+    </>);
+
 }
