@@ -10,10 +10,10 @@ import Image from "next/image";
 export default function ServicesEntreprises() {
   return (
     <>
-      <SEO 
+      <SEO
         title="Services pour Entreprises - HR Talents Partners"
-        description="Recrutement, conseil RH, analyse salariale et team building pour entreprises en Côte d'Ivoire."
-      />
+        description="Recrutement, conseil RH, analyse salariale et team building pour entreprises en Côte d'Ivoire." />
+      
       
       <Navigation />
       
@@ -25,8 +25,8 @@ export default function ServicesEntreprises() {
               src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80"
               alt="Services Entreprises"
               fill
-              className="object-cover"
-            />
+              className="object-cover" />
+            
             <div className="absolute inset-0 bg-primary/85"></div>
           </div>
           <div className="container relative text-center space-y-6 text-white">
@@ -88,11 +88,11 @@ export default function ServicesEntreprises() {
               </div>
               <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20 shadow-lg">
                 <Image
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80"
+                  src="/21178.jpg"
                   alt="Entretien de recrutement professionnel"
                   fill
-                  className="object-cover"
-                />
+                  className="object-cover" />
+                
               </div>
             </div>
 
@@ -100,11 +100,11 @@ export default function ServicesEntreprises() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20 shadow-lg order-2 lg:order-1">
                 <Image
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+                  src="/89675.jpg"
                   alt="Analyse de données salariales et graphiques"
                   fill
-                  className="object-cover"
-                />
+                  className="object-cover" />
+                
               </div>
               <div className="space-y-6 order-1 lg:order-2">
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
@@ -176,11 +176,11 @@ export default function ServicesEntreprises() {
               </div>
               <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20 shadow-lg">
                 <Image
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+                  src="/2149603484.jpg"
                   alt="Équipe collaborative en team building"
                   fill
-                  className="object-cover"
-                />
+                  className="object-cover" />
+                
               </div>
             </div>
 
@@ -188,11 +188,11 @@ export default function ServicesEntreprises() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20 shadow-lg order-2 lg:order-1">
                 <Image
-                  src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80"
+                  src="/2149300718.jpg"
                   alt="Formation et coaching professionnel"
                   fill
-                  className="object-cover"
-                />
+                  className="object-cover" />
+                
               </div>
               <div className="space-y-6 order-1 lg:order-2">
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
@@ -254,6 +254,6 @@ export default function ServicesEntreprises() {
       </main>
 
       <Footer />
-    </>
-  );
+    </>);
+
 }
