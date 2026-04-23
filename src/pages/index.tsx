@@ -4,9 +4,42 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
 import Link from "next/link";
-import { ArrowRight, Users, Target, Award, TrendingUp, CheckCircle, Briefcase, GraduationCap, Handshake, MessageSquare } from "lucide-react";
+import { ArrowRight, Users, Target, Award, TrendingUp, CheckCircle, Briefcase, GraduationCap, Handshake, MessageSquare, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import Image from "next/image";
+
+const heroSlides = [
+  {
+    title: "Connecter les Talents aux Opportunités",
+    subtitle: "Expert en recrutement, conseil RH et développement des talents",
+    cta: "Découvrir les offres",
+    ctaLink: "/jobs",
+  },
+  {
+    title: "Votre Partenaire RH de Confiance",
+    subtitle: "Accompagnement personnalisé pour entreprises et professionnels",
+    cta: "Nos services",
+    ctaLink: "/services/entreprises",
+  },
+  {
+    title: "Excellence et Innovation RH",
+    subtitle: "Plus de 10 ans d'expertise au service de votre réussite",
+    cta: "À propos de nous",
+    ctaLink: "/about",
+  },
+];
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
+
   return (
     <>
       <SEO 
@@ -17,41 +50,91 @@ export default function Home() {
       <Navigation />
       
       <main>
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-background via-background to-muted py-20 md:py-32 overflow-hidden">
+        {/* Hero Slider Section */}
+        <section className="relative bg-gradient-to-br from-background via-background to-muted overflow-hidden">
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-20 right-20 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
             <div className="absolute bottom-20 left-20 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
           </div>
           
-          <div className="container relative">
-            <div className="max-w-4xl mx-auto text-center space-y-8 animate-in fade-in duration-1000">
-              <div className="inline-block border-2 border-primary px-6 py-3 mb-4">
-                <span className="font-serif text-sm md:text-base font-semibold uppercase tracking-wider">
-                  Ambassadeur de Talents et d'Excellence
-                </span>
+          {/* Slider Container */}
+          <div className="relative h-[600px] md:h-[700px]">
+            {heroSlides.map((slide, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-opacity duration-700 ${
+                  index === currentSlide ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <div className="container h-full flex items-center">
+                  <div className="max-w-4xl mx-auto text-center space-y-8">
+                    <div className="inline-block border-2 border-primary px-6 py-3 mb-4">
+                      <span className="font-serif text-sm md:text-base font-semibold uppercase tracking-wider">
+                        Ambassadeur de Talents et d'Excellence
+                      </span>
+                    </div>
+                    
+                    <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-tight animate-in fade-in slide-in-from-bottom-4 duration-700">
+                      {slide.title.split(" ").map((word, i) => (
+                        <span key={i}>
+                          {word === "Opportunités" || word === "Confiance" || word === "Innovation" ? (
+                            <span className="text-accent">{word}</span>
+                          ) : (
+                            word
+                          )}{" "}
+                        </span>
+                      ))}
+                    </h1>
+                    
+                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.2s" }}>
+                      {slide.subtitle}
+                    </p>
+                    
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.4s" }}>
+                      <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8">
+                        <Link href={slide.ctaLink}>
+                          {slide.cta} <ArrowRight className="ml-2" size={20} />
+                        </Link>
+                      </Button>
+                      <Button asChild size="lg" variant="outline" className="text-lg px-8 border-2">
+                        <Link href="/contact">Nous contacter</Link>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
-              
-              <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                Connecter les Talents aux{" "}
-                <span className="text-accent">Opportunités</span>
-              </h1>
-              
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                HR Talents Partners accompagne les entreprises et les professionnels dans leur quête d'excellence. 
-                Expert en recrutement, conseil RH et développement des talents.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8">
-                  <Link href="/jobs">
-                    Découvrir les offres <ArrowRight className="ml-2" size={20} />
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="text-lg px-8 border-2">
-                  <Link href="/contact">Nous contacter</Link>
-                </Button>
-              </div>
+            ))}
+
+            {/* Slider Controls */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur border-2 border-primary hover:bg-accent hover:border-accent transition-all flex items-center justify-center"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur border-2 border-primary hover:bg-accent hover:border-accent transition-all flex items-center justify-center"
+              aria-label="Next slide"
+            >
+              <ChevronRight size={24} />
+            </button>
+
+            {/* Slider Dots */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3">
+              {heroSlides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all ${
+                    index === currentSlide
+                      ? "bg-accent w-8"
+                      : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -236,8 +319,8 @@ export default function Home() {
                           et accès aux meilleures opportunités.
                         </p>
                         <Button asChild variant="link" className="text-accent px-0 mt-2">
-                          <Link href="/services/candidats">
-                            En savoir plus <ArrowRight className="ml-1" size={16} />
+                          <Link href="/candidate/login">
+                            Créer mon profil <ArrowRight className="ml-1" size={16} />
                           </Link>
                         </Button>
                       </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,9 +12,14 @@ export function Navigation() {
       <div className="container">
         <div className="flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center">
-            <div className="border-2 border-primary px-4 py-2">
-              <span className="font-serif text-2xl font-bold">HR Talents Partners</span>
-            </div>
+            <Image 
+              src="/logo-hr-talents.jpg" 
+              alt="HR Talents Partners" 
+              width={200} 
+              height={60}
+              className="h-14 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -37,7 +43,7 @@ export function Navigation() {
               Contact
             </Link>
             <Button asChild variant="default" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-              <Link href="/admin/login">Espace Admin</Link>
+              <Link href="/candidate/login">Espace Candidat</Link>
             </Button>
           </div>
 
@@ -74,7 +80,7 @@ export function Navigation() {
                 Contact
               </Link>
               <Button asChild variant="default" className="bg-accent hover:bg-accent/90 text-accent-foreground w-full">
-                <Link href="/admin/login" onClick={() => setIsOpen(false)}>Espace Admin</Link>
+                <Link href="/candidate/login" onClick={() => setIsOpen(false)}>Espace Candidat</Link>
               </Button>
             </div>
           </div>
