@@ -159,38 +159,38 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
               <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.1s" }}>
                 <div className="flex justify-center mb-2">
+                  <Award className="text-accent" size={40} />
+                </div>
+                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">15</div>
+                <p className="text-sm md:text-base text-primary-foreground/80">Experts en capital humain</p>
+              </div>
+              <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.2s" }}>
+                <div className="flex justify-center mb-2">
                   <Users className="text-accent" size={40} />
                 </div>
                 <div className="text-3xl md:text-4xl font-bold font-serif text-accent">50 000+</div>
                 <p className="text-sm md:text-base text-primary-foreground/80">Talents dans notre réseau africain</p>
               </div>
-              <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.2s" }}>
+              <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.3s" }}>
                 <div className="flex justify-center mb-2">
                   <Building2 className="text-accent" size={40} />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">500+</div>
-                <p className="text-sm md:text-base text-primary-foreground/80">Entreprises accompagnées en conseil RH</p>
+                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">250+</div>
+                <p className="text-sm md:text-base text-primary-foreground/80">Entreprises accompagnées en conseil</p>
               </div>
-              <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.3s" }}>
+              <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.4s" }}>
                 <div className="flex justify-center mb-2">
                   <MapPin className="text-accent" size={40} />
                 </div>
                 <div className="text-3xl md:text-4xl font-bold font-serif text-accent">Abidjan</div>
-                <p className="text-sm md:text-base text-primary-foreground/80">Présence stratégique</p>
+                <p className="text-sm md:text-base text-primary-foreground/80">Un hub stratégique</p>
               </div>
-              <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.4s" }}>
+              <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.5s" }}>
                 <div className="flex justify-center mb-2">
                   <BadgeCheck className="text-accent" size={40} />
                 </div>
                 <div className="text-3xl md:text-4xl font-bold font-serif text-accent">8</div>
-                <p className="text-sm md:text-base text-primary-foreground/80">Success stories sur le continent</p>
-              </div>
-              <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.5s" }}>
-                <div className="flex justify-center mb-2">
-                  <TrendingUp className="text-accent" size={40} />
-                </div>
-                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">10+</div>
-                <p className="text-sm md:text-base text-primary-foreground/80">Années d'expérience</p>
+                <p className="text-sm md:text-base text-primary-foreground/80">Années d'excellence sur le continent</p>
               </div>
             </div>
           </div>

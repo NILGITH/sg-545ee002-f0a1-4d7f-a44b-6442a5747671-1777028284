@@ -33,7 +33,6 @@ export default function Contact() {
       company: formData.company,
       subject: formData.subject,
       message: formData.message,
-      status: "new",
     });
 
     if (error) {
