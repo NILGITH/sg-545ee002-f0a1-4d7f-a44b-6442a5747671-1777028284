@@ -12,7 +12,7 @@ export default function ServicesCandidats() {
     <>
       <SEO 
         title="Services pour Candidats - HR Talents Partners"
-        description="Accompagnement personnalisé, conseil carrière et opportunités d'emploi en Afrique de l'Ouest."
+        description="Accompagnement personnalisé, conseil carrière et opportunités d'emploi en Côte d'Ivoire."
       />
       
       <Navigation />
@@ -39,7 +39,7 @@ export default function ServicesCandidats() {
               Faites briller vos <span className="text-accent">talents</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Accédez aux meilleures opportunités et construisez la carrière qui vous ressemble
+              Accédez aux meilleures opportunités et construisez la carrière qui vous ressemble en Côte d'Ivoire
             </p>
             <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8">
               <Link href="/candidate/login">
@@ -55,7 +55,7 @@ export default function ServicesCandidats() {
             <div className="text-center mb-16 space-y-4">
               <h2 className="font-serif text-3xl md:text-5xl font-bold">Notre accompagnement</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Un parcours structuré pour maximiser vos chances de succès
+                Un parcours structuré pour maximiser vos chances de succès en Côte d'Ivoire
               </p>
             </div>
 
@@ -82,7 +82,7 @@ export default function ServicesCandidats() {
                   <div className="text-accent font-serif text-5xl font-bold mb-2">2</div>
                   <h3 className="font-serif text-2xl font-semibold">Place au match parfait</h3>
                   <p className="text-muted-foreground">
-                    Nos experts analysent votre profil et activent leur réseau pour dénicher les opportunités qui vous correspondent vraiment.
+                    Nos experts analysent votre profil et activent leur réseau ivoirien pour dénicher les opportunités qui vous correspondent vraiment.
                     Plus besoin de chercher – les meilleures opportunités viennent à vous.
                   </p>
                 </CardContent>
@@ -96,7 +96,7 @@ export default function ServicesCandidats() {
                   <div className="text-accent font-serif text-5xl font-bold mb-2">3</div>
                   <h3 className="font-serif text-2xl font-semibold">Brillez !</h3>
                   <p className="text-muted-foreground">
-                    On vous prépare, on vous coach, on vous propulse. Nos formations, masterclass et ateliers vous donnent tous les outils pour briller.
+                    On vous prépare, on vous coach, on vous propulse. Nos formations, masterclass et ateliers vous donnent tous les outils pour briller sur le marché ivoirien.
                   </p>
                 </CardContent>
               </Card>
@@ -111,35 +111,35 @@ export default function ServicesCandidats() {
               <div className="space-y-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold">Pourquoi nous rejoindre ?</h2>
                 <p className="text-lg text-muted-foreground">
-                  Inscrivez-vous gratuitement et entrez dans le cercle privilégié des talents d'excellence où chaque candidat est unique.
+                  Inscrivez-vous gratuitement et entrez dans le cercle privilégié des talents d'excellence en Côte d'Ivoire.
                 </p>
                 <div className="space-y-4">
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
                       <h3 className="font-semibold mb-1">Réseau d'entreprises premium</h3>
-                      <p className="text-muted-foreground">Accès exclusif aux plus grands noms d'Afrique : Unilever, Auchan, NHL, Studio et bien d'autres</p>
+                      <p className="text-muted-foreground">Accès exclusif aux plus grands noms en Côte d'Ivoire : Unilever, Auchan, NHL, Studio et bien d'autres</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
                       <h3 className="font-semibold mb-1">Accompagnement personnalisé</h3>
-                      <p className="text-muted-foreground">Un consultant dédié qui analyse votre profil et active son réseau pour vous</p>
+                      <p className="text-muted-foreground">Un consultant basé à Abidjan dédié qui analyse votre profil et active son réseau pour vous</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
                       <h3 className="font-semibold mb-1">Formations et coaching</h3>
-                      <p className="text-muted-foreground">Développez vos compétences avec nos masterclass et certifications</p>
+                      <p className="text-muted-foreground">Développez vos compétences avec nos masterclass et certifications adaptées au marché ivoirien</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
                       <h3 className="font-semibold mb-1">Matching intelligent</h3>
-                      <p className="text-muted-foreground">Profils parfaitement adaptés à votre culture et vos ambitions</p>
+                      <p className="text-muted-foreground">Profils parfaitement adaptés à votre culture et vos ambitions professionnelles</p>
                     </div>
                   </div>
                 </div>
@@ -162,7 +162,7 @@ export default function ServicesCandidats() {
             <div className="space-y-4">
               <h2 className="font-serif text-3xl md:text-5xl font-bold">Découvrez nos opportunités</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Consultez nos offres d'emploi et postulez en quelques clics
+                Consultez nos offres d'emploi en Côte d'Ivoire et postulez en quelques clics
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">

@@ -12,7 +12,7 @@ export default function ServicesEntreprises() {
     <>
       <SEO 
         title="Services pour Entreprises - HR Talents Partners"
-        description="Recrutement, conseil RH, analyse salariale et team building pour entreprises en Afrique de l'Ouest."
+        description="Recrutement, conseil RH, analyse salariale et team building pour entreprises en Côte d'Ivoire."
       />
       
       <Navigation />
@@ -39,7 +39,7 @@ export default function ServicesEntreprises() {
               Transformez vos <span className="text-accent">ambitions</span> en succès durables
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Des solutions sur mesure pour attirer, développer et fidéliser les meilleurs talents
+              Des solutions sur mesure pour attirer, développer et fidéliser les meilleurs talents en Côte d'Ivoire
             </p>
             <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8">
               <Link href="/contact">
@@ -60,14 +60,14 @@ export default function ServicesEntreprises() {
                 </div>
                 <h2 className="font-serif text-3xl md:text-5xl font-bold">Recrutement</h2>
                 <p className="text-lg text-muted-foreground">
-                  Nous transformons vos besoins en success stories. Notre méthode signature en 3 temps garantit des recrutements précis et durables.
+                  Nous transformons vos besoins en success stories. Notre méthode signature en 3 temps garantit des recrutements précis et durables en Côte d'Ivoire.
                 </p>
                 <div className="space-y-4">
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
                       <h3 className="font-semibold mb-1">Méthode en 3 temps</h3>
-                      <p className="text-muted-foreground">Un rendez-vous initial pour cerner vos enjeux, une investigation approfondie, puis une sélection rigoureuse</p>
+                      <p className="text-muted-foreground">Un rendez-vous initial pour cerner vos enjeux, une investigation approfondie du marché ivoirien, puis une sélection rigoureuse</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
@@ -112,28 +112,28 @@ export default function ServicesEntreprises() {
                 </div>
                 <h2 className="font-serif text-3xl md:text-5xl font-bold">Analyse Salariale</h2>
                 <p className="text-lg text-muted-foreground">
-                  Premier cabinet à publier un Guide des Salaires en Côte d'Ivoire, au Sénégal et au Bénin, offrant une vision 360° des tendances salariales.
+                  Premier cabinet à publier un Guide des Salaires en Côte d'Ivoire, offrant une vision 360° des tendances salariales du marché ivoirien.
                 </p>
                 <div className="space-y-4">
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
                       <h3 className="font-semibold mb-1">Collecte de données rigoureuse</h3>
-                      <p className="text-muted-foreground">Via des entretiens directs avec des professionnels clés</p>
+                      <p className="text-muted-foreground">Via des entretiens directs avec des professionnels clés à Abidjan</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
                       <h3 className="font-semibold mb-1">Analyse sectorielle pointue</h3>
-                      <p className="text-muted-foreground">Adaptée aux réalités locales et internationales</p>
+                      <p className="text-muted-foreground">Adaptée aux réalités du marché ivoirien et international</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
                       <h3 className="font-semibold mb-1">Benchmarking complet</h3>
-                      <p className="text-muted-foreground">Politiques salariales et avantages compétitifs</p>
+                      <p className="text-muted-foreground">Politiques salariales et avantages compétitifs en Côte d'Ivoire</p>
                     </div>
                   </div>
                 </div>
@@ -148,14 +148,14 @@ export default function ServicesEntreprises() {
                 </div>
                 <h2 className="font-serif text-3xl md:text-5xl font-bold">Team Building</h2>
                 <p className="text-lg text-muted-foreground">
-                  Nous ne nous contentons pas d'organiser des activités. Nous concevons des expériences sur mesure adaptées à votre culture et vos objectifs.
+                  Nous ne nous contentons pas d'organiser des activités. Nous concevons des expériences sur mesure adaptées à votre culture d'entreprise et vos objectifs en Côte d'Ivoire.
                 </p>
                 <div className="space-y-4">
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
                       <h3 className="font-semibold mb-1">Approche sur mesure</h3>
-                      <p className="text-muted-foreground">Expériences adaptées à votre culture et vos enjeux</p>
+                      <p className="text-muted-foreground">Expériences adaptées à votre culture et vos enjeux spécifiques</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
@@ -169,7 +169,7 @@ export default function ServicesEntreprises() {
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
                       <h3 className="font-semibold mb-1">Résultats durables</h3>
-                      <p className="text-muted-foreground">Impact mesurable sur la cohésion et l'engagement</p>
+                      <p className="text-muted-foreground">Impact mesurable sur la cohésion et l'engagement des équipes</p>
                     </div>
                   </div>
                 </div>
@@ -200,7 +200,7 @@ export default function ServicesEntreprises() {
                 </div>
                 <h2 className="font-serif text-3xl md:text-5xl font-bold">Formation</h2>
                 <p className="text-lg text-muted-foreground">
-                  Boostez vos compétences ! Nous ne recrutons pas les meilleurs talents : on les façonne pour l'avenir !
+                  Boostez vos compétences ! Nous ne recrutons pas les meilleurs talents : on les façonne pour l'avenir de la Côte d'Ivoire !
                 </p>
                 <div className="space-y-4">
                   <div className="flex gap-3">
@@ -214,14 +214,14 @@ export default function ServicesEntreprises() {
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
                       <h3 className="font-semibold mb-1">Formations terrain</h3>
-                      <p className="text-muted-foreground">Taillées pour le terrain, animées par des experts</p>
+                      <p className="text-muted-foreground">Taillées pour le terrain, animées par des experts locaux et internationaux</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
                       <h3 className="font-semibold mb-1">Certification</h3>
-                      <p className="text-muted-foreground">En fin de parcours pour booster votre CV</p>
+                      <p className="text-muted-foreground">En fin de parcours pour booster votre CV et celui de vos équipes</p>
                     </div>
                   </div>
                 </div>
@@ -237,7 +237,7 @@ export default function ServicesEntreprises() {
               Prêt à transformer votre organisation ?
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Discutons de vos besoins et trouvons ensemble la solution adaptée à votre entreprise
+              Discutons de vos besoins et trouvons ensemble la solution adaptée à votre entreprise en Côte d'Ivoire
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8">
