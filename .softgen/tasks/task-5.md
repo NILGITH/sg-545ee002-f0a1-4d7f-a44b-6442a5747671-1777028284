@@ -1,9 +1,9 @@
 ---
 title: Interface administrateur complète
-status: todo
+status: done
 priority: high
 type: feature
-tags: [admin, auth]
+tags: [admin, backend]
 created_by: agent
 created_at: 2026-04-23T10:56:24Z
 position: 5
