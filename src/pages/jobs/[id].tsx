@@ -62,9 +62,9 @@ export default function JobDetailPage() {
     setSubmitting(true);
     const { error } = await applicationsService.submitApplication({
       job_id: job.id,
-      full_name: formData.full_name,
-      email: formData.email,
-      phone: formData.phone,
+      candidate_name: formData.full_name,
+      candidate_email: formData.email,
+      candidate_phone: formData.phone,
       cover_letter: formData.cover_letter,
       status: "pending",
     });
