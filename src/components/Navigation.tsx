@@ -13,7 +13,7 @@ export function Navigation() {
         <div className="flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center">
             <Image 
-              src="/logo-hr-talents.jpg" 
+              src="/logo-transparent.svg" 
               alt="HR Talents Partners" 
               width={200} 
               height={60}
