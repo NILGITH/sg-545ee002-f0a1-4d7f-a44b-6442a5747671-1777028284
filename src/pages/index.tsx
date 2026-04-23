@@ -14,18 +14,21 @@ const heroSlides = [
     subtitle: "Expert en recrutement, conseil RH et développement des talents",
     cta: "Découvrir les offres",
     ctaLink: "/jobs",
+    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80",
   },
   {
     title: "Votre Partenaire RH de Confiance",
     subtitle: "Accompagnement personnalisé pour entreprises et professionnels",
     cta: "Nos services",
     ctaLink: "/services/entreprises",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80",
   },
   {
     title: "Excellence et Innovation RH",
     subtitle: "Plus de 10 ans d'expertise au service de votre réussite",
     cta: "À propos de nous",
     ctaLink: "/about",
+    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&q=80",
   },
 ];
 
@@ -51,12 +54,7 @@ export default function Home() {
       
       <main>
         {/* Hero Slider Section */}
-        <section className="relative bg-gradient-to-br from-background via-background to-muted overflow-hidden">
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-20 right-20 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 left-20 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
-          </div>
-          
+        <section className="relative overflow-hidden">
           {/* Slider Container */}
           <div className="relative h-[600px] md:h-[700px]">
             {heroSlides.map((slide, index) => (
@@ -66,9 +64,23 @@ export default function Home() {
                   index === currentSlide ? "opacity-100" : "opacity-0"
                 }`}
               >
-                <div className="container h-full flex items-center">
-                  <div className="max-w-4xl mx-auto text-center space-y-8">
-                    <div className="inline-block border-2 border-primary px-6 py-3 mb-4">
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <Image
+                    src={slide.image}
+                    alt={slide.title}
+                    fill
+                    className="object-cover"
+                    priority={index === 0}
+                  />
+                  {/* Dark overlay for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/50"></div>
+                </div>
+
+                {/* Content */}
+                <div className="relative container h-full flex items-center">
+                  <div className="max-w-4xl text-white space-y-8">
+                    <div className="inline-block border-2 border-accent px-6 py-3 mb-4">
                       <span className="font-serif text-sm md:text-base font-semibold uppercase tracking-wider">
                         Ambassadeur de Talents et d'Excellence
                       </span>
@@ -86,17 +98,17 @@ export default function Home() {
                       ))}
                     </h1>
                     
-                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.2s" }}>
+                    <p className="text-lg md:text-xl text-white/90 max-w-2xl animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.2s" }}>
                       {slide.subtitle}
                     </p>
                     
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.4s" }}>
+                    <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.4s" }}>
                       <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8">
                         <Link href={slide.ctaLink}>
                           {slide.cta} <ArrowRight className="ml-2" size={20} />
                         </Link>
                       </Button>
-                      <Button asChild size="lg" variant="outline" className="text-lg px-8 border-2">
+                      <Button asChild size="lg" variant="outline" className="text-lg px-8 border-2 border-white text-white hover:bg-white hover:text-primary">
                         <Link href="/contact">Nous contacter</Link>
                       </Button>
                     </div>
@@ -108,29 +120,29 @@ export default function Home() {
             {/* Slider Controls */}
             <button
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur border-2 border-primary hover:bg-accent hover:border-accent transition-all flex items-center justify-center"
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur border-2 border-accent hover:bg-accent hover:text-white transition-all flex items-center justify-center z-10"
               aria-label="Previous slide"
             >
               <ChevronLeft size={24} />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur border-2 border-primary hover:bg-accent hover:border-accent transition-all flex items-center justify-center"
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur border-2 border-accent hover:bg-accent hover:text-white transition-all flex items-center justify-center z-10"
               aria-label="Next slide"
             >
               <ChevronRight size={24} />
             </button>
 
             {/* Slider Dots */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3">
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
               {heroSlides.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
+                  className={`h-3 rounded-full transition-all ${
                     index === currentSlide
                       ? "bg-accent w-8"
-                      : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                      : "bg-white/50 hover:bg-white/70 w-3"
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -140,8 +152,12 @@ export default function Home() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-16 bg-primary text-primary-foreground">
-          <div className="container">
+        <section className="relative py-16 bg-primary text-primary-foreground overflow-hidden">
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
+          </div>
+          <div className="container relative">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.1s" }}>
                 <div className="text-4xl md:text-5xl font-bold font-serif text-accent">500+</div>
@@ -174,9 +190,9 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
                 <CardContent className="pt-8 space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                     <Users className="text-accent" size={28} />
                   </div>
                   <h3 className="font-serif text-2xl font-semibold">Recrutement</h3>
@@ -187,9 +203,9 @@ export default function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
                 <CardContent className="pt-8 space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                     <Target className="text-accent" size={28} />
                   </div>
                   <h3 className="font-serif text-2xl font-semibold">Conseil RH</h3>
@@ -200,9 +216,9 @@ export default function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
                 <CardContent className="pt-8 space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                     <GraduationCap className="text-accent" size={28} />
                   </div>
                   <h3 className="font-serif text-2xl font-semibold">Formation</h3>
@@ -212,9 +228,9 @@ export default function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
                 <CardContent className="pt-8 space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                     <Handshake className="text-accent" size={28} />
                   </div>
                   <h3 className="font-serif text-2xl font-semibold">Accompagnement</h3>
@@ -229,8 +245,16 @@ export default function Home() {
         </section>
 
         {/* Why Choose Us Section */}
-        <section className="py-20 md:py-32 bg-muted/30">
-          <div className="container">
+        <section className="py-20 md:py-32 bg-muted/30 relative overflow-hidden">
+          <div className="absolute inset-0 opacity-5">
+            <Image
+              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80"
+              alt="Background"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="container relative">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <h2 className="font-serif text-3xl md:text-5xl font-bold">
@@ -343,9 +367,19 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              <Card className="border-2">
+              <Card className="border-2 hover:border-accent transition-all duration-300">
                 <CardContent className="pt-8 space-y-4">
-                  <MessageSquare className="text-accent" size={32} />
+                  <div className="flex gap-4 items-center mb-4">
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden bg-muted">
+                      <Image
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80"
+                        alt="Marie Dupont"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <MessageSquare className="text-accent" size={32} />
+                  </div>
                   <p className="text-muted-foreground italic">
                     "HR Talents Partners a su identifier le profil parfait pour notre poste de directeur commercial. 
                     Leur professionnalisme et leur réactivité sont remarquables."
@@ -357,9 +391,19 @@ export default function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="border-2">
+              <Card className="border-2 hover:border-accent transition-all duration-300">
                 <CardContent className="pt-8 space-y-4">
-                  <MessageSquare className="text-accent" size={32} />
+                  <div className="flex gap-4 items-center mb-4">
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden bg-muted">
+                      <Image
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"
+                        alt="Jean Kabamba"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <MessageSquare className="text-accent" size={32} />
+                  </div>
                   <p className="text-muted-foreground italic">
                     "Grâce à leur accompagnement, j'ai trouvé un poste qui correspond parfaitement à mes aspirations. 
                     Un service de qualité et une écoute attentive."
@@ -371,9 +415,19 @@ export default function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="border-2">
+              <Card className="border-2 hover:border-accent transition-all duration-300">
                 <CardContent className="pt-8 space-y-4">
-                  <MessageSquare className="text-accent" size={32} />
+                  <div className="flex gap-4 items-center mb-4">
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden bg-muted">
+                      <Image
+                        src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80"
+                        alt="Sophie Mukendi"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <MessageSquare className="text-accent" size={32} />
+                  </div>
                   <p className="text-muted-foreground italic">
                     "Leur expertise en conseil RH nous a permis d'optimiser nos processus de recrutement. 
                     Un partenaire de confiance pour notre développement."
@@ -389,12 +443,21 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 md:py-32 bg-primary text-primary-foreground">
-          <div className="container text-center space-y-8">
+        <section className="relative py-20 md:py-32 overflow-hidden">
+          <div className="absolute inset-0">
+            <Image
+              src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1920&q=80"
+              alt="Background"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-primary/90"></div>
+          </div>
+          <div className="container relative text-center space-y-8 text-white">
             <h2 className="font-serif text-3xl md:text-5xl font-bold max-w-3xl mx-auto">
               Prêt à franchir une nouvelle étape ?
             </h2>
-            <p className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
               Découvrez nos offres d'emploi ou contactez-nous pour discuter de vos besoins en recrutement
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -403,7 +466,7 @@ export default function Home() {
                   Voir les offres <ArrowRight className="ml-2" size={20} />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="text-lg px-8 border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              <Button asChild size="lg" variant="outline" className="text-lg px-8 border-2 border-white text-white hover:bg-white hover:text-primary">
                 <Link href="/contact">Contactez-nous</Link>
               </Button>
             </div>
