@@ -352,10 +352,10 @@ export default function SubmitJob() {
                             <SelectValue placeholder="Sélectionner" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="junior">Junior (0-2 ans)</SelectItem>
-                            <SelectItem value="intermediaire">Intermédiaire (2-5 ans)</SelectItem>
-                            <SelectItem value="senior">Senior (5+ ans)</SelectItem>
-                            <SelectItem value="expert">Expert (10+ ans)</SelectItem>
+                            <SelectItem value="Junior">Junior (0-2 ans)</SelectItem>
+                            <SelectItem value="Confirmé">Confirmé (2-5 ans)</SelectItem>
+                            <SelectItem value="Senior">Senior (5-10 ans)</SelectItem>
+                            <SelectItem value="Expert">Expert (10+ ans)</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
