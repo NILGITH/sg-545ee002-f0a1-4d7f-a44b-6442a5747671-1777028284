@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export type Json =
   | string
   | number
@@ -58,6 +58,50 @@ export type Database = {
             columns: ["job_id"]
             isOneToOne: false
             referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      candidate_cvs: {
+        Row: {
+          candidate_id: string | null
+          file_name: string
+          file_size: number | null
+          file_type: string | null
+          file_url: string
+          id: string
+          is_current: boolean | null
+          uploaded_at: string | null
+          user_id: string
+        }
+        Insert: {
+          candidate_id?: string | null
+          file_name: string
+          file_size?: number | null
+          file_type?: string | null
+          file_url: string
+          id?: string
+          is_current?: boolean | null
+          uploaded_at?: string | null
+          user_id: string
+        }
+        Update: {
+          candidate_id?: string | null
+          file_name?: string
+          file_size?: number | null
+          file_type?: string | null
+          file_url?: string
+          id?: string
+          is_current?: boolean | null
+          uploaded_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "candidate_cvs_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: false
+            referencedRelation: "candidates"
             referencedColumns: ["id"]
           },
         ]
@@ -175,6 +219,93 @@ export type Database = {
           subject?: string | null
         }
         Relationships: []
+      }
+      job_submissions: {
+        Row: {
+          company_email: string
+          company_id: string | null
+          company_name: string
+          company_phone: string | null
+          contract_type: string
+          created_at: string | null
+          experience_level: string | null
+          id: string
+          job_description: string
+          job_requirements: string | null
+          job_responsibilities: string | null
+          job_title: string
+          location: string
+          published_job_id: string | null
+          rejection_reason: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          salary_range: string | null
+          sector: string | null
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          company_email: string
+          company_id?: string | null
+          company_name: string
+          company_phone?: string | null
+          contract_type: string
+          created_at?: string | null
+          experience_level?: string | null
+          id?: string
+          job_description: string
+          job_requirements?: string | null
+          job_responsibilities?: string | null
+          job_title: string
+          location: string
+          published_job_id?: string | null
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          salary_range?: string | null
+          sector?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          company_email?: string
+          company_id?: string | null
+          company_name?: string
+          company_phone?: string | null
+          contract_type?: string
+          created_at?: string | null
+          experience_level?: string | null
+          id?: string
+          job_description?: string
+          job_requirements?: string | null
+          job_responsibilities?: string | null
+          job_title?: string
+          location?: string
+          published_job_id?: string | null
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          salary_range?: string | null
+          sector?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_submissions_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "job_submissions_published_job_id_fkey"
+            columns: ["published_job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       jobs: {
         Row: {
@@ -307,7 +438,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      set_current_cv: {
+        Args: { cv_id: string; user_uuid: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
