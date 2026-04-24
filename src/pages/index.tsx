@@ -5,8 +5,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
 import Link from "next/link";
 import { ArrowRight, Users, Target, Award, TrendingUp, CheckCircle, Briefcase, GraduationCap, Handshake, MessageSquare, ChevronLeft, ChevronRight, Building2, MapPin, BadgeCheck } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { supabase } from "@/integrations/supabase/client";
+
+type Partnership = {
+  id: string;
+  company_name: string;
+  logo_url: string | null;
+  website_url: string | null;
+  category: string;
+  display_order: number;
+};
 
 const heroSlides = [
   {
@@ -34,6 +44,23 @@ const heroSlides = [
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [partnerships, setPartnerships] = useState<Partnership[]>([]);
+
+  useEffect(() => {
+    loadPartnerships();
+  }, []);
+
+  const loadPartnerships = async () => {
+    const { data } = await supabase
+      .from("partnerships")
+      .select("id, company_name, logo_url, website_url, category, display_order")
+      .eq("is_active", true)
+      .order("display_order", { ascending: true });
+    
+    if (data) {
+      setPartnerships(data);
+    }
+  };
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
@@ -345,47 +372,41 @@ export default function Home() {
               
               {/* Scrolling track with cards */}
               <div className="flex gap-8 animate-scroll">
-                {/* First set of logos */}
+                {/* First set of logos from database */}
                 <div className="flex gap-8 min-w-max">
-                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Auchan Retail</span>
-                  </div>
-                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Unilever</span>
-                  </div>
-                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">NHL</span>
-                  </div>
-                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Studio</span>
-                  </div>
-                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Leadway Assurance</span>
-                  </div>
-                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Oryx Energies</span>
-                  </div>
+                  {partnerships.map((partner) => (
+                    <div key={partner.id} className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                      {partner.logo_url ? (
+                        <img 
+                          src={partner.logo_url} 
+                          alt={partner.company_name}
+                          className="h-12 w-auto object-contain group-hover:scale-110 transition-transform"
+                        />
+                      ) : (
+                        <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">
+                          {partner.company_name}
+                        </span>
+                      )}
+                    </div>
+                  ))}
                 </div>
                 {/* Duplicate set for seamless infinite loop */}
                 <div className="flex gap-8 min-w-max">
-                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Auchan Retail</span>
-                  </div>
-                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Unilever</span>
-                  </div>
-                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">NHL</span>
-                  </div>
-                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Studio</span>
-                  </div>
-                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Leadway Assurance</span>
-                  </div>
-                  <div className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">Oryx Energies</span>
-                  </div>
+                  {partnerships.map((partner) => (
+                    <div key={`dup-${partner.id}`} className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                      {partner.logo_url ? (
+                        <img 
+                          src={partner.logo_url} 
+                          alt={partner.company_name}
+                          className="h-12 w-auto object-contain group-hover:scale-110 transition-transform"
+                        />
+                      ) : (
+                        <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">
+                          {partner.company_name}
+                        </span>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
