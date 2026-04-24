@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SEO } from "@/components/SEO";
-import { Send, Building2, Mail, Phone, MapPin, Briefcase } from "lucide-react";
+import { Send, Building2, Mail, Phone, MapPin, Briefcase, Upload, User, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { jobSubmissionService } from "@/services/jobSubmissionService";
 
@@ -17,6 +17,8 @@ export default function SubmitJob() {
     company_name: "",
     company_email: "",
     company_phone: "",
+    submitter_name: "",
+    submitter_position: "",
     job_title: "",
     job_description: "",
     job_requirements: "",
@@ -27,19 +29,49 @@ export default function SubmitJob() {
     salary_range: "",
     experience_level: "",
   });
+  const [logoFile, setLogoFile] = useState<File | null>(null);
+  const [logoPreview, setLogoPreview] = useState<string>("");
   const [submitting, setSubmitting] = useState(false);
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setLogoFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setLogoPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
     try {
-      await jobSubmissionService.submitJob(formData);
+      let logoUrl = "";
+      
+      // Upload du logo si présent
+      if (logoFile) {
+        logoUrl = await jobSubmissionService.uploadCompanyLogo(logoFile);
+      }
+
+      // Soumettre l'offre avec toutes les données
+      await jobSubmissionService.submitJob({
+        ...formData,
+        company_logo_url: logoUrl,
+      });
+
       alert("Votre offre a été soumise avec succès ! Notre équipe la validera sous 24-48h.");
+      
+      // Reset du formulaire
       setFormData({
         company_name: "",
         company_email: "",
         company_phone: "",
+        submitter_name: "",
+        submitter_position: "",
         job_title: "",
         job_description: "",
         job_requirements: "",
@@ -50,6 +82,8 @@ export default function SubmitJob() {
         salary_range: "",
         experience_level: "",
       });
+      setLogoFile(null);
+      setLogoPreview("");
     } catch (error) {
       console.error("Job submission error:", error);
       alert("Erreur lors de la soumission. Veuillez réessayer.");
@@ -173,6 +207,64 @@ export default function SubmitJob() {
                           value={formData.company_phone}
                           onChange={handleChange}
                           placeholder="+225 27 XX XX XX XX"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Upload Logo */}
+                    <div className="space-y-2">
+                      <Label htmlFor="company_logo">Logo de l'entreprise (optionnel)</Label>
+                      <div className="flex items-center gap-4">
+                        <div className="flex-1">
+                          <Input
+                            id="company_logo"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleLogoChange}
+                            className="cursor-pointer"
+                          />
+                          <p className="text-xs text-muted-foreground mt-1">
+                            PNG, JPG ou JPEG (max 2MB)
+                          </p>
+                        </div>
+                        {logoPreview && (
+                          <div className="w-20 h-20 border-2 rounded-lg overflow-hidden bg-white p-2">
+                            <img src={logoPreview} alt="Logo preview" className="w-full h-full object-contain" />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Informations Soumissionnaire */}
+                  <div className="space-y-6 pt-8 border-t">
+                    <h3 className="font-serif text-xl font-semibold flex items-center gap-2">
+                      <User className="text-accent" size={24} />
+                      Vos Informations
+                    </h3>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="submitter_name">Votre nom complet *</Label>
+                        <Input
+                          id="submitter_name"
+                          name="submitter_name"
+                          value={formData.submitter_name}
+                          onChange={handleChange}
+                          required
+                          placeholder="Ex: Marie Kouadio"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="submitter_position">Votre poste *</Label>
+                        <Input
+                          id="submitter_position"
+                          name="submitter_position"
+                          value={formData.submitter_position}
+                          onChange={handleChange}
+                          required
+                          placeholder="Ex: Responsable RH"
                         />
                       </div>
                     </div>
@@ -303,8 +395,17 @@ export default function SubmitJob() {
                       className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
                       disabled={submitting}
                     >
-                      {submitting ? "Envoi en cours..." : "Soumettre l'offre"}
-                      <Send className="ml-2" size={20} />
+                      {submitting ? (
+                        <>
+                          <Loader2 className="mr-2 animate-spin" size={20} />
+                          Envoi en cours...
+                        </>
+                      ) : (
+                        <>
+                          Soumettre l'offre
+                          <Send className="ml-2" size={20} />
+                        </>
+                      )}
                     </Button>
                     <p className="text-sm text-muted-foreground text-center mt-4">
                       Notre équipe validera votre offre sous 24-48h avant publication
