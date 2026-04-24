@@ -12,14 +12,14 @@ export function Navigation() {
       <div className="container">
         <div className="flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center">
-            <Image 
-              src="/logo-hr-sans-fond.png" 
-              alt="HR Talents Partners" 
-              width={200} 
+            <Image
+              src="/logo_hr_sans_fond.png"
+              alt="HR Talents Partners"
+              width={200}
               height={60}
               className="h-14 w-auto"
-              priority
-            />
+              priority />
+            
           </Link>
 
           {/* Desktop Navigation */}
@@ -48,15 +48,15 @@ export function Navigation() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2"
-            aria-label="Toggle menu"
-          >
+            aria-label="Toggle menu">
+            
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden py-4 border-t border-border">
+        {isOpen &&
+        <div className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
               <Link href="/" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
                 Accueil
@@ -78,8 +78,8 @@ export function Navigation() {
               </Button>
             </div>
           </div>
-        )}
+        }
       </div>
-    </nav>
-  );
+    </nav>);
+
 }
