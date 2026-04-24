@@ -31,6 +31,28 @@ export default function TeamBuildingRequest() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validation des champs obligatoires
+    if (!formData.companyName || !formData.contactName || !formData.email || !formData.phone) {
+      toast({
+        title: "Champs obligatoires manquants",
+        description: "Veuillez remplir tous les champs obligatoires (*)",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validation email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast({
+        title: "Email invalide",
+        description: "Veuillez entrer une adresse email valide",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -52,11 +74,11 @@ export default function TeamBuildingRequest() {
       });
 
       router.push("/services");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error:", error);
       toast({
         title: "Erreur",
-        description: "Une erreur est survenue. Veuillez réessayer.",
+        description: error.message || "Une erreur est survenue. Veuillez réessayer.",
         variant: "destructive",
       });
     } finally {

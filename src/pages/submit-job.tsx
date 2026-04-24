@@ -47,6 +47,22 @@ export default function SubmitJob() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validation des champs obligatoires
+    if (!formData.company_name || !formData.company_email || !formData.submitter_name || 
+        !formData.submitter_position || !formData.job_title || !formData.job_description || 
+        !formData.contract_type || !formData.location) {
+      alert("Veuillez remplir tous les champs obligatoires (*)");
+      return;
+    }
+
+    // Validation email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.company_email)) {
+      alert("Veuillez entrer une adresse email valide");
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -54,6 +70,12 @@ export default function SubmitJob() {
       
       // Upload du logo si présent
       if (logoFile) {
+        // Vérifier la taille du fichier (max 2MB)
+        if (logoFile.size > 2 * 1024 * 1024) {
+          alert("Le logo doit faire moins de 2MB");
+          setSubmitting(false);
+          return;
+        }
         logoUrl = await jobSubmissionService.uploadCompanyLogo(logoFile);
       }
 
@@ -84,9 +106,9 @@ export default function SubmitJob() {
       });
       setLogoFile(null);
       setLogoPreview("");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Job submission error:", error);
-      alert("Erreur lors de la soumission. Veuillez réessayer.");
+      alert(error.message || "Erreur lors de la soumission. Veuillez réessayer.");
     }
 
     setSubmitting(false);
