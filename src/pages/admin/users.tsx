@@ -374,7 +374,7 @@ export default function AdminUsers() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="edit-role">Rôle *</Label>
-              <Select value={editData.role} onValueChange={(value) => setEditData({ ...editData, role: value as "admin" | "manager" | "super_admin" })}>
+              <Select value={editData.role} onValueChange={(value: "admin" | "manager" | "super_admin") => setEditData({ ...editData, role: value })}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
