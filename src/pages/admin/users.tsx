@@ -331,7 +331,7 @@ export default function AdminUsers() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="new-role">Rôle *</Label>
-              <Select value={newUser.role} onValueChange={(value: string) => setNewUser({ ...newUser, role: value as "admin" | "manager" | "super_admin" })}>
+              <Select value={newUser.role} onValueChange={(value) => setNewUser({ ...newUser, role: value as "admin" | "manager" | "super_admin" })}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
@@ -374,7 +374,7 @@ export default function AdminUsers() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="edit-role">Rôle *</Label>
-              <Select value={editData.role} onValueChange={(value: string) => setEditData({ ...editData, role: value as "admin" | "manager" | "super_admin" })}>
+              <Select value={editData.role} onValueChange={(value) => setEditData({ ...editData, role: value as "admin" | "manager" | "super_admin" })}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
