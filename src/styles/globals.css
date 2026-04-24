@@ -6,49 +6,49 @@
 
 @layer base {
   :root {
-    /* Corporate elegant palette */
-    --background: 45 33% 96%;
-    --foreground: 0 0% 13%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 13%;
+    /* Palette inspirée de la brochure HR Talents Partners */
+    --background: 40 20% 97%;        /* Beige/crème très clair */
+    --foreground: 0 0% 20%;          /* Gris foncé professionnel */
+    --card: 0 0% 100%;               /* Blanc pur pour les cards */
+    --card-foreground: 0 0% 20%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 13%;
-    --primary: 0 0% 13%;
-    --primary-foreground: 45 33% 96%;
-    --secondary: 45 20% 88%;
-    --secondary-foreground: 0 0% 13%;
-    --muted: 45 20% 88%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 43 74% 49%;
+    --popover-foreground: 0 0% 20%;
+    --primary: 0 0% 20%;             /* Gris foncé pour primary */
+    --primary-foreground: 40 20% 97%;
+    --secondary: 40 15% 92%;         /* Beige/gris clair */
+    --secondary-foreground: 0 0% 20%;
+    --muted: 40 15% 92%;             /* Beige/gris clair */
+    --muted-foreground: 0 0% 45%;
+    --accent: 43 55% 58%;            /* OR/DORÉ - couleur signature de la brochure */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 45 15% 85%;
-    --input: 45 15% 85%;
-    --ring: 43 74% 49%;
+    --border: 40 15% 88%;            /* Bordures beige très clair */
+    --input: 40 15% 88%;
+    --ring: 43 55% 58%;              /* Or pour focus ring */
     --radius: 0.5rem;
   }
 
   .dark {
     --background: 0 0% 13%;
-    --foreground: 45 33% 96%;
+    --foreground: 40 20% 97%;
     --card: 0 0% 18%;
-    --card-foreground: 45 33% 96%;
+    --card-foreground: 40 20% 97%;
     --popover: 0 0% 18%;
-    --popover-foreground: 45 33% 96%;
-    --primary: 45 33% 96%;
+    --popover-foreground: 40 20% 97%;
+    --primary: 40 20% 97%;
     --primary-foreground: 0 0% 13%;
     --secondary: 0 0% 25%;
-    --secondary-foreground: 45 33% 96%;
+    --secondary-foreground: 40 20% 97%;
     --muted: 0 0% 25%;
-    --muted-foreground: 45 20% 70%;
-    --accent: 43 74% 49%;
+    --muted-foreground: 40 15% 70%;
+    --accent: 43 55% 58%;            /* Or reste identique en dark mode */
     --accent-foreground: 0 0% 13%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 25%;
     --input: 0 0% 25%;
-    --ring: 43 74% 49%;
+    --ring: 43 55% 58%;
   }
 }
 
