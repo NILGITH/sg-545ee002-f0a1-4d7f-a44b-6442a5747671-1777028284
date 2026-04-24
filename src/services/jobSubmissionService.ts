@@ -62,7 +62,7 @@ export const jobSubmissionService = {
       .from("jobs")
       .insert({
         title: submission.job_title,
-        company: submission.company_name,
+        company_name: submission.company_name,
         location: submission.location,
         contract_type: submission.contract_type,
         sector: submission.sector,
