@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { adminUsersService } from "@/services/adminUsersService";
-import { Briefcase, Users, FileText, TrendingUp, PlusCircle, Settings, LogOut, Upload, CheckSquare, ShieldCheck } from "lucide-react";
+import { Briefcase, Users, FileText, TrendingUp, PlusCircle, Settings, LogOut, Upload, CheckSquare, ShieldCheck, MessageSquare } from "lucide-react";
 import Link from "next/link";
 
 export default function AdminDashboard() {
@@ -21,6 +21,7 @@ export default function AdminDashboard() {
     pendingApplications: 0,
     totalCVs: 0,
     pendingSubmissions: 0,
+    pendingServiceRequests: 0,
   });
 
   useEffect(() => {
@@ -43,11 +44,12 @@ export default function AdminDashboard() {
   const loadStats = async () => {
     setLoading(true);
 
-    const [jobsData, applicationsData, cvsData, submissionsData] = await Promise.all([
+    const [jobsData, applicationsData, cvsData, submissionsData, serviceRequestsData] = await Promise.all([
       supabase.from("jobs").select("id, is_active", { count: "exact" }),
       supabase.from("applications").select("id, status", { count: "exact" }),
       supabase.from("candidate_cvs").select("id", { count: "exact" }),
       supabase.from("job_submissions").select("id, status", { count: "exact" }),
+      supabase.from("service_requests").select("id, status", { count: "exact" }),
     ]);
 
     const totalJobs = jobsData.count || 0;
@@ -56,6 +58,7 @@ export default function AdminDashboard() {
     const pendingApplications = applicationsData.data?.filter(a => a.status === "pending").length || 0;
     const totalCVs = cvsData.count || 0;
     const pendingSubmissions = submissionsData.data?.filter(s => s.status === "pending").length || 0;
+    const pendingServiceRequests = serviceRequestsData.data?.filter(s => s.status === "pending").length || 0;
 
     setStats({
       totalJobs,
@@ -64,6 +67,7 @@ export default function AdminDashboard() {
       pendingApplications,
       totalCVs,
       pendingSubmissions,
+      pendingServiceRequests,
     });
     setLoading(false);
   };
@@ -279,6 +283,21 @@ export default function AdminDashboard() {
                     Valider les offres
                   </Link>
                 </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 hover:border-accent transition-colors">
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  Demandes de Services
+                </CardTitle>
+                <MessageSquare className="text-accent" size={20} />
+              </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold font-serif">{stats.pendingServiceRequests}</div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Demandes en attente
+                </p>
               </CardContent>
             </Card>
 
