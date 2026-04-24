@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { adminUsersService } from "@/services/adminUsersService";
-import { Briefcase, Users, FileText, TrendingUp, PlusCircle, Settings, LogOut, Upload, CheckSquare, ShieldCheck, MessageSquare } from "lucide-react";
+import { Briefcase, Users, FileText, TrendingUp, PlusCircle, Settings, LogOut, Upload, CheckSquare, ShieldCheck, MessageSquare, Clock, CheckCircle, XCircle, AlertCircle } from "lucide-react";
 import Link from "next/link";
 
 export default function AdminDashboard() {
@@ -17,11 +17,19 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState({
     totalJobs: 0,
     activeJobs: 0,
+    inactiveJobs: 0,
     totalApplications: 0,
     pendingApplications: 0,
+    approvedApplications: 0,
+    rejectedApplications: 0,
     totalCVs: 0,
     pendingSubmissions: 0,
+    approvedSubmissions: 0,
+    rejectedSubmissions: 0,
     pendingServiceRequests: 0,
+    completedServiceRequests: 0,
+    totalServiceRequests: 0,
+    conversionRate: 0,
   });
 
   useEffect(() => {
@@ -36,7 +44,6 @@ export default function AdminDashboard() {
       return;
     }
 
-    // Vérifier si l'utilisateur est super_admin
     const isSA = await adminUsersService.isSuperAdmin();
     setIsSuperAdmin(isSA);
   };
@@ -54,20 +61,43 @@ export default function AdminDashboard() {
 
     const totalJobs = jobsData.count || 0;
     const activeJobs = jobsData.data?.filter(j => j.is_active).length || 0;
+    const inactiveJobs = totalJobs - activeJobs;
+
     const totalApplications = applicationsData.count || 0;
     const pendingApplications = applicationsData.data?.filter(a => a.status === "pending").length || 0;
+    const approvedApplications = applicationsData.data?.filter(a => a.status === "approved").length || 0;
+    const rejectedApplications = applicationsData.data?.filter(a => a.status === "rejected").length || 0;
+
     const totalCVs = cvsData.count || 0;
+
     const pendingSubmissions = submissionsData.data?.filter(s => s.status === "pending").length || 0;
+    const approvedSubmissions = submissionsData.data?.filter(s => s.status === "approved").length || 0;
+    const rejectedSubmissions = submissionsData.data?.filter(s => s.status === "rejected").length || 0;
+
+    const totalServiceRequests = serviceRequestsData.count || 0;
     const pendingServiceRequests = serviceRequestsData.data?.filter(s => s.status === "pending").length || 0;
+    const completedServiceRequests = serviceRequestsData.data?.filter(s => s.status === "completed").length || 0;
+
+    const conversionRate = totalApplications > 0 
+      ? Math.round((approvedApplications / totalApplications) * 100)
+      : 0;
 
     setStats({
       totalJobs,
       activeJobs,
+      inactiveJobs,
       totalApplications,
       pendingApplications,
+      approvedApplications,
+      rejectedApplications,
       totalCVs,
       pendingSubmissions,
+      approvedSubmissions,
+      rejectedSubmissions,
       pendingServiceRequests,
+      completedServiceRequests,
+      totalServiceRequests,
+      conversionRate,
     });
     setLoading(false);
   };
@@ -91,7 +121,7 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="font-serif text-4xl font-bold mb-2">Tableau de bord</h1>
-              <p className="text-muted-foreground">Gérez vos offres d'emploi et candidatures</p>
+              <p className="text-muted-foreground">Vue d'ensemble de votre activité RH</p>
             </div>
             <Button onClick={handleLogout} variant="outline">
               <LogOut size={18} className="mr-2" />
@@ -99,19 +129,19 @@ export default function AdminDashboard() {
             </Button>
           </div>
 
-          {/* Stats Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {/* Stats principales */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <Card className="border-2">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                  Total Offres
+                  Offres d'emploi
                 </CardTitle>
                 <Briefcase className="text-accent" size={20} />
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold font-serif">{stats.totalJobs}</div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  {stats.activeJobs} actives
+                  {stats.activeJobs} actives · {stats.inactiveJobs} inactives
                 </p>
               </CardContent>
             </Card>
@@ -141,7 +171,7 @@ export default function AdminDashboard() {
               <CardContent>
                 <div className="text-3xl font-bold font-serif">{stats.totalCVs}</div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  CV dans la base
+                  Dans la base de données
                 </p>
               </CardContent>
             </Card>
@@ -149,54 +179,120 @@ export default function AdminDashboard() {
             <Card className="border-2">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                  Soumissions Entreprises
-                </CardTitle>
-                <CheckSquare className="text-accent" size={20} />
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold font-serif">{stats.pendingSubmissions}</div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  En attente de validation
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                  Taux de réponse
+                  Taux d'approbation
                 </CardTitle>
                 <TrendingUp className="text-accent" size={20} />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold font-serif">
-                  {stats.totalApplications > 0 
-                    ? Math.round((stats.totalApplications - stats.pendingApplications) / stats.totalApplications * 100)
-                    : 0}%
-                </div>
+                <div className="text-3xl font-bold font-serif">{stats.conversionRate}%</div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Candidatures traitées
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                  Candidats uniques
-                </CardTitle>
-                <Users className="text-accent" size={20} />
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold font-serif">{stats.totalApplications}</div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Inscriptions totales
+                  Candidatures approuvées
                 </p>
               </CardContent>
             </Card>
           </div>
 
+          {/* Statistiques détaillées */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <Card className="border-2">
+              <CardHeader>
+                <CardTitle className="text-base flex items-center gap-2">
+                  <FileText className="text-accent" size={20} />
+                  Répartition Candidatures
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Clock className="text-yellow-500" size={16} />
+                    <span className="text-sm">En attente</span>
+                  </div>
+                  <span className="font-semibold">{stats.pendingApplications}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="text-green-500" size={16} />
+                    <span className="text-sm">Approuvées</span>
+                  </div>
+                  <span className="font-semibold">{stats.approvedApplications}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <XCircle className="text-red-500" size={16} />
+                    <span className="text-sm">Rejetées</span>
+                  </div>
+                  <span className="font-semibold">{stats.rejectedApplications}</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2">
+              <CardHeader>
+                <CardTitle className="text-base flex items-center gap-2">
+                  <CheckSquare className="text-accent" size={20} />
+                  Soumissions Entreprises
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Clock className="text-yellow-500" size={16} />
+                    <span className="text-sm">En attente</span>
+                  </div>
+                  <span className="font-semibold">{stats.pendingSubmissions}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="text-green-500" size={16} />
+                    <span className="text-sm">Approuvées</span>
+                  </div>
+                  <span className="font-semibold">{stats.approvedSubmissions}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <XCircle className="text-red-500" size={16} />
+                    <span className="text-sm">Rejetées</span>
+                  </div>
+                  <span className="font-semibold">{stats.rejectedSubmissions}</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2">
+              <CardHeader>
+                <CardTitle className="text-base flex items-center gap-2">
+                  <MessageSquare className="text-accent" size={20} />
+                  Demandes Services
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Clock className="text-yellow-500" size={16} />
+                    <span className="text-sm">En attente</span>
+                  </div>
+                  <span className="font-semibold">{stats.pendingServiceRequests}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="text-green-500" size={16} />
+                    <span className="text-sm">Complétées</span>
+                  </div>
+                  <span className="font-semibold">{stats.completedServiceRequests}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <AlertCircle className="text-blue-500" size={16} />
+                    <span className="text-sm">Total</span>
+                  </div>
+                  <span className="font-semibold">{stats.totalServiceRequests}</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
           {/* Quick Actions */}
+          <h2 className="font-serif text-2xl font-bold mb-4">Actions rapides</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card className="border-2 hover:border-accent transition-colors">
               <CardHeader>
@@ -287,21 +383,25 @@ export default function AdminDashboard() {
             </Card>
 
             <Card className="border-2 hover:border-accent transition-colors">
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MessageSquare className="text-accent" size={24} />
                   Demandes de Services
                 </CardTitle>
-                <MessageSquare className="text-accent" size={20} />
               </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold font-serif">{stats.pendingServiceRequests}</div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Demandes en attente
+              <CardContent className="space-y-3">
+                <p className="text-muted-foreground">
+                  Gérez les demandes de Team Building, Formation, etc.
                 </p>
+                <Button asChild variant="outline" className="w-full">
+                  <Link href="/admin/service-requests">
+                    <MessageSquare size={18} className="mr-2" />
+                    Voir les demandes
+                  </Link>
+                </Button>
               </CardContent>
             </Card>
 
-            {/* Gestion des utilisateurs - Super Admin uniquement */}
             {isSuperAdmin && (
               <Card className="border-2 hover:border-accent transition-colors bg-accent/5">
                 <CardHeader>
