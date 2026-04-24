@@ -13,7 +13,7 @@ export function Navigation() {
         <div className="flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center">
             <Image 
-              src="/logo-hr-talents.jpg" 
+              src="/logo-hr-sans-fond.png" 
               alt="HR Talents Partners" 
               width={200} 
               height={60}
@@ -27,11 +27,8 @@ export function Navigation() {
             <Link href="/" className="text-sm font-medium hover:text-accent transition-colors">
               Accueil
             </Link>
-            <Link href="/services/entreprises" className="text-sm font-medium hover:text-accent transition-colors">
-              Entreprises
-            </Link>
-            <Link href="/services/candidats" className="text-sm font-medium hover:text-accent transition-colors">
-              Candidats
+            <Link href="/services" className="text-sm font-medium hover:text-accent transition-colors">
+              Services
             </Link>
             <Link href="/jobs" className="text-sm font-medium hover:text-accent transition-colors">
               Offres d'emploi
@@ -64,11 +61,8 @@ export function Navigation() {
               <Link href="/" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
                 Accueil
               </Link>
-              <Link href="/services/entreprises" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
-                Entreprises
-              </Link>
-              <Link href="/services/candidats" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
-                Candidats
+              <Link href="/services" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
+                Services
               </Link>
               <Link href="/jobs" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
                 Offres d'emploi
