@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
 import Link from "next/link";
-import { ArrowRight, Users, Target, Award, TrendingUp, CheckCircle, Briefcase, GraduationCap, Handshake, MessageSquare, ChevronLeft, ChevronRight, Building2, MapPin, BadgeCheck } from "lucide-react";
+import { ArrowRight, Users, Target, Award, TrendingUp, CheckCircle, Briefcase, GraduationCap, Handshake, MessageSquare, ChevronLeft, ChevronRight, Building2, MapPin, BadgeCheck, Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { supabase } from "@/integrations/supabase/client";
@@ -15,6 +15,18 @@ type Partnership = {
   logo_url: string | null;
   website_url: string | null;
   category: string;
+  display_order: number;
+};
+
+type Testimonial = {
+  id: string;
+  author_name: string;
+  author_position: string;
+  author_company: string;
+  author_photo_url: string | null;
+  content: string;
+  rating: number;
+  is_featured: boolean;
   display_order: number;
 };
 
@@ -45,9 +57,11 @@ const heroSlides = [
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [partnerships, setPartnerships] = useState<Partnership[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
   useEffect(() => {
     loadPartnerships();
+    loadTestimonials();
   }, []);
 
   const loadPartnerships = async () => {
@@ -59,6 +73,19 @@ export default function Home() {
     
     if (data) {
       setPartnerships(data);
+    }
+  };
+
+  const loadTestimonials = async () => {
+    const { data } = await supabase
+      .from("testimonials")
+      .select("id, author_name, author_position, author_company, author_photo_url, content, rating, is_featured, display_order")
+      .eq("is_active", true)
+      .order("display_order", { ascending: true })
+      .limit(6);
+    
+    if (data) {
+      setTestimonials(data);
     }
   };
 
@@ -501,77 +528,56 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              <Card className="border-2 hover:border-accent transition-all duration-300">
-                <CardContent className="pt-8 space-y-4">
-                  <div className="flex gap-4 items-center mb-4">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden bg-muted">
-                      <Image
-                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80"
-                        alt="Marie Dupont"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <MessageSquare className="text-accent" size={32} />
-                  </div>
-                  <p className="text-muted-foreground italic">
-                    "HR Talents Partners a su identifier le profil parfait pour notre poste de directeur commercial. 
-                    Leur professionnalisme et leur réactivité sont remarquables."
-                  </p>
-                  <div className="pt-4 border-t">
-                    <p className="font-semibold">Marie Dupont</p>
-                    <p className="text-sm text-muted-foreground">DRH, Auchan Retail Côte d'Ivoire</p>
-                  </div>
-                </CardContent>
-              </Card>
+              {testimonials.length > 0 ? (
+                testimonials.map((testimonial) => (
+                  <Card key={testimonial.id} className="border-2 hover:border-accent transition-all duration-300">
+                    <CardContent className="pt-8 space-y-4">
+                      <div className="flex gap-4 items-center mb-4">
+                        <div className="relative w-16 h-16 rounded-full overflow-hidden bg-muted">
+                          {testimonial.author_photo_url ? (
+                            <Image
+                              src={testimonial.author_photo_url}
+                              alt={testimonial.author_name}
+                              fill
+                              className="object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center bg-accent/10 text-accent font-bold text-xl">
+                              {testimonial.author_name.charAt(0)}
+                            </div>
+                          )}
+                        </div>
+                        <MessageSquare className="text-accent" size={32} />
+                      </div>
+                      
+                      {/* Rating stars */}
+                      <div className="flex gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            size={16}
+                            className={i < testimonial.rating ? "fill-accent text-accent" : "text-muted"}
+                          />
+                        ))}
+                      </div>
 
-              <Card className="border-2 hover:border-accent transition-all duration-300">
-                <CardContent className="pt-8 space-y-4">
-                  <div className="flex gap-4 items-center mb-4">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden bg-muted">
-                      <Image
-                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"
-                        alt="Kouassi Jean"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <MessageSquare className="text-accent" size={32} />
-                  </div>
-                  <p className="text-muted-foreground italic">
-                    "Grâce à leur accompagnement, j'ai trouvé un poste qui correspond parfaitement à mes aspirations. 
-                    Un service de qualité et une écoute attentive."
-                  </p>
-                  <div className="pt-4 border-t">
-                    <p className="font-semibold">Kouassi Jean</p>
-                    <p className="text-sm text-muted-foreground">Manager Marketing, Abidjan</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-2 hover:border-accent transition-all duration-300">
-                <CardContent className="pt-8 space-y-4">
-                  <div className="flex gap-4 items-center mb-4">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden bg-muted">
-                      <Image
-                        src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80"
-                        alt="Sophie Koffi"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <MessageSquare className="text-accent" size={32} />
-                  </div>
-                  <p className="text-muted-foreground italic">
-                    "Leur expertise en conseil RH nous a permis d'optimiser nos processus de recrutement. 
-                    Un partenaire de confiance pour notre développement."
-                  </p>
-                  <div className="pt-4 border-t">
-                    <p className="font-semibold">Sophie Koffi</p>
-                    <p className="text-sm text-muted-foreground">CEO, Unilever Côte d'Ivoire</p>
-                  </div>
-                </CardContent>
-              </Card>
+                      <p className="text-muted-foreground italic">
+                        "{testimonial.content}"
+                      </p>
+                      <div className="pt-4 border-t">
+                        <p className="font-semibold">{testimonial.author_name}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {testimonial.author_position}, {testimonial.author_company}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))
+              ) : (
+                <div className="col-span-3 text-center text-muted-foreground py-12">
+                  Aucun témoignage pour le moment
+                </div>
+              )}
             </div>
           </div>
         </section>
