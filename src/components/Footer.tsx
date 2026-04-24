@@ -19,40 +19,38 @@ export function Footer() {
             <h3 className="font-semibold mb-4">Navigation</h3>
             <ul className="space-y-2 text-sm">
               <li><Link href="/" className="hover:text-accent transition-colors">Accueil</Link></li>
-              <li><Link href="/services/entreprises" className="hover:text-accent transition-colors">Pour les entreprises</Link></li>
-              <li><Link href="/services/candidats" className="hover:text-accent transition-colors">Pour les candidats</Link></li>
+              <li><Link href="/services" className="hover:text-accent transition-colors">Nos Services</Link></li>
               <li><Link href="/jobs" className="hover:text-accent transition-colors">Offres d'emploi</Link></li>
               <li><Link href="/about" className="hover:text-accent transition-colors">À propos</Link></li>
+              <li><Link href="/contact" className="hover:text-accent transition-colors">Contact</Link></li>
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="font-semibold mb-4">Services</h3>
+            <h3 className="font-semibold mb-4">Nos Expertises</h3>
             <ul className="space-y-2 text-sm">
-              <li>Recrutement</li>
-              <li>Conseil RH</li>
-              <li>Formation</li>
-              <li>Accompagnement carrière</li>
-              <li>Évaluation talents</li>
+              <li>Recrutement et Chasse de Têtes</li>
+              <li>Formation Professionnelle</li>
+              <li>Conseil en Ressources Humaines</li>
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact - Informations officielles de la brochure */}
           <div>
             <h3 className="font-semibold mb-4">Contact</h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <Phone size={16} className="mt-1 flex-shrink-0" />
-                <span>+225 27 XX XX XX XX</span>
+                <span>07 10 15 12 13</span>
               </li>
               <li className="flex items-start gap-2">
                 <Mail size={16} className="mt-1 flex-shrink-0" />
-                <span>contact@hrtalentspartners.com</span>
+                <span>rh@hrtalentspartners.com</span>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="mt-1 flex-shrink-0" />
-                <span>Abidjan, Côte d'Ivoire<br />Plateau - Zone 4</span>
+                <span>Abidjan, Cocody Riviera<br />Côte d'Ivoire</span>
               </li>
             </ul>
             
@@ -74,6 +72,6 @@ export function Footer() {
           <p>&copy; {new Date().getFullYear()} HR Talents Partners. Tous droits réservés.</p>
         </div>
       </div>
-    </footer>);
-
+    </footer>
+  );
 }

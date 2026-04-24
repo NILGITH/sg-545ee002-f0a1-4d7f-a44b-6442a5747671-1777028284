@@ -67,13 +67,13 @@ export default function Services() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Recrutement */}
+              {/* Recrutement et Chasse de Têtes */}
               <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
                 <CardContent className="pt-8 space-y-6">
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <Image
                       src="/2148190653.jpg"
-                      alt="Recrutement"
+                      alt="Recrutement et Chasse de Têtes"
                       fill
                       className="object-cover"
                     />
@@ -83,23 +83,23 @@ export default function Services() {
                       <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                         <Users className="text-accent" size={28} />
                       </div>
-                      <h3 className="font-serif text-2xl font-semibold">Recrutement</h3>
+                      <h3 className="font-serif text-2xl font-semibold">Recrutement et Chasse de Têtes</h3>
                     </div>
                     <p className="text-muted-foreground">
-                      Notre méthode signature en 3 temps garantit des recrutements précis et durables en Côte d'Ivoire.
+                      Identification et attraction des meilleurs talents pour les postes stratégiques
                     </p>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
                         <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                        <span>Méthode en 3 temps : définition, recherche, sélection</span>
+                        <span>Identification et attraction des meilleurs talents pour les postes stratégiques</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                        <span>Accompagnement personnalisé jusqu'à l'intégration</span>
+                        <span>Évaluation approfondie des compétences, du potentiel et de la compatibilité culturelle</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                        <span>Garantie de fidélisation exclusive</span>
+                        <span>Accompagnement dans l'intégration pour garantir un succès durable</span>
                       </li>
                     </ul>
                     <Button 
@@ -112,103 +112,13 @@ export default function Services() {
                 </CardContent>
               </Card>
 
-              {/* Analyse Salariale */}
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
-                <CardContent className="pt-8 space-y-6">
-                  <div className="relative h-48 rounded-lg overflow-hidden">
-                    <Image
-                      src="/15685.jpg"
-                      alt="Analyse salariale"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                        <Target className="text-accent" size={28} />
-                      </div>
-                      <h3 className="font-serif text-2xl font-semibold">Analyse Salariale</h3>
-                    </div>
-                    <p className="text-muted-foreground">
-                      Premier cabinet à publier un Guide des Salaires en Côte d'Ivoire avec vision 360° du marché.
-                    </p>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                        <span>Collecte de données via entretiens directs</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                        <span>Analyse sectorielle pointue du marché ivoirien</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                        <span>Benchmarking complet des politiques salariales</span>
-                      </li>
-                    </ul>
-                    <Button 
-                      onClick={() => setOpenModal("analyse")}
-                      className="bg-accent hover:bg-accent/90 w-full"
-                    >
-                      En savoir plus <ArrowRight className="ml-2" size={20} />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Team Building */}
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
-                <CardContent className="pt-8 space-y-6">
-                  <div className="relative h-48 rounded-lg overflow-hidden">
-                    <Image
-                      src="/21178.jpg"
-                      alt="Team building"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                        <Handshake className="text-accent" size={28} />
-                      </div>
-                      <h3 className="font-serif text-2xl font-semibold">Team Building</h3>
-                    </div>
-                    <p className="text-muted-foreground">
-                      Expériences sur mesure adaptées à votre culture et objectifs pour renforcer vos équipes.
-                    </p>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                        <span>Activités personnalisées selon votre culture</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                        <span>Animation professionnelle et engageante</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                        <span>Performance mesurable avec KPIs concrets</span>
-                      </li>
-                    </ul>
-                    <Button 
-                      onClick={() => setOpenModal("teambuilding")}
-                      className="bg-accent hover:bg-accent/90 w-full"
-                    >
-                      En savoir plus <ArrowRight className="ml-2" size={20} />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Formation */}
+              {/* Formation Professionnelle */}
               <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
                 <CardContent className="pt-8 space-y-6">
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <Image
                       src="/2149300718.jpg"
-                      alt="Formation"
+                      alt="Formation Professionnelle"
                       fill
                       className="object-cover"
                     />
@@ -218,23 +128,23 @@ export default function Services() {
                       <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                         <GraduationCap className="text-accent" size={28} />
                       </div>
-                      <h3 className="font-serif text-2xl font-semibold">Formation</h3>
+                      <h3 className="font-serif text-2xl font-semibold">Formation Professionnelle</h3>
                     </div>
                     <p className="text-muted-foreground">
-                      Développez les compétences de vos talents avec nos formations taillées pour le terrain ivoirien.
+                      Programmes sur mesure pour le développement des compétences techniques et comportementales
                     </p>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
                         <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                        <span>Leadership, prise de parole, IA, gestion de projet</span>
+                        <span>Programmes sur mesure pour le développement des compétences techniques et comportementales</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                        <span>Formations pratiques adaptées au contexte local</span>
+                        <span>Ateliers de leadership et gestion du changement pour dirigeants et managers</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                        <span>Certification en fin de parcours</span>
+                        <span>Certification et formation continue pour rester à la pointe des évolutions du marché</span>
                       </li>
                     </ul>
                     <Button 
@@ -243,6 +153,47 @@ export default function Services() {
                     >
                       En savoir plus <ArrowRight className="ml-2" size={20} />
                     </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Conseil en Ressources Humaines */}
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group md:col-span-2">
+                <CardContent className="pt-8 space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="relative h-48 rounded-lg overflow-hidden">
+                      <Image
+                        src="/21178.jpg"
+                        alt="Conseil en Ressources Humaines"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-4">
+                        <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                          <Handshake className="text-accent" size={28} />
+                        </div>
+                        <h3 className="font-serif text-2xl font-semibold">Conseil en Ressources Humaines</h3>
+                      </div>
+                      <p className="text-muted-foreground">
+                        Audit RH, politiques RH stratégiques, digitalisation des processus RH
+                      </p>
+                      <ul className="space-y-2 text-sm text-muted-foreground">
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                          <span>Audit RH pour diagnostiquer les forces et axes d'amélioration</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                          <span>Mise en place de politiques RH stratégiques alignées sur les objectifs organisationnels</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                          <span>Accompagnement dans la digitalisation des processus RH pour une efficacité accrue</span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -525,7 +476,7 @@ export default function Services() {
                     </div>
                     <div className="border-l-4 border-accent pl-4">
                       <h4 className="font-semibold mb-2">💡 Séminaires Stratégiques</h4>
-                      <p className="text-sm">Innovation workshops, planification collaborative</p>
+                      <p className="text-sm">Workshops d'innovation, planification collaborative</p>
                     </div>
                   </div>
                 </div>

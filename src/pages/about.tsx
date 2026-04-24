@@ -25,8 +25,8 @@ export default function About() {
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80"
               alt="À propos"
               fill
-              className="object-cover" />
-            
+              className="object-cover"
+            />
             <div className="absolute inset-0 bg-primary/85"></div>
           </div>
           <div className="container relative text-center space-y-6 text-white">
@@ -36,10 +36,10 @@ export default function About() {
               </span>
             </div>
             <h1 className="font-serif text-4xl md:text-6xl font-bold max-w-4xl mx-auto">
-              Ambassadeurs de <span className="text-accent">Talents</span> et d'<span className="text-accent">Excellence</span>
+              Ambassadeur de <span className="text-accent">Talents</span> et d'<span className="text-accent">Excellence</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Plus qu'un cabinet de recrutement, nous sommes vos partenaires stratégiques pour bâtir l'avenir de vos organisations en Côte d'Ivoire
+              Nous incarnons une vision ambitieuse et une quête incessante d'excellence, visant à vous accompagner dans l'élaboration et la mise en œuvre de stratégies avancées en gestion des ressources humaines
             </p>
           </div>
         </section>
@@ -49,16 +49,19 @@ export default function About() {
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold">Notre Histoire</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold">Qui sommes-nous ?</h2>
                 <div className="space-y-4 text-muted-foreground">
                   <p className="text-lg">
-                    Dans un marché ivoirien en pleine croissance, HR Talents Partners crée des connexions privilégiées entre les entreprises visionnaires et les talents qui transforment leurs ambitions en réalité.
+                    HR TALENTS PARTNERS est né d'une ambition partagée : celle de transformer les Ressources Humaines en un levier stratégique de performance et d'innovation au sein des organisations.
                   </p>
                   <p className="text-lg">
-                    Depuis plus de 8 ans, nous avons accompagné plus de 250 entreprises et connecté plus de 50 000 talents à travers la Côte d'Ivoire. Notre expertise s'étend du recrutement stratégique au conseil RH, en passant par l'analyse salariale et le développement des compétences.
+                    Fondé par des experts en gestion des talents, en développement organisationnel et en stratégie RH, notre cabinet s'est rapidement imposé comme un acteur incontournable dans l'accompagnement des entreprises, des PME aux grands groupes, dans leur gestion des ressources humaines.
                   </p>
                   <p className="text-lg">
-                    Basés à Abidjan, nous sommes reconnus comme le premier cabinet à avoir publié un Guide des Salaires en Côte d'Ivoire, offrant ainsi une vision 360° des tendances du marché RH ivoirien.
+                    À travers une approche humaine et innovante, nous avons su accompagner nos clients dans leur évolution en intégrant les dernières tendances RH et en développant une expertise reconnue dans le recrutement, la formation et le conseil.
+                  </p>
+                  <p className="text-lg">
+                    Aujourd'hui, notre équipe d'experts s'engage à aider les organisations à naviguer avec agilité dans un environnement en constante transformation, tout en plaçant le talent et l'excellence au cœur de chaque stratégie RH.
                   </p>
                 </div>
               </div>
@@ -67,8 +70,8 @@ export default function About() {
                   src="/2147664377.jpg"
                   alt="Notre équipe à Abidjan"
                   fill
-                  className="object-cover rounded-lg" />
-                
+                  className="object-cover rounded-lg"
+                />
               </div>
             </div>
           </div>
@@ -80,43 +83,19 @@ export default function About() {
             <div className="text-center mb-16 space-y-4">
               <h2 className="font-serif text-3xl md:text-5xl font-bold">Nos Valeurs</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Les principes qui guident chacune de nos actions en Côte d'Ivoire
+                Les valeurs qui guident notre projet
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
-                <CardContent className="pt-8 space-y-4 text-center">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                    <Target className="text-accent" size={32} />
-                  </div>
-                  <h3 className="font-serif text-2xl font-semibold">Excellence</h3>
-                  <p className="text-muted-foreground">
-                    Nous visons l'excellence dans chaque mission, chaque recrutement, chaque conseil
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
-                <CardContent className="pt-8 space-y-4 text-center">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                    <Users className="text-accent" size={32} />
-                  </div>
-                  <h3 className="font-serif text-2xl font-semibold">Humanité</h3>
-                  <p className="text-muted-foreground">
-                    Au cœur de notre métier : les personnes, leurs aspirations, leur potentiel unique
-                  </p>
-                </CardContent>
-              </Card>
-
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
               <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
                 <CardContent className="pt-8 space-y-4 text-center">
                   <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
                     <Award className="text-accent" size={32} />
                   </div>
-                  <h3 className="font-serif text-2xl font-semibold">Intégrité</h3>
+                  <h3 className="font-serif text-2xl font-semibold">Excellence</h3>
                   <p className="text-muted-foreground">
-                    Transparence et honnêteté dans toutes nos relations, avec candidats et entreprises
+                    Nous plaçons la qualité au cœur de nos actions, en proposant des services rigoureusement pensés et exécutés pour répondre aux exigences les plus élevées
                   </p>
                 </CardContent>
               </Card>
@@ -128,7 +107,43 @@ export default function About() {
                   </div>
                   <h3 className="font-serif text-2xl font-semibold">Innovation</h3>
                   <p className="text-muted-foreground">
-                    Pionniers de l'analyse RH en Côte d'Ivoire, nous innovons constamment pour vous servir mieux
+                    Nous intégrons des outils de pointe et des approches modernes pour anticiper les mutations du marché et offrir des solutions avant-gardistes
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
+                <CardContent className="pt-8 space-y-4 text-center">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                    <Users className="text-accent" size={32} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold">Proximité</h3>
+                  <p className="text-muted-foreground">
+                    Nous cultivons des relations authentiques et durables avec nos clients et partenaires, en étant à leur écoute pour co-construire des solutions adaptées
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
+                <CardContent className="pt-8 space-y-4 text-center">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                    <Target className="text-accent" size={32} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold">Intégrité</h3>
+                  <p className="text-muted-foreground">
+                    Nos engagements sont guidés par l'éthique, la transparence et le respect de nos parties prenantes, créant un environnement fondé sur la confiance
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
+                <CardContent className="pt-8 space-y-4 text-center">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                    <Award className="text-accent" size={32} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold">Impact</h3>
+                  <p className="text-muted-foreground">
+                    Nous visons à créer des transformations positives et mesurables pour nos clients, leurs équipes et leurs organisations
                   </p>
                 </CardContent>
               </Card>
