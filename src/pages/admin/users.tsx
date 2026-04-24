@@ -33,6 +33,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { SEO } from "@/components/SEO";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { authService } from "@/services/authService";
 import { adminUsersService } from "@/services/adminUsersService";
 import { Users, UserPlus, Edit, Trash2, ShieldAlert, ShieldCheck, Calendar } from "lucide-react";
@@ -43,9 +44,8 @@ type AdminUser = Tables<"admin_users">;
 
 export default function AdminUsers() {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
+  const { loading: authLoading, isAdmin, isSuperAdmin } = useAdminAuth(true); // requireSuperAdmin = true
   const [users, setUsers] = useState<AdminUser[]>([]);
-  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -76,27 +76,10 @@ export default function AdminUsers() {
   };
 
   useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const checkAuth = async () => {
-    const session = await authService.getCurrentSession();
-    if (!session) {
-      router.push("/admin/login");
-      return;
+    if (!authLoading && isSuperAdmin) {
+      loadUsers();
     }
-
-    const isSA = await adminUsersService.isSuperAdmin();
-    if (!isSA) {
-      alert("Accès refusé. Seul le super_admin peut accéder à cette page.");
-      router.push("/admin/dashboard");
-      return;
-    }
-
-    setIsSuperAdmin(true);
-    await loadUsers();
-    setLoading(false);
-  };
+  }, [authLoading, isSuperAdmin]);
 
   const loadUsers = async () => {
     try {
@@ -184,15 +167,14 @@ export default function AdminUsers() {
     return <Badge variant={variant}>{label}</Badge>;
   };
 
-  if (loading) {
+  if (authLoading || !isSuperAdmin) {
     return (
-      <>
-        <Navigation />
-        <main className="min-h-[calc(100vh-80px)] flex items-center justify-center">
-          <p>Chargement...</p>
-        </main>
-        <Footer />
-      </>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Vérification des permissions Super Admin...</p>
+        </div>
+      </div>
     );
   }
 

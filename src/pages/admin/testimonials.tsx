@@ -15,7 +15,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/integrations/supabase/client";
 import { testimonialsService } from "@/services/testimonialsService";
-import { adminUsersService } from "@/services/adminUsersService";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { PlusCircle, Edit, Trash2, Upload, Star, ArrowLeft } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 import Link from "next/link";
@@ -24,6 +24,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function AdminTestimonials() {
   const router = useRouter();
   const { toast } = useToast();
+  const { loading: authLoading, isAdmin } = useAdminAuth();
   const [loading, setLoading] = useState(true);
   const [testimonials, setTestimonials] = useState<Tables<"testimonials">[]>([]);
   const [showCreateDialog, setShowCreateDialog] = useState(false);
@@ -54,19 +55,10 @@ export default function AdminTestimonials() {
   });
 
   useEffect(() => {
-    checkAuth();
-    loadTestimonials();
-  }, []);
-
-  const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-      router.push("/admin/login");
-      return;
+    if (!authLoading && isAdmin) {
+      loadTestimonials();
     }
-    // Ne pas rediriger - laisser la page charger normalement
-    // Les RLS policies vont gérer les permissions
-  };
+  }, [authLoading, isAdmin]);
 
   const loadTestimonials = async () => {
     setLoading(true);
@@ -82,6 +74,17 @@ export default function AdminTestimonials() {
     }
     setLoading(false);
   };
+
+  if (authLoading || !isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Vérification des permissions...</p>
+        </div>
+      </div>
+    );
+  }
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

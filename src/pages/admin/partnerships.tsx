@@ -14,7 +14,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/integrations/supabase/client";
 import { partnershipsService } from "@/services/partnershipsService";
-import { adminUsersService } from "@/services/adminUsersService";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { PlusCircle, Edit, Trash2, ArrowLeft, ExternalLink } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 import Link from "next/link";
@@ -23,6 +23,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function AdminPartnerships() {
   const router = useRouter();
   const { toast } = useToast();
+  const { loading: authLoading, isAdmin } = useAdminAuth();
   const [loading, setLoading] = useState(true);
   const [partnerships, setPartnerships] = useState<Tables<"partnerships">[]>([]);
   const [showCreateDialog, setShowCreateDialog] = useState(false);
@@ -49,19 +50,10 @@ export default function AdminPartnerships() {
   });
 
   useEffect(() => {
-    checkAuth();
-    loadPartnerships();
-  }, []);
-
-  const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-      router.push("/admin/login");
-      return;
+    if (!authLoading && isAdmin) {
+      loadPartnerships();
     }
-    // Ne pas rediriger - laisser la page charger normalement
-    // Les RLS policies vont gérer les permissions
-  };
+  }, [authLoading, isAdmin]);
 
   const loadPartnerships = async () => {
     setLoading(true);
@@ -77,6 +69,17 @@ export default function AdminPartnerships() {
     }
     setLoading(false);
   };
+
+  if (authLoading || !isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Vérification des permissions...</p>
+        </div>
+      </div>
+    );
+  }
 
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
