@@ -76,14 +76,21 @@ export default function SubmitJob() {
           setSubmitting(false);
           return;
         }
+        console.log("Uploading logo...");
         logoUrl = await jobSubmissionService.uploadCompanyLogo(logoFile);
+        console.log("Logo uploaded:", logoUrl);
       }
 
-      // Soumettre l'offre avec toutes les données
-      await jobSubmissionService.submitJob({
+      // Log des données avant soumission
+      const submissionData = {
         ...formData,
         company_logo_url: logoUrl,
-      });
+      };
+      console.log("Submitting job data:", submissionData);
+
+      // Soumettre l'offre avec toutes les données
+      const result = await jobSubmissionService.submitJob(submissionData);
+      console.log("Submission result:", result);
 
       alert("Votre offre a été soumise avec succès ! Notre équipe la validera sous 24-48h.");
       
@@ -108,7 +115,13 @@ export default function SubmitJob() {
       setLogoPreview("");
     } catch (error: any) {
       console.error("Job submission error:", error);
-      alert(error.message || "Erreur lors de la soumission. Veuillez réessayer.");
+      console.error("Error details:", {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+      });
+      alert(`Erreur lors de la soumission: ${error.message || "Erreur inconnue"}\n\nDétails: ${error.details || error.hint || "Aucun détail"}`);
     }
 
     setSubmitting(false);
