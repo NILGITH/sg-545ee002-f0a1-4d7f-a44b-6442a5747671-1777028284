@@ -451,6 +451,45 @@ export type Database = {
         }
         Relationships: []
       }
+      partnerships: {
+        Row: {
+          category: string | null
+          company_name: string
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          id: string
+          is_active: boolean | null
+          logo_url: string
+          updated_at: string | null
+          website_url: string | null
+        }
+        Insert: {
+          category?: string | null
+          company_name: string
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          logo_url: string
+          updated_at?: string | null
+          website_url?: string | null
+        }
+        Update: {
+          category?: string | null
+          company_name?: string
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          logo_url?: string
+          updated_at?: string | null
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -551,6 +590,51 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      testimonials: {
+        Row: {
+          author_company: string
+          author_name: string
+          author_photo_url: string | null
+          author_position: string
+          content: string
+          created_at: string | null
+          display_order: number | null
+          id: string
+          is_active: boolean | null
+          is_featured: boolean | null
+          rating: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          author_company: string
+          author_name: string
+          author_photo_url?: string | null
+          author_position: string
+          content: string
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          rating?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          author_company?: string
+          author_name?: string
+          author_photo_url?: string | null
+          author_position?: string
+          content?: string
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          rating?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
       }
     }
     Views: {
