@@ -6,7 +6,7 @@ import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
-import { Briefcase, Users, FileText, TrendingUp, PlusCircle, Settings, LogOut } from "lucide-react";
+import { Briefcase, Users, FileText, TrendingUp, PlusCircle, Settings, LogOut, Upload, CheckSquare } from "lucide-react";
 import Link from "next/link";
 
 export default function AdminDashboard() {
@@ -17,6 +17,8 @@ export default function AdminDashboard() {
     activeJobs: 0,
     totalApplications: 0,
     pendingApplications: 0,
+    totalCVs: 0,
+    pendingSubmissions: 0,
   });
 
   useEffect(() => {
@@ -34,21 +36,27 @@ export default function AdminDashboard() {
   const loadStats = async () => {
     setLoading(true);
 
-    const [jobsData, applicationsData] = await Promise.all([
+    const [jobsData, applicationsData, cvsData, submissionsData] = await Promise.all([
       supabase.from("jobs").select("id, is_active", { count: "exact" }),
       supabase.from("applications").select("id, status", { count: "exact" }),
+      supabase.from("candidate_cvs").select("id", { count: "exact" }),
+      supabase.from("job_submissions").select("id, status", { count: "exact" }),
     ]);
 
     const totalJobs = jobsData.count || 0;
     const activeJobs = jobsData.data?.filter(j => j.is_active).length || 0;
     const totalApplications = applicationsData.count || 0;
     const pendingApplications = applicationsData.data?.filter(a => a.status === "pending").length || 0;
+    const totalCVs = cvsData.count || 0;
+    const pendingSubmissions = submissionsData.data?.filter(s => s.status === "pending").length || 0;
 
     setStats({
       totalJobs,
       activeJobs,
       totalApplications,
       pendingApplications,
+      totalCVs,
+      pendingSubmissions,
     });
     setLoading(false);
   };
@@ -67,7 +75,7 @@ export default function AdminDashboard() {
       
       <Navigation />
       
-      <main className="min-h-screen py-12">
+      <main className="min-h-screen py-12 bg-muted/30">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -81,7 +89,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Stats Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <Card className="border-2">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -108,6 +116,36 @@ export default function AdminDashboard() {
                 <div className="text-3xl font-bold font-serif">{stats.totalApplications}</div>
                 <p className="text-xs text-muted-foreground mt-1">
                   {stats.pendingApplications} en attente
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2">
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  CV Candidats
+                </CardTitle>
+                <Upload className="text-accent" size={20} />
+              </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold font-serif">{stats.totalCVs}</div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  CV dans la base
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2">
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  Soumissions Entreprises
+                </CardTitle>
+                <CheckSquare className="text-accent" size={20} />
+              </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold font-serif">{stats.pendingSubmissions}</div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  En attente de validation
                 </p>
               </CardContent>
             </Card>
@@ -148,7 +186,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Quick Actions */}
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card className="border-2 hover:border-accent transition-colors">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -170,7 +208,7 @@ export default function AdminDashboard() {
                   <Button asChild variant="outline">
                     <Link href="/admin/jobs">
                       <Settings size={18} className="mr-2" />
-                      Gérer les offres
+                      Gérer
                     </Link>
                   </Button>
                 </div>
@@ -181,7 +219,7 @@ export default function AdminDashboard() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <FileText className="text-accent" size={24} />
-                  Gestion des candidatures
+                  Candidatures
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -192,6 +230,46 @@ export default function AdminDashboard() {
                   <Link href="/admin/applications">
                     <FileText size={18} className="mr-2" />
                     Voir les candidatures
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 hover:border-accent transition-colors">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Upload className="text-accent" size={24} />
+                  CV Candidats
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p className="text-muted-foreground">
+                  Consultez tous les CV des candidats inscrits
+                </p>
+                <Button asChild variant="outline" className="w-full">
+                  <Link href="/admin/cvs">
+                    <Upload size={18} className="mr-2" />
+                    Gérer les CV
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 hover:border-accent transition-colors">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <CheckSquare className="text-accent" size={24} />
+                  Soumissions Entreprises
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p className="text-muted-foreground">
+                  Validez les offres soumises par les entreprises
+                </p>
+                <Button asChild variant="outline" className="w-full">
+                  <Link href="/admin/submissions">
+                    <CheckSquare size={18} className="mr-2" />
+                    Valider les offres
                   </Link>
                 </Button>
               </CardContent>
