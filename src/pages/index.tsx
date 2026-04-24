@@ -20,7 +20,7 @@ const heroSlides = [
     title: "Votre Partenaire RH de Confiance",
     subtitle: "Accompagnement personnalisé pour entreprises et professionnels ivoiriens",
     cta: "Nos services",
-    ctaLink: "/services/entreprises",
+    ctaLink: "/services",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80",
   },
   {
