@@ -270,7 +270,7 @@ export default function AdminUsers() {
                             setSelectedUser(user);
                             setEditData({
                               fullName: user.full_name || "",
-                              role: user.role,
+                              role: user.role as "admin" | "manager" | "super_admin",
                               isActive: user.is_active,
                             });
                             setShowEditDialog(true);
