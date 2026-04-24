@@ -1,13 +1,25 @@
+import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { SEO } from "@/components/SEO";
 import Link from "next/link";
-import { ArrowRight, Users, Target, GraduationCap, Handshake, CheckCircle, Building2, UserCheck } from "lucide-react";
+import { ArrowRight, Users, Target, GraduationCap, Handshake, CheckCircle, Building2, UserCheck, X } from "lucide-react";
 import Image from "next/image";
 
+type ServiceModal = "recrutement" | "analyse" | "teambuilding" | "formation" | null;
+
 export default function Services() {
+  const [openModal, setOpenModal] = useState<ServiceModal>(null);
+
   return (
     <>
       <SEO 
@@ -22,7 +34,7 @@ export default function Services() {
         <section className="relative py-20 md:py-32 overflow-hidden">
           <div className="absolute inset-0">
             <Image
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80"
+              src="/2149603484.jpg"
               alt="Services RH"
               fill
               className="object-cover"
@@ -60,7 +72,7 @@ export default function Services() {
                 <CardContent className="pt-8 space-y-6">
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <Image
-                      src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80"
+                      src="/2148190653.jpg"
                       alt="Recrutement"
                       fill
                       className="object-cover"
@@ -90,10 +102,11 @@ export default function Services() {
                         <span>Garantie de fidélisation exclusive</span>
                       </li>
                     </ul>
-                    <Button asChild className="bg-accent hover:bg-accent/90 w-full">
-                      <Link href="/services/entreprises">
-                        En savoir plus <ArrowRight className="ml-2" size={20} />
-                      </Link>
+                    <Button 
+                      onClick={() => setOpenModal("recrutement")}
+                      className="bg-accent hover:bg-accent/90 w-full"
+                    >
+                      En savoir plus <ArrowRight className="ml-2" size={20} />
                     </Button>
                   </div>
                 </CardContent>
@@ -104,7 +117,7 @@ export default function Services() {
                 <CardContent className="pt-8 space-y-6">
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <Image
-                      src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+                      src="/15685.jpg"
                       alt="Analyse salariale"
                       fill
                       className="object-cover"
@@ -134,10 +147,11 @@ export default function Services() {
                         <span>Benchmarking complet des politiques salariales</span>
                       </li>
                     </ul>
-                    <Button asChild className="bg-accent hover:bg-accent/90 w-full">
-                      <Link href="/services/entreprises">
-                        En savoir plus <ArrowRight className="ml-2" size={20} />
-                      </Link>
+                    <Button 
+                      onClick={() => setOpenModal("analyse")}
+                      className="bg-accent hover:bg-accent/90 w-full"
+                    >
+                      En savoir plus <ArrowRight className="ml-2" size={20} />
                     </Button>
                   </div>
                 </CardContent>
@@ -148,7 +162,7 @@ export default function Services() {
                 <CardContent className="pt-8 space-y-6">
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <Image
-                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+                      src="/21178.jpg"
                       alt="Team building"
                       fill
                       className="object-cover"
@@ -178,10 +192,11 @@ export default function Services() {
                         <span>Performance mesurable avec KPIs concrets</span>
                       </li>
                     </ul>
-                    <Button asChild className="bg-accent hover:bg-accent/90 w-full">
-                      <Link href="/services/entreprises">
-                        En savoir plus <ArrowRight className="ml-2" size={20} />
-                      </Link>
+                    <Button 
+                      onClick={() => setOpenModal("teambuilding")}
+                      className="bg-accent hover:bg-accent/90 w-full"
+                    >
+                      En savoir plus <ArrowRight className="ml-2" size={20} />
                     </Button>
                   </div>
                 </CardContent>
@@ -192,7 +207,7 @@ export default function Services() {
                 <CardContent className="pt-8 space-y-6">
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <Image
-                      src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80"
+                      src="/2149300718.jpg"
                       alt="Formation"
                       fill
                       className="object-cover"
@@ -222,10 +237,11 @@ export default function Services() {
                         <span>Certification en fin de parcours</span>
                       </li>
                     </ul>
-                    <Button asChild className="bg-accent hover:bg-accent/90 w-full">
-                      <Link href="/services/entreprises">
-                        En savoir plus <ArrowRight className="ml-2" size={20} />
-                      </Link>
+                    <Button 
+                      onClick={() => setOpenModal("formation")}
+                      className="bg-accent hover:bg-accent/90 w-full"
+                    >
+                      En savoir plus <ArrowRight className="ml-2" size={20} />
                     </Button>
                   </div>
                 </CardContent>
@@ -336,6 +352,326 @@ export default function Services() {
       </main>
 
       <Footer />
+
+      {/* Modals pour chaque service */}
+      {/* Modal Recrutement */}
+      <Dialog open={openModal === "recrutement"} onOpenChange={() => setOpenModal(null)}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="font-serif text-3xl mb-4">Recrutement Stratégique</DialogTitle>
+            <DialogDescription className="text-base text-foreground">
+              <div className="space-y-6">
+                <p className="text-lg">
+                  Notre méthode en 3 temps garantit des recrutements précis, durables et parfaitement alignés avec votre culture d'entreprise.
+                </p>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-xl text-accent">Étape 1 : Définition du Besoin</h3>
+                  <ul className="space-y-2 ml-6 list-disc">
+                    <li>Analyse approfondie de votre organisation et culture d'entreprise</li>
+                    <li>Identification précise des compétences techniques et soft skills requis</li>
+                    <li>Définition du profil idéal en collaboration avec vos équipes</li>
+                    <li>Établissement des critères de sélection et grille d'évaluation</li>
+                  </ul>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-xl text-accent">Étape 2 : Recherche Active</h3>
+                  <ul className="space-y-2 ml-6 list-disc">
+                    <li>Chasse de têtes ciblée dans notre réseau de 50 000+ talents ivoiriens</li>
+                    <li>Sourcing multi-canal : LinkedIn, plateformes professionnelles, réseau direct</li>
+                    <li>Approche discrète et personnalisée des candidats potentiels</li>
+                    <li>Pré-qualification rigoureuse selon vos critères</li>
+                  </ul>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-xl text-accent">Étape 3 : Sélection & Intégration</h3>
+                  <ul className="space-y-2 ml-6 list-disc">
+                    <li>Entretiens structurés avec évaluation des compétences techniques</li>
+                    <li>Tests de personnalité et assessment centers si nécessaire</li>
+                    <li>Présentation d'une short-list de 3-5 candidats qualifiés</li>
+                    <li>Accompagnement lors des entretiens finaux</li>
+                    <li>Support à l'intégration pendant la période d'essai</li>
+                  </ul>
+                </div>
+
+                <div className="bg-accent/10 p-6 rounded-lg border-l-4 border-accent">
+                  <h3 className="font-semibold text-lg mb-2">🎯 Garantie de Fidélisation</h3>
+                  <p>
+                    Nous offrons une garantie exclusive de remplacement gratuit si le candidat ne donne pas satisfaction pendant la période d'essai. Votre succès est notre priorité.
+                  </p>
+                </div>
+
+                <div className="pt-4">
+                  <Button asChild size="lg" className="bg-accent hover:bg-accent/90 w-full">
+                    <Link href="/contact">Discuter de vos besoins en recrutement</Link>
+                  </Button>
+                </div>
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+
+      {/* Modal Analyse Salariale */}
+      <Dialog open={openModal === "analyse"} onOpenChange={() => setOpenModal(null)}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="font-serif text-3xl mb-4">Analyse Salariale & Benchmarking</DialogTitle>
+            <DialogDescription className="text-base text-foreground">
+              <div className="space-y-6">
+                <p className="text-lg">
+                  Pionniers de l'intelligence RH en Côte d'Ivoire, nous avons publié le premier Guide des Salaires du pays, offrant une vision 360° des tendances salariales du marché ivoirien.
+                </p>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-xl text-accent">Notre Méthodologie</h3>
+                  <ul className="space-y-2 ml-6 list-disc">
+                    <li><strong>Collecte de données confidentielles</strong> via des entretiens directs avec plus de 5 000 professionnels clés</li>
+                    <li><strong>Analyse sectorielle pointue</strong> adaptée aux réalités du marché ivoirien</li>
+                    <li><strong>Benchmarking complet</strong> des politiques salariales et avantages compétitifs</li>
+                    <li><strong>Mise à jour annuelle</strong> pour refléter l'évolution du marché</li>
+                  </ul>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-xl text-accent">Ce que Contient Notre Guide</h3>
+                  <ul className="space-y-2 ml-6 list-disc">
+                    <li>20+ index salariaux par secteur d'activité et niveau d'expérience</li>
+                    <li>Grilles salariales détaillées pour 150+ postes clés</li>
+                    <li>Analyse des avantages sociaux et packages compétitifs</li>
+                    <li>Tendances d'évolution salariale et prévisions</li>
+                    <li>Comparaisons régionales Abidjan vs autres villes de CI</li>
+                    <li>Insights sur les pratiques de rémunération variable</li>
+                  </ul>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-xl text-accent">Services Personnalisés</h3>
+                  <ul className="space-y-2 ml-6 list-disc">
+                    <li>Audit de votre grille salariale actuelle</li>
+                    <li>Recommandations stratégiques pour attirer et retenir les talents</li>
+                    <li>Étude comparative avec vos concurrents directs</li>
+                    <li>Conseil sur la structuration de packages de rémunération globale</li>
+                  </ul>
+                </div>
+
+                <div className="bg-accent/10 p-6 rounded-lg border-l-4 border-accent">
+                  <h3 className="font-semibold text-lg mb-2">📊 Chiffres Clés</h3>
+                  <div className="grid grid-cols-3 gap-4 text-center mt-4">
+                    <div>
+                      <div className="text-2xl font-bold text-accent">5000+</div>
+                      <div className="text-sm">Répondants</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-accent">20</div>
+                      <div className="text-sm">Index publiés</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-accent">CI</div>
+                      <div className="text-sm">Marché couvert</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <Button asChild size="lg" className="bg-accent hover:bg-accent/90 w-full">
+                    <Link href="/contact">Obtenir le Guide des Salaires</Link>
+                  </Button>
+                </div>
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+
+      {/* Modal Team Building */}
+      <Dialog open={openModal === "teambuilding"} onOpenChange={() => setOpenModal(null)}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="font-serif text-3xl mb-4">Team Building Sur Mesure</DialogTitle>
+            <DialogDescription className="text-base text-foreground">
+              <div className="space-y-6">
+                <p className="text-lg">
+                  Créez des expériences mémorables qui renforcent la cohésion, stimulent la collaboration et alignent vos équipes sur vos objectifs stratégiques.
+                </p>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-xl text-accent">Notre Approche Personnalisée</h3>
+                  <ul className="space-y-2 ml-6 list-disc">
+                    <li><strong>Diagnostic initial</strong> : Analyse de votre culture d'entreprise et dynamiques d'équipe</li>
+                    <li><strong>Co-création</strong> : Design d'activités adaptées à vos objectifs spécifiques</li>
+                    <li><strong>Animation professionnelle</strong> : Facilitateurs expérimentés et engageants</li>
+                    <li><strong>Débriefing structuré</strong> : Capitalisation sur les apprentissages</li>
+                    <li><strong>Suivi post-événement</strong> : Mesure de l'impact avec KPIs concrets</li>
+                  </ul>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-xl text-accent">Types d'Activités</h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="border-l-4 border-accent pl-4">
+                      <h4 className="font-semibold mb-2">🎯 Challenges Collaboratifs</h4>
+                      <p className="text-sm">Escape games, défis stratégiques, rallyes urbains à Abidjan</p>
+                    </div>
+                    <div className="border-l-4 border-accent pl-4">
+                      <h4 className="font-semibold mb-2">🏆 Compétitions Sportives</h4>
+                      <p className="text-sm">Tournois, courses d'orientation, activités nautiques</p>
+                    </div>
+                    <div className="border-l-4 border-accent pl-4">
+                      <h4 className="font-semibold mb-2">🎨 Ateliers Créatifs</h4>
+                      <p className="text-sm">Team cooking, création artistique, improvisation théâtrale</p>
+                    </div>
+                    <div className="border-l-4 border-accent pl-4">
+                      <h4 className="font-semibold mb-2">💡 Séminaires Stratégiques</h4>
+                      <p className="text-sm">Innovation workshops, planification collaborative</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-xl text-accent">Objectifs Mesurables</h3>
+                  <ul className="space-y-2 ml-6 list-disc">
+                    <li>Renforcement de la communication inter-équipes</li>
+                    <li>Développement de la confiance et de l'entraide</li>
+                    <li>Stimulation de la créativité et de l'innovation</li>
+                    <li>Amélioration du leadership et de la prise d'initiative</li>
+                    <li>Alignement sur la vision et les valeurs de l'entreprise</li>
+                  </ul>
+                </div>
+
+                <div className="bg-accent/10 p-6 rounded-lg border-l-4 border-accent">
+                  <h3 className="font-semibold text-lg mb-2">✨ Lieux d'Exception</h3>
+                  <p>
+                    Nous organisons vos événements dans les plus beaux sites de Côte d'Ivoire : resorts balnéaires de Grand-Bassam, espaces nature d'Assinie, hôtels premium d'Abidjan ou sites culturels uniques.
+                  </p>
+                </div>
+
+                <div className="pt-4">
+                  <Button asChild size="lg" className="bg-accent hover:bg-accent/90 w-full">
+                    <Link href="/contact">Organiser mon Team Building</Link>
+                  </Button>
+                </div>
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+
+      {/* Modal Formation */}
+      <Dialog open={openModal === "formation"} onOpenChange={() => setOpenModal(null)}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="font-serif text-3xl mb-4">Formation Professionnelle</DialogTitle>
+            <DialogDescription className="text-base text-foreground">
+              <div className="space-y-6">
+                <p className="text-lg">
+                  Développez les compétences stratégiques de vos talents avec nos formations pratiques, adaptées au contexte ivoirien et animées par des experts reconnus.
+                </p>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-xl text-accent">Nos Modules de Formation</h3>
+                  
+                  <div className="space-y-4">
+                    <div className="border-l-4 border-accent pl-4">
+                      <h4 className="font-semibold text-lg mb-2">👔 Leadership & Management</h4>
+                      <ul className="text-sm space-y-1 ml-4 list-disc">
+                        <li>Leadership inspirant et gestion d'équipe</li>
+                        <li>Management situationnel et coaching</li>
+                        <li>Gestion des conflits et médiation</li>
+                        <li>Conduite du changement organisationnel</li>
+                      </ul>
+                    </div>
+
+                    <div className="border-l-4 border-accent pl-4">
+                      <h4 className="font-semibold text-lg mb-2">🎤 Communication & Influence</h4>
+                      <ul className="text-sm space-y-1 ml-4 list-disc">
+                        <li>Prise de parole en public et storytelling</li>
+                        <li>Communication interpersonnelle efficace</li>
+                        <li>Techniques de négociation et persuasion</li>
+                        <li>Présentation impactante et pitch</li>
+                      </ul>
+                    </div>
+
+                    <div className="border-l-4 border-accent pl-4">
+                      <h4 className="font-semibold text-lg mb-2">🤖 Intelligence Artificielle & Digital</h4>
+                      <ul className="text-sm space-y-1 ml-4 list-disc">
+                        <li>IA appliquée aux RH et au business</li>
+                        <li>Automatisation des processus métier</li>
+                        <li>Data analytics pour la prise de décision</li>
+                        <li>Transformation digitale de l'entreprise</li>
+                      </ul>
+                    </div>
+
+                    <div className="border-l-4 border-accent pl-4">
+                      <h4 className="font-semibold text-lg mb-2">📊 Gestion de Projet</h4>
+                      <ul className="text-sm space-y-1 ml-4 list-disc">
+                        <li>Méthodologies Agile et Scrum</li>
+                        <li>Planification et suivi de projet</li>
+                        <li>Gestion des risques et des parties prenantes</li>
+                        <li>Outils de pilotage de projet</li>
+                      </ul>
+                    </div>
+
+                    <div className="border-l-4 border-accent pl-4">
+                      <h4 className="font-semibold text-lg mb-2">💼 Développement Personnel</h4>
+                      <ul className="text-sm space-y-1 ml-4 list-disc">
+                        <li>Gestion du temps et des priorités</li>
+                        <li>Intelligence émotionnelle</li>
+                        <li>Créativité et résolution de problèmes</li>
+                        <li>Gestion du stress et résilience</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-xl text-accent">Notre Pédagogie</h3>
+                  <ul className="space-y-2 ml-6 list-disc">
+                    <li><strong>Formation-Action</strong> : 70% pratique, 30% théorie</li>
+                    <li><strong>Études de cas locales</strong> : Situations réelles du marché ivoirien</li>
+                    <li><strong>Jeux de rôle et simulations</strong> : Mise en pratique immédiate</li>
+                    <li><strong>Coaching individuel</strong> : Accompagnement personnalisé</li>
+                    <li><strong>Supports digitaux</strong> : Accès plateforme e-learning</li>
+                  </ul>
+                </div>
+
+                <div className="bg-accent/10 p-6 rounded-lg border-l-4 border-accent">
+                  <h3 className="font-semibold text-lg mb-2">🎓 Certification</h3>
+                  <p>
+                    À l'issue de chaque formation, les participants reçoivent un certificat reconnu attestant de leurs nouvelles compétences. Possibilité de formations diplômantes en partenariat avec des institutions accréditées.
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <h3 className="font-semibold text-lg">Formats Disponibles</h3>
+                  <div className="grid grid-cols-3 gap-4 text-center">
+                    <div className="border border-accent/20 rounded p-3">
+                      <div className="font-bold">Intra-entreprise</div>
+                      <div className="text-sm text-muted-foreground">Dans vos locaux</div>
+                    </div>
+                    <div className="border border-accent/20 rounded p-3">
+                      <div className="font-bold">Inter-entreprises</div>
+                      <div className="text-sm text-muted-foreground">Sessions ouvertes</div>
+                    </div>
+                    <div className="border border-accent/20 rounded p-3">
+                      <div className="font-bold">E-learning</div>
+                      <div className="text-sm text-muted-foreground">100% en ligne</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <Button asChild size="lg" className="bg-accent hover:bg-accent/90 w-full">
+                    <Link href="/contact">Demander un catalogue de formations</Link>
+                  </Button>
+                </div>
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
