@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export type Json =
   | string
   | number
@@ -468,6 +468,80 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      service_requests: {
+        Row: {
+          activity_type: string | null
+          admin_notes: string | null
+          assigned_to: string | null
+          company_name: string
+          contact_name: string
+          created_at: string | null
+          email: string
+          id: string
+          location_preference: string | null
+          message: string | null
+          participants_count: number | null
+          phone: string
+          preferred_date: string | null
+          request_type: string
+          status: string | null
+          team_size: number | null
+          training_format: string | null
+          training_topic: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          activity_type?: string | null
+          admin_notes?: string | null
+          assigned_to?: string | null
+          company_name: string
+          contact_name: string
+          created_at?: string | null
+          email: string
+          id?: string
+          location_preference?: string | null
+          message?: string | null
+          participants_count?: number | null
+          phone: string
+          preferred_date?: string | null
+          request_type: string
+          status?: string | null
+          team_size?: number | null
+          training_format?: string | null
+          training_topic?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          activity_type?: string | null
+          admin_notes?: string | null
+          assigned_to?: string | null
+          company_name?: string
+          contact_name?: string
+          created_at?: string | null
+          email?: string
+          id?: string
+          location_preference?: string | null
+          message?: string | null
+          participants_count?: number | null
+          phone?: string
+          preferred_date?: string | null
+          request_type?: string
+          status?: string | null
+          team_size?: number | null
+          training_format?: string | null
+          training_topic?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_requests_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "admin_users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
