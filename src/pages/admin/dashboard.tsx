@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { adminUsersService } from "@/services/adminUsersService";
-import { Briefcase, Users, FileText, TrendingUp, PlusCircle, Settings, LogOut, Upload, CheckSquare, ShieldCheck, MessageSquare, Clock, CheckCircle, XCircle, AlertCircle } from "lucide-react";
+import { Briefcase, Users, FileText, TrendingUp, PlusCircle, Settings, LogOut, Upload, CheckSquare, ShieldCheck, MessageSquare, Clock, CheckCircle, XCircle, AlertCircle, Star, Handshake } from "lucide-react";
 import Link from "next/link";
+import { AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -29,6 +30,8 @@ export default function AdminDashboard() {
     pendingServiceRequests: 0,
     completedServiceRequests: 0,
     totalServiceRequests: 0,
+    totalTestimonials: 0,
+    totalPartnerships: 0,
     conversionRate: 0,
   });
 
@@ -51,12 +54,14 @@ export default function AdminDashboard() {
   const loadStats = async () => {
     setLoading(true);
 
-    const [jobsData, applicationsData, cvsData, submissionsData, serviceRequestsData] = await Promise.all([
+    const [jobsData, applicationsData, cvsData, submissionsData, serviceRequestsData, testimonialsData, partnershipsData] = await Promise.all([
       supabase.from("jobs").select("id, is_active", { count: "exact" }),
       supabase.from("applications").select("id, status", { count: "exact" }),
       supabase.from("candidate_cvs").select("id", { count: "exact" }),
       supabase.from("job_submissions").select("id, status", { count: "exact" }),
       supabase.from("service_requests").select("id, status", { count: "exact" }),
+      supabase.from("testimonials").select("id", { count: "exact" }),
+      supabase.from("partnerships").select("id", { count: "exact" }),
     ]);
 
     const totalJobs = jobsData.count || 0;
@@ -78,6 +83,9 @@ export default function AdminDashboard() {
     const pendingServiceRequests = serviceRequestsData.data?.filter(s => s.status === "pending").length || 0;
     const completedServiceRequests = serviceRequestsData.data?.filter(s => s.status === "completed").length || 0;
 
+    const totalTestimonials = testimonialsData.count || 0;
+    const totalPartnerships = partnershipsData.count || 0;
+
     const conversionRate = totalApplications > 0 
       ? Math.round((approvedApplications / totalApplications) * 100)
       : 0;
@@ -97,6 +105,8 @@ export default function AdminDashboard() {
       pendingServiceRequests,
       completedServiceRequests,
       totalServiceRequests,
+      totalTestimonials,
+      totalPartnerships,
       conversionRate,
     });
     setLoading(false);
@@ -106,6 +116,26 @@ export default function AdminDashboard() {
     await supabase.auth.signOut();
     router.push("/admin/login");
   };
+
+  // Données pour les graphiques
+  const applicationsChartData = [
+    { name: "En attente", value: stats.pendingApplications, color: "#f59e0b" },
+    { name: "Approuvées", value: stats.approvedApplications, color: "#10b981" },
+    { name: "Rejetées", value: stats.rejectedApplications, color: "#ef4444" },
+  ];
+
+  const submissionsChartData = [
+    { name: "En attente", value: stats.pendingSubmissions, color: "#f59e0b" },
+    { name: "Approuvées", value: stats.approvedSubmissions, color: "#10b981" },
+    { name: "Rejetées", value: stats.rejectedSubmissions, color: "#ef4444" },
+  ];
+
+  const activityData = [
+    { name: "Offres", actives: stats.activeJobs, inactives: stats.inactiveJobs },
+    { name: "Candidatures", approuvées: stats.approvedApplications, rejetées: stats.rejectedApplications },
+    { name: "Soumissions", approuvées: stats.approvedSubmissions, rejetées: stats.rejectedSubmissions },
+    { name: "Services", complétées: stats.completedServiceRequests, enAttente: stats.pendingServiceRequests },
+  ];
 
   return (
     <>
@@ -191,6 +221,87 @@ export default function AdminDashboard() {
               </CardContent>
             </Card>
           </div>
+
+          {/* Graphiques statistiques */}
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <Card className="border-2">
+              <CardHeader>
+                <CardTitle className="text-base">Vue d'ensemble des candidatures</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <PieChart>
+                    <Pie
+                      data={applicationsChartData}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={(entry) => `${entry.name}: ${entry.value}`}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="value"
+                    >
+                      {applicationsChartData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2">
+              <CardHeader>
+                <CardTitle className="text-base">Soumissions entreprises</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <PieChart>
+                    <Pie
+                      data={submissionsChartData}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={(entry) => `${entry.name}: ${entry.value}`}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="value"
+                    >
+                      {submissionsChartData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Graphique d'activité globale */}
+          <Card className="border-2 mb-8">
+            <CardHeader>
+              <CardTitle className="text-base">Activité globale</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={350}>
+                <BarChart data={activityData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="actives" stackId="a" fill="#10b981" name="Actives" />
+                  <Bar dataKey="inactives" stackId="a" fill="#6b7280" name="Inactives" />
+                  <Bar dataKey="approuvées" stackId="b" fill="#10b981" name="Approuvées" />
+                  <Bar dataKey="rejetées" stackId="b" fill="#ef4444" name="Rejetées" />
+                  <Bar dataKey="complétées" stackId="c" fill="#10b981" name="Complétées" />
+                  <Bar dataKey="enAttente" stackId="c" fill="#f59e0b" name="En attente" />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
 
           {/* Statistiques détaillées */}
           <div className="grid md:grid-cols-3 gap-6 mb-8">
@@ -397,6 +508,46 @@ export default function AdminDashboard() {
                   <Link href="/admin/service-requests">
                     <MessageSquare size={18} className="mr-2" />
                     Voir les demandes
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 hover:border-accent transition-colors">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Star className="text-accent" size={24} />
+                  Témoignages
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p className="text-muted-foreground">
+                  Gérez les témoignages clients ({stats.totalTestimonials} total)
+                </p>
+                <Button asChild variant="outline" className="w-full">
+                  <Link href="/admin/testimonials">
+                    <Star size={18} className="mr-2" />
+                    Gérer les témoignages
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 hover:border-accent transition-colors">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Handshake className="text-accent" size={24} />
+                  Partenariats
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p className="text-muted-foreground">
+                  Gérez vos partenaires ({stats.totalPartnerships} total)
+                </p>
+                <Button asChild variant="outline" className="w-full">
+                  <Link href="/admin/partnerships">
+                    <Handshake size={18} className="mr-2" />
+                    Gérer les partenariats
                   </Link>
                 </Button>
               </CardContent>
