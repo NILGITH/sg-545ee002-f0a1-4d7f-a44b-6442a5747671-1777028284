@@ -65,8 +65,8 @@ export default function AdminTestimonials() {
       return;
     }
 
-    const hasPrivilege = await adminUsersService.hasPrivilege();
-    if (!hasPrivilege) {
+    const profile = await adminUsersService.getCurrentAdminProfile();
+    if (!profile || !profile.is_active) {
       router.push("/admin/dashboard");
     }
   };
