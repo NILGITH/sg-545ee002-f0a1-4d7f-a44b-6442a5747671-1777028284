@@ -6,15 +6,15 @@ import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
-import { adminUsersService } from "@/services/adminUsersService";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { Briefcase, Users, FileText, TrendingUp, PlusCircle, Settings, LogOut, Upload, CheckSquare, ShieldCheck, MessageSquare, Clock, CheckCircle, XCircle, AlertCircle, Star, Handshake } from "lucide-react";
 import Link from "next/link";
 import { AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 export default function AdminDashboard() {
   const router = useRouter();
+  const { loading: authLoading, isAdmin, isSuperAdmin } = useAdminAuth();
   const [loading, setLoading] = useState(true);
-  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [stats, setStats] = useState({
     totalJobs: 0,
     activeJobs: 0,
@@ -36,20 +36,10 @@ export default function AdminDashboard() {
   });
 
   useEffect(() => {
-    checkAuth();
-    loadStats();
-  }, []);
-
-  const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-      router.push("/admin/login");
-      return;
+    if (!authLoading && isAdmin) {
+      loadStats();
     }
-
-    const isSA = await adminUsersService.isSuperAdmin();
-    setIsSuperAdmin(isSA);
-  };
+  }, [authLoading, isAdmin]);
 
   const loadStats = async () => {
     setLoading(true);
@@ -116,6 +106,18 @@ export default function AdminDashboard() {
     await supabase.auth.signOut();
     router.push("/admin/login");
   };
+
+  // Afficher un loader pendant la vérification d'authentification
+  if (authLoading || !isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Vérification des permissions...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Données pour les graphiques
   const applicationsChartData = [

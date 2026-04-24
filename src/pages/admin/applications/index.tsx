@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { applicationsService } from "@/services/applicationsService";
 import { ArrowLeft, Mail, Phone, FileText, Loader2, Calendar } from "lucide-react";
@@ -24,21 +25,16 @@ type Application = Database["public"]["Tables"]["applications"]["Row"] & {
 export default function AdminApplicationsPage() {
   const router = useRouter();
   const { toast } = useToast();
+  const { loading: authLoading, isAdmin } = useAdminAuth();
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>("all");
 
   useEffect(() => {
-    checkAuth();
-    loadApplications();
-  }, []);
-
-  const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-      router.push("/admin/login");
+    if (!authLoading && isAdmin) {
+      loadApplications();
     }
-  };
+  }, [authLoading, isAdmin]);
 
   const loadApplications = async () => {
     setLoading(true);
@@ -79,6 +75,17 @@ export default function AdminApplicationsPage() {
     if (filter === "all") return true;
     return app.status === filter;
   });
+
+  if (authLoading || !isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Vérification des permissions...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

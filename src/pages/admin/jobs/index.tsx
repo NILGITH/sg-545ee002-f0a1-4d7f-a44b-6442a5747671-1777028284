@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { jobsService } from "@/services/jobsService";
 import { PlusCircle, Edit, Trash2, Eye, EyeOff, ArrowLeft, Loader2 } from "lucide-react";
@@ -18,20 +19,15 @@ type Job = Database["public"]["Tables"]["jobs"]["Row"];
 export default function AdminJobsPage() {
   const router = useRouter();
   const { toast } = useToast();
+  const { loading: authLoading, isAdmin } = useAdminAuth();
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    checkAuth();
-    loadJobs();
-  }, []);
-
-  const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-      router.push("/admin/login");
+    if (!authLoading && isAdmin) {
+      loadJobs();
     }
-  };
+  }, [authLoading, isAdmin]);
 
   const loadJobs = async () => {
     setLoading(true);
@@ -75,6 +71,17 @@ export default function AdminJobsPage() {
       loadJobs();
     }
   };
+
+  if (authLoading || !isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Vérification des permissions...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
