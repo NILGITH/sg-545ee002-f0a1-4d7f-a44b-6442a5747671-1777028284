@@ -59,11 +59,8 @@ export default function AdminPartnerships() {
       router.push("/admin/login");
       return;
     }
-
-    const profile = await adminUsersService.getCurrentAdminProfile();
-    if (!profile || !profile.is_active) {
-      router.push("/admin/dashboard");
-    }
+    // Ne pas rediriger - laisser la page charger normalement
+    // Les RLS policies vont gérer les permissions
   };
 
   const loadPartnerships = async () => {
