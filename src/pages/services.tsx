@@ -550,7 +550,7 @@ export default function Services() {
 
                 <div className="pt-4">
                   <Button asChild size="lg" className="bg-accent hover:bg-accent/90 w-full">
-                    <Link href="/contact">Organiser mon Team Building</Link>
+                    <Link href="/services/team-building">Organiser mon Team Building</Link>
                   </Button>
                 </div>
               </div>
@@ -664,7 +664,7 @@ export default function Services() {
 
                 <div className="pt-4">
                   <Button asChild size="lg" className="bg-accent hover:bg-accent/90 w-full">
-                    <Link href="/contact">Demander un catalogue de formations</Link>
+                    <Link href="/services/formation">Demander un catalogue de formations</Link>
                   </Button>
                 </div>
               </div>
