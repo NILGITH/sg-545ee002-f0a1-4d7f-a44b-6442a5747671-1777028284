@@ -6,12 +6,14 @@ import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
-import { Briefcase, Users, FileText, TrendingUp, PlusCircle, Settings, LogOut, Upload, CheckSquare } from "lucide-react";
+import { adminUsersService } from "@/services/adminUsersService";
+import { Briefcase, Users, FileText, TrendingUp, PlusCircle, Settings, LogOut, Upload, CheckSquare, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
 export default function AdminDashboard() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [stats, setStats] = useState({
     totalJobs: 0,
     activeJobs: 0,
@@ -30,7 +32,12 @@ export default function AdminDashboard() {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
       router.push("/admin/login");
+      return;
     }
+
+    // Vérifier si l'utilisateur est super_admin
+    const isSA = await adminUsersService.isSuperAdmin();
+    setIsSuperAdmin(isSA);
   };
 
   const loadStats = async () => {
@@ -274,6 +281,29 @@ export default function AdminDashboard() {
                 </Button>
               </CardContent>
             </Card>
+
+            {/* Gestion des utilisateurs - Super Admin uniquement */}
+            {isSuperAdmin && (
+              <Card className="border-2 hover:border-accent transition-colors bg-accent/5">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <ShieldCheck className="text-accent" size={24} />
+                    Gestion des Utilisateurs
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <p className="text-muted-foreground">
+                    Gérer les comptes administrateurs (Super Admin uniquement)
+                  </p>
+                  <Button asChild variant="outline" className="w-full border-accent">
+                    <Link href="/admin/users">
+                      <Users size={18} className="mr-2" />
+                      Gérer les utilisateurs
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </main>
