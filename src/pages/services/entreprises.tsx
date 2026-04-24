@@ -246,7 +246,7 @@ export default function ServicesEntreprises() {
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="text-lg px-8 border-2">
-                <Link href="/jobs">Publier une offre</Link>
+                <Link href="/submit-job">Publier une offre</Link>
               </Button>
             </div>
           </div>
