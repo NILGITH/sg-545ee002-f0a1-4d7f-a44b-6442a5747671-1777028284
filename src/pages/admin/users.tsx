@@ -65,6 +65,16 @@ export default function AdminUsers() {
     isActive: true,
   });
 
+  // Handler pour le changement de rôle lors de la création
+  const handleNewRoleChange = (value: string) => {
+    setNewUser({ ...newUser, role: value as "admin" | "manager" | "super_admin" });
+  };
+
+  // Handler pour le changement de rôle lors de l'édition
+  const handleEditRoleChange = (value: string) => {
+    setEditData({ ...editData, role: value as "admin" | "manager" | "super_admin" });
+  };
+
   useEffect(() => {
     checkAuth();
   }, []);
@@ -331,10 +341,7 @@ export default function AdminUsers() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="new-role">Rôle *</Label>
-              <Select 
-                value={newUser.role} 
-                onValueChange={(value) => setNewUser({ ...newUser, role: value as "admin" | "manager" | "super_admin" })}
-              >
+              <Select value={newUser.role} onValueChange={handleNewRoleChange}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
@@ -377,10 +384,7 @@ export default function AdminUsers() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="edit-role">Rôle *</Label>
-              <Select 
-                value={editData.role} 
-                onValueChange={(value) => setEditData({ ...editData, role: value as "admin" | "manager" | "super_admin" })}
-              >
+              <Select value={editData.role} onValueChange={handleEditRoleChange}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
