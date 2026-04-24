@@ -71,7 +71,7 @@ export const jobSubmissionService = {
         responsibilities: submission.job_responsibilities,
         salary_range: submission.salary_range,
         experience_level: submission.experience_level,
-        status: "published",
+        is_active: true,
       })
       .select()
       .single();
