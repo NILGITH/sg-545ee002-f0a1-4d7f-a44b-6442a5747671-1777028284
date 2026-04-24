@@ -12,8 +12,8 @@ const heroSlides = [
   {
     title: "Connecter les Talents aux Opportunités",
     subtitle: "Expert en recrutement, conseil RH et développement des talents en Côte d'Ivoire",
-    cta: "Découvrir les offres",
-    ctaLink: "/jobs",
+    cta: "Découvrir nos services",
+    ctaLink: "/services",
     image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80",
   },
   {

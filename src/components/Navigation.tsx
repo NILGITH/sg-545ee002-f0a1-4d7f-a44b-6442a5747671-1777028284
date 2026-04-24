@@ -15,11 +15,11 @@ export function Navigation() {
             <Image
               src="/logo_hr_sans_fond.png"
               alt="HR Talents Partners"
-              width={200}
-              height={60}
-              className="h-14 w-auto"
-              priority />
-            
+              width={240}
+              height={72}
+              className="h-16 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
