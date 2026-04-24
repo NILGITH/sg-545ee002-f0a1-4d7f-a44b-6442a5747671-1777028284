@@ -331,7 +331,7 @@ export default function AdminUsers() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="new-role">Rôle *</Label>
-              <Select value={newUser.role} onValueChange={(value) => setNewUser({ ...newUser, role: value as "admin" | "manager" | "super_admin" })}>
+              <Select value={newUser.role} onValueChange={(value: "admin" | "manager" | "super_admin") => setNewUser({ ...newUser, role: value })}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
