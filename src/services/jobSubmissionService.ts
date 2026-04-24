@@ -39,13 +39,39 @@ export const jobSubmissionService = {
     salary_range?: string;
     experience_level?: string;
   }) {
+    // Nettoyer les données - retirer les valeurs vides
+    const cleanData: any = {
+      company_name: submission.company_name,
+      company_email: submission.company_email,
+      submitter_name: submission.submitter_name,
+      submitter_position: submission.submitter_position,
+      job_title: submission.job_title,
+      job_description: submission.job_description,
+      contract_type: submission.contract_type,
+      location: submission.location,
+    };
+
+    // Ajouter les champs optionnels seulement s'ils ont une valeur
+    if (submission.company_phone) cleanData.company_phone = submission.company_phone;
+    if (submission.company_logo_url) cleanData.company_logo_url = submission.company_logo_url;
+    if (submission.job_requirements) cleanData.job_requirements = submission.job_requirements;
+    if (submission.job_responsibilities) cleanData.job_responsibilities = submission.job_responsibilities;
+    if (submission.sector) cleanData.sector = submission.sector;
+    if (submission.salary_range) cleanData.salary_range = submission.salary_range;
+    if (submission.experience_level) cleanData.experience_level = submission.experience_level;
+
+    console.log("Clean data to insert:", cleanData);
+
     const { data, error } = await supabase
       .from("job_submissions")
-      .insert(submission)
+      .insert(cleanData)
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) {
+      console.error("Supabase insert error:", error);
+      throw error;
+    }
     return data;
   },
 
