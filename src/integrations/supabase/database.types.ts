@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export type Json =
   | string
   | number
@@ -641,6 +641,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      is_super_admin: { Args: never; Returns: boolean }
       set_current_cv: {
         Args: { cv_id: string; user_uuid: string }
         Returns: undefined
