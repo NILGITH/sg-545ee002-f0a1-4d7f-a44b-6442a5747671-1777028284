@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="border-2 border-primary-foreground px-3 py-2 inline-block">
+            <div className="border-2 border-primary-foreground px-3 py-2 inline-block" style={{ backgroundImage: "url(\"/logo_hr_sans_fond.png\")", backgroundColor: "transparent" }}>
               <span className="font-serif text-lg font-bold">HR Talents Partners</span>
             </div>
             <p className="text-sm text-primary-foreground/80">
@@ -54,7 +54,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="mt-1 flex-shrink-0" />
-                <span>Abidjan, Côte d'Ivoire<br/>Plateau - Zone 4</span>
+                <span>Abidjan, Côte d'Ivoire<br />Plateau - Zone 4</span>
               </li>
             </ul>
             
@@ -76,6 +76,6 @@ export function Footer() {
           <p>&copy; {new Date().getFullYear()} HR Talents Partners. Tous droits réservés.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 }
