@@ -260,6 +260,7 @@ export type Database = {
         Row: {
           company_email: string
           company_id: string | null
+          company_logo_url: string | null
           company_name: string
           company_phone: string | null
           contract_type: string
@@ -278,11 +279,14 @@ export type Database = {
           salary_range: string | null
           sector: string | null
           status: string | null
+          submitter_name: string | null
+          submitter_position: string | null
           updated_at: string | null
         }
         Insert: {
           company_email: string
           company_id?: string | null
+          company_logo_url?: string | null
           company_name: string
           company_phone?: string | null
           contract_type: string
@@ -301,11 +305,14 @@ export type Database = {
           salary_range?: string | null
           sector?: string | null
           status?: string | null
+          submitter_name?: string | null
+          submitter_position?: string | null
           updated_at?: string | null
         }
         Update: {
           company_email?: string
           company_id?: string | null
+          company_logo_url?: string | null
           company_name?: string
           company_phone?: string | null
           contract_type?: string
@@ -324,6 +331,8 @@ export type Database = {
           salary_range?: string | null
           sector?: string | null
           status?: string | null
+          submitter_name?: string | null
+          submitter_position?: string | null
           updated_at?: string | null
         }
         Relationships: [
