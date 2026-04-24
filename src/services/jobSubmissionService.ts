@@ -4,10 +4,31 @@ import type { Tables } from "@/integrations/supabase/types";
 type JobSubmission = Tables<"job_submissions">;
 
 export const jobSubmissionService = {
+  async uploadCompanyLogo(file: File): Promise<string> {
+    const fileExt = file.name.split(".").pop();
+    const fileName = `${Math.random()}.${fileExt}`;
+    const filePath = `company-logos/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("company-documents")
+      .upload(filePath, file);
+
+    if (uploadError) throw uploadError;
+
+    const { data: { publicUrl } } = supabase.storage
+      .from("company-documents")
+      .getPublicUrl(filePath);
+
+    return publicUrl;
+  },
+
   async submitJob(submission: {
     company_name: string;
     company_email: string;
     company_phone?: string;
+    company_logo_url?: string;
+    submitter_name: string;
+    submitter_position: string;
     job_title: string;
     job_description: string;
     job_requirements?: string;
@@ -43,6 +64,18 @@ export const jobSubmissionService = {
       .from("job_submissions")
       .select("*")
       .eq("id", id)
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
+  async updateSubmission(id: string, updates: Partial<JobSubmission>) {
+    const { data, error } = await supabase
+      .from("job_submissions")
+      .update(updates)
+      .eq("id", id)
+      .select()
       .single();
 
     if (error) throw error;
