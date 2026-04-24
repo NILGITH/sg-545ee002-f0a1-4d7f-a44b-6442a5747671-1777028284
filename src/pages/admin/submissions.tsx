@@ -17,7 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { SEO } from "@/components/SEO";
-import { authService } from "@/services/authService";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { jobSubmissionService } from "@/services/jobSubmissionService";
 import { Building2, CheckCircle, XCircle, Eye, Search, Calendar } from "lucide-react";
 import Link from "next/link";
@@ -38,6 +38,7 @@ type Submission = {
 
 export default function AdminSubmissions() {
   const router = useRouter();
+  const { loading: authLoading, isAdmin } = useAdminAuth();
   const [loading, setLoading] = useState(true);
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [filteredSubmissions, setFilteredSubmissions] = useState<Submission[]>([]);
@@ -49,8 +50,10 @@ export default function AdminSubmissions() {
   const [userId, setUserId] = useState("");
 
   useEffect(() => {
-    checkAuth();
-  }, []);
+    if (!authLoading && isAdmin) {
+      loadSubmissions();
+    }
+  }, [authLoading, isAdmin]);
 
   useEffect(() => {
     if (searchTerm) {
@@ -66,18 +69,6 @@ export default function AdminSubmissions() {
     }
   }, [searchTerm, submissions]);
 
-  const checkAuth = async () => {
-    const session = await authService.getCurrentSession();
-    if (!session) {
-      router.push("/admin/login");
-      return;
-    }
-
-    setUserId(session.user.id);
-    await loadSubmissions();
-    setLoading(false);
-  };
-
   const loadSubmissions = async () => {
     try {
       const data = await jobSubmissionService.getAllSubmissions();
@@ -86,7 +77,19 @@ export default function AdminSubmissions() {
     } catch (error) {
       console.error("Error loading submissions:", error);
     }
+    setLoading(false);
   };
+
+  if (authLoading || !isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Vérification des permissions...</p>
+        </div>
+      </div>
+    );
+  }
 
   const handleApprove = async (submission: Submission) => {
     if (!confirm(`Approuver et publier l'offre "${submission.job_title}" ?`)) return;

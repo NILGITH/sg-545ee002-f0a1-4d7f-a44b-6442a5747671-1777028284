@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { SEO } from "@/components/SEO";
-import { authService } from "@/services/authService";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { cvService } from "@/services/cvService";
 import { FileText, Eye, Download, Search, Calendar, User } from "lucide-react";
 import Link from "next/link";
@@ -28,14 +28,17 @@ type CV = {
 
 export default function AdminCVs() {
   const router = useRouter();
+  const { loading: authLoading, isAdmin } = useAdminAuth();
   const [loading, setLoading] = useState(true);
   const [cvs, setCvs] = useState<CV[]>([]);
   const [filteredCvs, setFilteredCvs] = useState<CV[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    checkAuth();
-  }, []);
+    if (!authLoading && isAdmin) {
+      loadCVs();
+    }
+  }, [authLoading, isAdmin]);
 
   useEffect(() => {
     if (searchTerm) {
@@ -51,17 +54,6 @@ export default function AdminCVs() {
     }
   }, [searchTerm, cvs]);
 
-  const checkAuth = async () => {
-    const session = await authService.getCurrentSession();
-    if (!session) {
-      router.push("/admin/login");
-      return;
-    }
-
-    await loadCVs();
-    setLoading(false);
-  };
-
   const loadCVs = async () => {
     try {
       const data = await cvService.getAllCVs();
@@ -70,6 +62,7 @@ export default function AdminCVs() {
     } catch (error) {
       console.error("Error loading CVs:", error);
     }
+    setLoading(false);
   };
 
   const formatFileSize = (bytes: number) => {
@@ -78,15 +71,14 @@ export default function AdminCVs() {
     return (bytes / (1024 * 1024)).toFixed(1) + " MB";
   };
 
-  if (loading) {
+  if (authLoading || !isAdmin) {
     return (
-      <>
-        <Navigation />
-        <main className="min-h-[calc(100vh-80px)] flex items-center justify-center">
-          <p>Chargement...</p>
-        </main>
-        <Footer />
-      </>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Vérification des permissions...</p>
+        </div>
+      </div>
     );
   }
 

@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { supabase } from "@/integrations/supabase/client";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { serviceRequestService } from "@/services/serviceRequestService";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Calendar, Users, MapPin, MessageSquare, CheckCircle2, XCircle, Clock } from "lucide-react";
@@ -39,6 +39,7 @@ type ServiceRequest = {
 export default function ServiceRequests() {
   const router = useRouter();
   const { toast } = useToast();
+  const { loading: authLoading, isAdmin } = useAdminAuth();
   const [loading, setLoading] = useState(true);
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
   const [selectedRequest, setSelectedRequest] = useState<ServiceRequest | null>(null);
@@ -49,16 +50,10 @@ export default function ServiceRequests() {
   const [filterStatus, setFilterStatus] = useState<string>("all");
 
   useEffect(() => {
-    checkAuth();
-    loadRequests();
-  }, []);
-
-  const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-      router.push("/admin/login");
+    if (!authLoading && isAdmin) {
+      loadRequests();
     }
-  };
+  }, [authLoading, isAdmin]);
 
   const loadRequests = async () => {
     try {
@@ -75,6 +70,17 @@ export default function ServiceRequests() {
       setLoading(false);
     }
   };
+
+  if (authLoading || !isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Vérification des permissions...</p>
+        </div>
+      </div>
+    );
+  }
 
   const handleUpdateStatus = async () => {
     if (!selectedRequest || !newStatus) return;
