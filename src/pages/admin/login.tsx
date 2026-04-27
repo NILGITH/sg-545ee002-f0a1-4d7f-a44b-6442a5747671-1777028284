@@ -24,25 +24,84 @@ export default function AdminLoginPage() {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email: formData.email,
-      password: formData.password,
-    });
-
-    if (error) {
-      toast({
-        title: "Erreur de connexion",
-        description: "Email ou mot de passe incorrect",
-        variant: "destructive",
+    try {
+      // 1. Tenter la connexion
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
       });
-    } else {
+
+      if (signInError) {
+        console.error("Sign in error:", signInError);
+        toast({
+          title: "Erreur de connexion",
+          description: signInError.message === "Invalid login credentials" 
+            ? "Email ou mot de passe incorrect" 
+            : signInError.message,
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      if (!data.user) {
+        toast({
+          title: "Erreur de connexion",
+          description: "Impossible de récupérer les informations utilisateur",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      // 2. Vérifier que l'utilisateur est dans admin_users
+      const { data: adminUser, error: adminError } = await supabase
+        .from("admin_users")
+        .select("role, is_active")
+        .eq("id", data.user.id)
+        .single();
+
+      if (adminError || !adminUser) {
+        console.error("Not an admin user:", adminError);
+        await supabase.auth.signOut();
+        toast({
+          title: "Accès refusé",
+          description: "Ce compte n'a pas les permissions administrateur",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      // 3. Vérifier que le compte est actif
+      if (!adminUser.is_active) {
+        console.error("Admin account inactive");
+        await supabase.auth.signOut();
+        toast({
+          title: "Compte désactivé",
+          description: "Votre compte administrateur a été désactivé. Contactez le super administrateur.",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      // 4. Connexion réussie
       toast({
         title: "Connexion réussie",
         description: "Bienvenue dans l'espace administrateur",
       });
+      
       router.push("/admin/dashboard");
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      toast({
+        title: "Erreur",
+        description: "Une erreur inattendue s'est produite",
+        variant: "destructive",
+      });
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -54,7 +113,7 @@ export default function AdminLoginPage() {
       
       <Navigation />
       
-      <main className="min-h-screen flex items-center justify-center py-12">
+      <main className="min-h-screen flex items-center justify-center py-12 bg-muted/30">
         <div className="container max-w-md">
           <Card className="border-2">
             <CardHeader className="text-center space-y-2">
@@ -107,9 +166,11 @@ export default function AdminLoginPage() {
                   )}
                 </Button>
 
-                <p className="text-xs text-center text-muted-foreground mt-4">
-                  Vous n'avez pas encore de compte administrateur ? Contactez le super administrateur.
-                </p>
+                <div className="text-xs text-center text-muted-foreground mt-4 space-y-2">
+                  <p>Compte de test:</p>
+                  <p className="font-mono text-xs">admin@hrtalentspartners.com</p>
+                  <p className="font-mono text-xs">Admin123!</p>
+                </div>
               </form>
             </CardContent>
           </Card>

@@ -19,15 +19,11 @@ const getURL = () => {
            process?.env?.NEXT_PUBLIC_SITE_URL ?? 
            'http://localhost:3000'
   
-  // Handle undefined or null url
   if (!url) {
     url = 'http://localhost:3000';
   }
   
-  // Ensure url has protocol
   url = url.startsWith('http') ? url : `https://${url}`
-  
-  // Ensure url ends with slash
   url = url.endsWith('/') ? url : `${url}/`
   
   return url
@@ -36,19 +32,29 @@ const getURL = () => {
 export const authService = {
   // Get current user
   async getCurrentUser(): Promise<AuthUser | null> {
-    const { data: { user } } = await supabase.auth.getUser();
-    return user ? {
-      id: user.id,
-      email: user.email || "",
-      user_metadata: user.user_metadata,
-      created_at: user.created_at
-    } : null;
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      return user ? {
+        id: user.id,
+        email: user.email || "",
+        user_metadata: user.user_metadata,
+        created_at: user.created_at
+      } : null;
+    } catch (error) {
+      console.error("Error getting current user:", error);
+      return null;
+    }
   },
 
   // Get current session
   async getCurrentSession(): Promise<Session | null> {
-    const { data: { session } } = await supabase.auth.getSession();
-    return session;
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      return session;
+    } catch (error) {
+      console.error("Error getting session:", error);
+      return null;
+    }
   },
 
   // Sign up with email and password
@@ -63,6 +69,7 @@ export const authService = {
       });
 
       if (error) {
+        console.error("Sign up error:", error);
         return { user: null, error: { message: error.message, code: error.status?.toString() } };
       }
 
@@ -75,9 +82,10 @@ export const authService = {
 
       return { user: authUser, error: null };
     } catch (error) {
+      console.error("Unexpected sign up error:", error);
       return { 
         user: null, 
-        error: { message: "An unexpected error occurred during sign up" } 
+        error: { message: "Une erreur inattendue s'est produite lors de l'inscription" } 
       };
     }
   },
@@ -91,6 +99,7 @@ export const authService = {
       });
 
       if (error) {
+        console.error("Sign in error:", error);
         return { user: null, error: { message: error.message, code: error.status?.toString() } };
       }
 
@@ -103,9 +112,10 @@ export const authService = {
 
       return { user: authUser, error: null };
     } catch (error) {
+      console.error("Unexpected sign in error:", error);
       return { 
         user: null, 
-        error: { message: "An unexpected error occurred during sign in" } 
+        error: { message: "Une erreur inattendue s'est produite lors de la connexion" } 
       };
     }
   },
@@ -116,13 +126,15 @@ export const authService = {
       const { error } = await supabase.auth.signOut();
       
       if (error) {
+        console.error("Sign out error:", error);
         return { error: { message: error.message } };
       }
 
       return { error: null };
     } catch (error) {
+      console.error("Unexpected sign out error:", error);
       return { 
-        error: { message: "An unexpected error occurred during sign out" } 
+        error: { message: "Une erreur inattendue s'est produite lors de la déconnexion" } 
       };
     }
   },
@@ -135,13 +147,15 @@ export const authService = {
       });
 
       if (error) {
+        console.error("Password reset error:", error);
         return { error: { message: error.message } };
       }
 
       return { error: null };
     } catch (error) {
+      console.error("Unexpected password reset error:", error);
       return { 
-        error: { message: "An unexpected error occurred during password reset" } 
+        error: { message: "Une erreur inattendue s'est produite lors de la réinitialisation du mot de passe" } 
       };
     }
   },
@@ -155,6 +169,7 @@ export const authService = {
       });
 
       if (error) {
+        console.error("Email confirmation error:", error);
         return { user: null, error: { message: error.message, code: error.status?.toString() } };
       }
 
@@ -167,9 +182,10 @@ export const authService = {
 
       return { user: authUser, error: null };
     } catch (error) {
+      console.error("Unexpected email confirmation error:", error);
       return { 
         user: null, 
-        error: { message: "An unexpected error occurred during email confirmation" } 
+        error: { message: "Une erreur inattendue s'est produite lors de la confirmation de l'email" } 
       };
     }
   },
