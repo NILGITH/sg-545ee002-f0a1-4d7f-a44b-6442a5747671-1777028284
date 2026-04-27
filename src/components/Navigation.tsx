@@ -9,10 +9,10 @@ export function Navigation() {
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-32">
-          {/* Logo - 4X PLUS GRAND */}
-          <Link href="/" className="flex items-center space-x-4 group">
-            <div className="relative w-32 h-32">
+        <div className="flex items-center justify-between py-4">
+          {/* Logo - 12X PLUS GRAND (3x de plus) */}
+          <Link href="/" className="flex items-center space-x-6 group">
+            <div className="relative w-96 h-96">
               <Image 
                 src="/logo_hr_sans_fond.png" 
                 alt="HR Talents Partners" 
@@ -21,7 +21,7 @@ export function Navigation() {
                 priority
               />
             </div>
-            <span className="font-serif text-2xl md:text-3xl font-bold bg-gradient-to-r from-accent to-accent/70 bg-clip-text text-transparent">
+            <span className="font-serif text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent to-accent/70 bg-clip-text text-transparent">
               HR Talents Partners
             </span>
           </Link>
