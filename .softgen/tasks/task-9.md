@@ -1,6 +1,6 @@
 ---
 title: Boutons et pages détails services
-status: todo
+status: done
 priority: medium
 type: feature
 tags: [services, pages]
@@ -13,9 +13,9 @@ position: 9
 Il manque les boutons "En savoir plus" sur la page /services et les pages de détails pour chaque service comme avant.
 
 ## Checklist
-- [ ] Ajouter boutons "En savoir plus" sur chaque carte de service dans /services
-- [ ] Créer pages détails pour les services manquants
-- [ ] Vérifier que toutes les pages de détails existent et sont accessibles
+- [x] Ajouter boutons "En savoir plus" sur chaque carte de service dans /services
+- [x] Créer pages détails pour les services manquants (conseil RH, coaching, externalisation, réorganisation)
+- [x] Vérifier que toutes les pages de détails existent et sont accessibles
 
 ## Acceptance
 - Chaque service a un bouton "En savoir plus"

@@ -354,6 +354,7 @@ export type Database = {
       }
       jobs: {
         Row: {
+          company_logo_url: string | null
           company_name: string
           contract_type: string
           created_at: string | null
@@ -371,6 +372,7 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          company_logo_url?: string | null
           company_name: string
           contract_type: string
           created_at?: string | null
@@ -388,6 +390,7 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          company_logo_url?: string | null
           company_name?: string
           contract_type?: string
           created_at?: string | null

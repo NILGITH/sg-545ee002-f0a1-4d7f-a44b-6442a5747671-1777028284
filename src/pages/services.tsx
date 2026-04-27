@@ -56,8 +56,8 @@ export default function Services() {
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               {/* 1. Recrutement 360° */}
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
-                <CardContent className="pt-8 space-y-6">
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group flex flex-col">
+                <CardContent className="pt-8 space-y-6 flex-1">
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <Image
                       src="/2148190653.jpg"
@@ -76,7 +76,7 @@ export default function Services() {
                     <p className="text-muted-foreground italic">
                       De l'élaboration du besoin à l'intégration réussie
                     </p>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <ul className="space-y-2 text-sm text-muted-foreground mb-6">
                       <li className="flex items-start gap-2">
                         <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
                         <span>Analyse stratégique du poste : enjeux, missions, profil cible et culture fit</span>
@@ -100,11 +100,16 @@ export default function Services() {
                     </ul>
                   </div>
                 </CardContent>
+                <div className="p-6 pt-0 mt-auto">
+                  <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+                    <Link href="/services/entreprises">En savoir plus</Link>
+                  </Button>
+                </div>
               </Card>
 
               {/* 2. Formation Professionnelle */}
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
-                <CardContent className="pt-8 space-y-6">
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group flex flex-col">
+                <CardContent className="pt-8 space-y-6 flex-1">
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <Image
                       src="/2149300718.jpg"
@@ -123,7 +128,7 @@ export default function Services() {
                     <p className="text-muted-foreground italic">
                       Des parcours transformatifs, pas de simples formations
                     </p>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <ul className="space-y-2 text-sm text-muted-foreground mb-6">
                       <li className="flex items-start gap-2">
                         <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
                         <span>Ingénierie pédagogique 100% sur mesure après analyse fine des besoins</span>
@@ -147,11 +152,16 @@ export default function Services() {
                     </ul>
                   </div>
                 </CardContent>
+                <div className="p-6 pt-0 mt-auto">
+                  <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+                    <Link href="/services/formation">En savoir plus</Link>
+                  </Button>
+                </div>
               </Card>
 
               {/* 3. Conseil RH · Audit Social · GEPP */}
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
-                <CardContent className="pt-8 space-y-6">
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group flex flex-col">
+                <CardContent className="pt-8 space-y-6 flex-1">
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <Image
                       src="/21178.jpg"
@@ -170,7 +180,7 @@ export default function Services() {
                     <p className="text-muted-foreground italic">
                       Transformer votre fonction RH en levier stratégique
                     </p>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <ul className="space-y-2 text-sm text-muted-foreground mb-6">
                       <li className="flex items-start gap-2">
                         <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
                         <span>Audit RH global : pratiques, forces, risques et plan d'action priorisé</span>
@@ -190,11 +200,16 @@ export default function Services() {
                     </ul>
                   </div>
                 </CardContent>
+                <div className="p-6 pt-0 mt-auto">
+                  <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+                    <Link href="/services/conseil-rh">En savoir plus</Link>
+                  </Button>
+                </div>
               </Card>
 
               {/* 4. Teambuilding & Cohésion */}
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
-                <CardContent className="pt-8 space-y-6">
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group flex flex-col">
+                <CardContent className="pt-8 space-y-6 flex-1">
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <Image
                       src="/89675.jpg"
@@ -213,7 +228,7 @@ export default function Services() {
                     <p className="text-muted-foreground italic">
                       Libérer le potentiel collectif de vos équipes
                     </p>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <ul className="space-y-2 text-sm text-muted-foreground mb-6">
                       <li className="flex items-start gap-2">
                         <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
                         <span>Diagnostic des dynamiques d'équipe et du climat organisationnel</span>
@@ -233,14 +248,19 @@ export default function Services() {
                     </ul>
                   </div>
                 </CardContent>
+                <div className="p-6 pt-0 mt-auto">
+                  <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+                    <Link href="/services/team-building">En savoir plus</Link>
+                  </Button>
+                </div>
               </Card>
             </div>
 
             {/* Les 3 autres services en grille de 3 */}
             <div className="grid md:grid-cols-3 gap-8">
               {/* 5. Coaching Professionnel */}
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
-                <CardContent className="pt-8 space-y-4">
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group flex flex-col">
+                <CardContent className="pt-8 space-y-4 flex-1">
                   <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                     <Brain className="text-accent" size={28} />
                   </div>
@@ -248,7 +268,7 @@ export default function Services() {
                   <p className="text-muted-foreground text-sm italic">
                     Vous confronté à des situations complexes ?
                   </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
+                  <ul className="space-y-2 text-sm text-muted-foreground mb-6">
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={14} />
                       <span>Coaching exécutif & dirigeant : vision, décision, posture leader</span>
@@ -271,11 +291,16 @@ export default function Services() {
                     </li>
                   </ul>
                 </CardContent>
+                <div className="p-6 pt-0 mt-auto">
+                  <Button asChild variant="outline" className="w-full hover:bg-accent hover:text-accent-foreground border-accent text-accent">
+                    <Link href="/services/coaching">En savoir plus</Link>
+                  </Button>
+                </div>
               </Card>
 
               {/* 6. Externalisation RH */}
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
-                <CardContent className="pt-8 space-y-4">
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group flex flex-col">
+                <CardContent className="pt-8 space-y-4 flex-1">
                   <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                     <Briefcase className="text-accent" size={28} />
                   </div>
@@ -283,7 +308,7 @@ export default function Services() {
                   <p className="text-muted-foreground text-sm italic">
                     Concentrez-vous sur votre cœur de métier
                   </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
+                  <ul className="space-y-2 text-sm text-muted-foreground mb-6">
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={14} />
                       <span>Administration du personnel · Gestion de la paie</span>
@@ -306,11 +331,16 @@ export default function Services() {
                     </li>
                   </ul>
                 </CardContent>
+                <div className="p-6 pt-0 mt-auto">
+                  <Button asChild variant="outline" className="w-full hover:bg-accent hover:text-accent-foreground border-accent text-accent">
+                    <Link href="/services/externalisation">En savoir plus</Link>
+                  </Button>
+                </div>
               </Card>
 
               {/* 7. Réorganisation & Structuration */}
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
-                <CardContent className="pt-8 space-y-4">
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group flex flex-col">
+                <CardContent className="pt-8 space-y-4 flex-1">
                   <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                     <TrendingUp className="text-accent" size={28} />
                   </div>
@@ -318,7 +348,7 @@ export default function Services() {
                   <p className="text-muted-foreground text-sm italic">
                     Anticiper, structurer et transformer
                   </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
+                  <ul className="space-y-2 text-sm text-muted-foreground mb-6">
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={14} />
                       <span>Diagnostic organisationnel et analyse de performance</span>
@@ -337,6 +367,11 @@ export default function Services() {
                     </li>
                   </ul>
                 </CardContent>
+                <div className="p-6 pt-0 mt-auto">
+                  <Button asChild variant="outline" className="w-full hover:bg-accent hover:text-accent-foreground border-accent text-accent">
+                    <Link href="/services/reorganisation">En savoir plus</Link>
+                  </Button>
+                </div>
               </Card>
             </div>
           </div>
