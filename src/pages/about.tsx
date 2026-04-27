@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
 import Link from "next/link";
-import { ArrowRight, Target, Award, Users, TrendingUp } from "lucide-react";
+import { ArrowRight, Target, Award, Users, TrendingUp, Lightbulb, Shield } from "lucide-react";
 import Image from "next/image";
 
 export default function About() {
@@ -12,8 +12,8 @@ export default function About() {
     <>
       <SEO
         title="À propos - HR Talents Partners"
-        description="Découvrez l'histoire et les valeurs de HR Talents Partners, premier cabinet de recrutement et conseil RH en Côte d'Ivoire." />
-      
+        description="Découvrez HR Talents Partners : Faire de votre capital humain le moteur de votre performance en Côte d'Ivoire."
+      />
       
       <Navigation />
       
@@ -38,30 +38,30 @@ export default function About() {
             <h1 className="font-serif text-4xl md:text-6xl font-bold max-w-4xl mx-auto">
               Ambassadeur de <span className="text-accent">Talents</span> et d'<span className="text-accent">Excellence</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Nous incarnons une vision ambitieuse et une quête incessante d'excellence, visant à vous accompagner dans l'élaboration et la mise en œuvre de stratégies avancées en gestion des ressources humaines
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto italic">
+              « Nous ne gérons pas des ressources humaines. Nous développons des potentiels humains. »
             </p>
           </div>
         </section>
 
-        {/* Notre Histoire */}
+        {/* Notre Identité */}
         <section className="py-20 md:py-32">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold">Qui sommes-nous ?</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold">
+                  Faire de votre capital humain le moteur de votre performance.
+                </h2>
+                <div className="h-1 w-20 bg-accent"></div>
                 <div className="space-y-4 text-muted-foreground">
                   <p className="text-lg">
-                    HR TALENTS PARTNERS est né d'une ambition partagée : celle de transformer les Ressources Humaines en un levier stratégique de performance et d'innovation au sein des organisations.
+                    HR TALENTS PARTNERS est né d'une conviction fondamentale : les organisations qui performent durablement sont celles qui placent le capital humain au cœur de leur stratégie ; pas comme une contrainte à gérer, mais comme un levier à cultiver avec méthode et ambition.
                   </p>
                   <p className="text-lg">
-                    Fondé par des experts en gestion des talents, en développement organisationnel et en stratégie RH, notre cabinet s'est rapidement imposé comme un acteur incontournable dans l'accompagnement des entreprises, des PME aux grands groupes, dans leur gestion des ressources humaines.
+                    Fondé par des experts reconnus en gestion des talents, développement organisationnel et stratégie RH; notre cabinet accompagne les entreprises; des PME ambitieuses aux grands groupes; avec rigueur méthodologique, intelligence humaine et innovation continue.
                   </p>
                   <p className="text-lg">
-                    À travers une approche humaine et innovante, nous avons su accompagner nos clients dans leur évolution en intégrant les dernières tendances RH et en développant une expertise reconnue dans le recrutement, la formation et le conseil.
-                  </p>
-                  <p className="text-lg">
-                    Aujourd'hui, notre équipe d'experts s'engage à aider les organisations à naviguer avec agilité dans un environnement en constante transformation, tout en plaçant le talent et l'excellence au cœur de chaque stratégie RH.
+                    Ce qui nous distingue ? Nous ne livrons pas des rapports. Nous livrons des transformations. Nous vous accompagnons jusqu'aux résultats; et souvent bien au-delà.
                   </p>
                 </div>
               </div>
@@ -77,73 +77,61 @@ export default function About() {
           </div>
         </section>
 
-        {/* Nos Valeurs */}
+        {/* Ce qui nous distingue */}
         <section className="py-20 md:py-32 bg-muted/30">
           <div className="container">
             <div className="text-center mb-16 space-y-4">
-              <h2 className="font-serif text-3xl md:text-5xl font-bold">Nos Valeurs</h2>
+              <h2 className="font-serif text-3xl md:text-5xl font-bold">Ce qui nous distingue</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Les valeurs qui guident notre projet
+                Notre engagement total envers votre transformation
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
-                <CardContent className="pt-8 space-y-4 text-center">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                    <Award className="text-accent" size={32} />
-                  </div>
-                  <h3 className="font-serif text-2xl font-semibold">Excellence</h3>
-                  <p className="text-muted-foreground">
-                    Nous plaçons la qualité au cœur de nos actions, en proposant des services rigoureusement pensés et exécutés pour répondre aux exigences les plus élevées
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
-                <CardContent className="pt-8 space-y-4 text-center">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                    <TrendingUp className="text-accent" size={32} />
-                  </div>
-                  <h3 className="font-serif text-2xl font-semibold">Innovation</h3>
-                  <p className="text-muted-foreground">
-                    Nous intégrons des outils de pointe et des approches modernes pour anticiper les mutations du marché et offrir des solutions avant-gardistes
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
-                <CardContent className="pt-8 space-y-4 text-center">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <Card className="border-2 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
                     <Users className="text-accent" size={32} />
                   </div>
-                  <h3 className="font-serif text-2xl font-semibold">Proximité</h3>
+                  <h3 className="font-serif text-2xl font-semibold">Un engagement total</h3>
                   <p className="text-muted-foreground">
-                    Nous cultivons des relations authentiques et durables avec nos clients et partenaires, en étant à leur écoute pour co-construire des solutions adaptées
+                    L'implication personnelle de nos experts. Pas d'équipe junior supervisée de loin.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
-                <CardContent className="pt-8 space-y-4 text-center">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+              <Card className="border-2 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
                     <Target className="text-accent" size={32} />
                   </div>
-                  <h3 className="font-serif text-2xl font-semibold">Intégrité</h3>
+                  <h3 className="font-serif text-2xl font-semibold">Du sur-mesure absolu</h3>
                   <p className="text-muted-foreground">
-                    Nos engagements sont guidés par l'éthique, la transparence et le respect de nos parties prenantes, créant un environnement fondé sur la confiance
+                    Aucune solution pré-packagée. Chaque intervention pensée pour votre réalité.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
-                <CardContent className="pt-8 space-y-4 text-center">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                    <Award className="text-accent" size={32} />
+              <Card className="border-2 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
+                    <Shield className="text-accent" size={32} />
                   </div>
-                  <h3 className="font-serif text-2xl font-semibold">Impact</h3>
+                  <h3 className="font-serif text-2xl font-semibold">Une confidentialité irréprochable</h3>
                   <p className="text-muted-foreground">
-                    Nous visons à créer des transformations positives et mesurables pour nos clients, leurs équipes et leurs organisations
+                    Vos informations protégées avec le plus haut niveau de discrétion professionnelle.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
+                    <TrendingUp className="text-accent" size={32} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold">Des résultats mesurables</h3>
+                  <p className="text-muted-foreground">
+                    Indicateurs définis dès le départ; tenus sans compromis.
                   </p>
                 </CardContent>
               </Card>
@@ -151,44 +139,193 @@ export default function About() {
           </div>
         </section>
 
-        {/* Statistiques */}
+        {/* Nos Valeurs */}
         <section className="py-20 md:py-32">
           <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">Notre Impact en Côte d'Ivoire</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Des chiffres qui témoignent de notre engagement et de votre confiance
+            <div className="text-center mb-16 space-y-4">
+              <h2 className="font-serif text-3xl md:text-5xl font-bold">Nos Valeurs</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Les principes qui nous guident
               </p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div className="space-y-2">
-                <div className="text-4xl md:text-5xl font-bold font-serif text-accent">50 000+</div>
-                <p className="text-muted-foreground">Talents dans notre réseau ivoirien</p>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                    <Award className="text-accent" size={32} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold text-center">Excellence</h3>
+                  <p className="text-muted-foreground text-center text-sm">
+                    Nous ne livrons pas du "suffisant". Nous visons l'excellence à chaque étape, avec une exigence constante dans l'exécution. Chaque mission est menée comme si votre organisation était la nôtre.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                    <Lightbulb className="text-accent" size={32} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold text-center">Innovation</h3>
+                  <p className="text-muted-foreground text-center text-sm">
+                    Nous combinons standards internationaux et intelligence locale pour concevoir des solutions pertinentes, ancrées dans la réalité de vos enjeux. Parce que vos défis méritent des réponses sur mesure.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                    <Shield className="text-accent" size={32} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold text-center">Intégrité</h3>
+                  <p className="text-muted-foreground text-center text-sm">
+                    L'intégrité structure chacune de nos interventions : Confidentialité absolue, transparence totale, honnêteté même quand c'est inconfortable.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                    <Target className="text-accent" size={32} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold text-center">Impact</h3>
+                  <p className="text-muted-foreground text-center text-sm">
+                    Nos interventions produisent un impact tangible : elles structurent les organisations, renforcent les équipes et soutiennent durablement la performance économique. Nous agissons en partenaire stratégique.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Notre Vision */}
+        <section className="py-20 md:py-32 bg-primary text-white">
+          <div className="container">
+            <div className="max-w-4xl mx-auto text-center space-y-8">
+              <div className="inline-block border-2 border-accent px-4 py-2 mb-4">
+                <span className="font-serif text-sm font-semibold uppercase tracking-wider">
+                  Notre Vision
+                </span>
               </div>
-              <div className="space-y-2">
-                <div className="text-4xl md:text-5xl font-bold font-serif text-accent">250+</div>
-                <p className="text-muted-foreground">Entreprises accompagnées à Abidjan</p>
-              </div>
-              <div className="space-y-2">
-                <div className="text-4xl md:text-5xl font-bold font-serif text-accent">15</div>
-                <p className="text-muted-foreground">Experts en capital humain</p>
-              </div>
-              <div className="space-y-2">
-                <div className="text-4xl md:text-5xl font-bold font-serif text-accent">8</div>
-                <p className="text-muted-foreground">Années d'excellence en Côte d'Ivoire</p>
-              </div>
+              <h2 className="font-serif text-3xl md:text-5xl font-bold">
+                Devenir le partenaire de référence des organisations africaines
+              </h2>
+              <p className="text-lg md:text-xl text-white/90">
+                Devenir le partenaire de référence des organisations africaines dans la structuration et la transformation de leur capital humain, afin de renforcer durablement leur performance.
+              </p>
+              <p className="text-base text-white/80">
+                Nous travaillons chaque jour à construire cet avenir : en faisant progresser notre expertise, en développant nos équipes et en élevant continuellement nos standards d'exécution.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* L'Équipe */}
+        <section className="py-20 md:py-32">
+          <div className="container">
+            <div className="text-center mb-16 space-y-4">
+              <h2 className="font-serif text-3xl md:text-5xl font-bold">L'Équipe</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Une équipe d'experts d'exception, à votre service chaque jour.
+              </p>
+              <p className="text-base text-muted-foreground max-w-3xl mx-auto">
+                Chez HR Talents Partners, chaque expert est sélectionné selon les plus hauts standards : maîtrise technique reconnue et expertise opérationnelle de haut niveau, sens aigu des dynamiques humaines et engagement sans compromis envers la qualité et la satisfaction client.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <Card className="border-2 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center">
+                    <Users className="text-accent" size={28} />
+                  </div>
+                  <h3 className="font-serif text-xl font-semibold">Talent Acquisition & Executive Search</h3>
+                  <p className="text-sm text-accent">Recrutement 360°</p>
+                  <p className="text-sm text-muted-foreground">
+                    Chasseurs de têtes et recruteurs seniors spécialisés, réseaux étendus, expertise sur profils stratégiques et Top Management.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center">
+                    <Award className="text-accent" size={28} />
+                  </div>
+                  <h3 className="font-serif text-xl font-semibold">Learning & Development</h3>
+                  <p className="text-sm text-accent">Formation Professionnelle</p>
+                  <p className="text-sm text-muted-foreground">
+                    Formateurs certifiés et ingénieurs pédagogiques reconnus pour concevoir des parcours transformatifs et mesurables.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center">
+                    <Target className="text-accent" size={28} />
+                  </div>
+                  <h3 className="font-serif text-xl font-semibold">HR Strategy & Audit Social</h3>
+                  <p className="text-sm text-accent">Conseil RH · Audit Social · GEPP</p>
+                  <p className="text-sm text-muted-foreground">
+                    Consultants seniors en stratégie RH, audit social et GEPP avec des références dans des groupes nationaux et internationaux.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center">
+                    <Users className="text-accent" size={28} />
+                  </div>
+                  <h3 className="font-serif text-xl font-semibold">Team Performance & Coaching</h3>
+                  <p className="text-sm text-accent">Teambuilding · Coaching</p>
+                  <p className="text-sm text-muted-foreground">
+                    Coachs exécutifs certifiés et experts en dynamiques collectives spécialisés en leadership et cohésion des équipes.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center">
+                    <TrendingUp className="text-accent" size={28} />
+                  </div>
+                  <h3 className="font-serif text-xl font-semibold">HR Operations & Outsourcing</h3>
+                  <p className="text-sm text-accent">Externalisation RH (RPO/BPO)</p>
+                  <p className="text-sm text-muted-foreground">
+                    Experts en gestion externalisée RH : administration, paie, recrutement externalisé, relations sociales.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center">
+                    <TrendingUp className="text-accent" size={28} />
+                  </div>
+                  <h3 className="font-serif text-xl font-semibold">Transformation & Restructuration</h3>
+                  <p className="text-sm text-accent">Réorganisation & Structuration</p>
+                  <p className="text-sm text-muted-foreground">
+                    Consultants en transformation organisationnelle et restructuration sociale, reconnus pour leur méthode et sens de l'humain.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
 
         {/* CTA */}
-        <section className="relative py-20 md:py-32 overflow-hidden bg-primary">
-          <div className="container relative text-center space-y-8 text-white">
+        <section className="relative py-20 md:py-32 overflow-hidden bg-muted/30">
+          <div className="container relative text-center space-y-8">
             <h2 className="font-serif text-3xl md:text-5xl font-bold max-w-3xl mx-auto">
               Prêt à rejoindre l'aventure ?
             </h2>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Que vous soyez entreprise ou candidat en Côte d'Ivoire, nous avons une solution pour vous
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto italic">
+              « Les premières conversations ne coûtent rien. La décision de ne pas agir, si. »
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8">
@@ -196,7 +333,7 @@ export default function About() {
                   Contactez-nous <ArrowRight className="ml-2" size={20} />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="text-lg px-8 border-2 border-white text-white hover:bg-white hover:text-primary">
+              <Button asChild size="lg" variant="outline" className="text-lg px-8 border-2 border-primary hover:bg-primary hover:text-white">
                 <Link href="/jobs">Voir les offres</Link>
               </Button>
             </div>
@@ -205,6 +342,6 @@ export default function About() {
       </main>
 
       <Footer />
-    </>);
-
+    </>
+  );
 }
