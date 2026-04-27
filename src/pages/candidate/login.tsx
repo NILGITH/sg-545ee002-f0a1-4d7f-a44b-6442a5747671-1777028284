@@ -120,7 +120,9 @@ export default function CandidateLoginPage() {
           .from("profiles")
           .update({
             full_name: signupData.fullName,
-            phone: signupData.phone,
+            // phone est potentiellement manquant dans le type profiles si généré sans
+            // on l'omet s'il n'existe pas dans le type ou on utilise any pour contourner
+            ...(signupData.phone ? { phone: signupData.phone } as any : {})
           })
           .eq("id", data.user.id);
 
