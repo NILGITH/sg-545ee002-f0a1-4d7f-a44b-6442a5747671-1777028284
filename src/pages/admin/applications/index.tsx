@@ -9,18 +9,16 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
-import { supabase } from "@/integrations/supabase/client";
 import { applicationsService } from "@/services/applicationsService";
-import { ArrowLeft, Mail, Phone, FileText, Loader2, Calendar } from "lucide-react";
+import { ArrowLeft, Mail, Phone, Calendar, FileText, Loader2 } from "lucide-react";
 import Link from "next/link";
 import type { Database } from "@/integrations/supabase/types";
 
 type Application = Database["public"]["Tables"]["applications"]["Row"] & {
-  jobs?: {
-    title: string;
-    company_name: string;
-  };
+  jobs?: { title: string; company_name: string } | null;
 };
+
+type StatusType = "pending" | "reviewed" | "completed";
 
 export default function AdminApplicationsPage() {
   const router = useRouter();
@@ -28,7 +26,7 @@ export default function AdminApplicationsPage() {
   const { loading: authLoading, isAdmin } = useAdminAuth();
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<string>("all");
+  const [filterStatus, setFilterStatus] = useState<string>("all");
 
   useEffect(() => {
     if (!authLoading && isAdmin) {
@@ -43,8 +41,8 @@ export default function AdminApplicationsPage() {
     setLoading(false);
   };
 
-  const updateStatus = async (id: string, status: string) => {
-    const { error } = await applicationsService.updateApplicationStatus(id, status);
+  const updateStatus = async (id: string, newStatus: StatusType) => {
+    const { error } = await applicationsService.updateApplicationStatus(id, newStatus);
     if (error) {
       toast({
         title: "Erreur",
@@ -53,27 +51,30 @@ export default function AdminApplicationsPage() {
       });
     } else {
       toast({
-        title: "Statut mis à jour",
-        description: "Le statut de la candidature a été modifié",
+        title: "Statut modifié",
+        description: "Le statut de la candidature a été mis à jour",
       });
       loadApplications();
     }
   };
 
   const getStatusBadge = (status: string) => {
-    const variants: Record<string, { label: string; className: string }> = {
-      pending: { label: "En attente", className: "bg-yellow-500 text-white" },
-      reviewed: { label: "Examinée", className: "bg-blue-500 text-white" },
-      accepted: { label: "Acceptée", className: "bg-green-500 text-white" },
-      rejected: { label: "Refusée", className: "bg-red-500 text-white" },
+    const statusConfig = {
+      pending: { label: "En attente", variant: "secondary" as const },
+      reviewed: { label: "Examinée", variant: "default" as const },
+      completed: { label: "Terminée", variant: "outline" as const },
     };
-    const variant = variants[status] || variants.pending;
-    return <Badge className={variant.className}>{variant.label}</Badge>;
+    const config = statusConfig[status as StatusType] || statusConfig.pending;
+    return (
+      <Badge variant={config.variant} className={config.variant === "default" ? "bg-accent text-accent-foreground" : ""}>
+        {config.label}
+      </Badge>
+    );
   };
 
   const filteredApplications = applications.filter((app) => {
-    if (filter === "all") return true;
-    return app.status === filter;
+    if (filterStatus === "all") return true;
+    return app.status === filterStatus;
   });
 
   if (authLoading || !isAdmin) {
@@ -108,26 +109,20 @@ export default function AdminApplicationsPage() {
               </Button>
               <div>
                 <h1 className="font-serif text-4xl font-bold">Gestion des candidatures</h1>
-                <p className="text-muted-foreground mt-1">
-                  {filteredApplications.length} candidature{filteredApplications.length > 1 ? "s" : ""}
-                </p>
+                <p className="text-muted-foreground mt-1">{applications.length} candidature{applications.length > 1 ? "s" : ""} au total</p>
               </div>
             </div>
-
-            <div className="w-48">
-              <Select value={filter} onValueChange={setFilter}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Filtrer par statut" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Toutes</SelectItem>
-                  <SelectItem value="pending">En attente</SelectItem>
-                  <SelectItem value="reviewed">Examinées</SelectItem>
-                  <SelectItem value="accepted">Acceptées</SelectItem>
-                  <SelectItem value="rejected">Refusées</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+            <Select value={filterStatus} onValueChange={setFilterStatus}>
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Filtrer par statut" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Toutes</SelectItem>
+                <SelectItem value="pending">En attente</SelectItem>
+                <SelectItem value="reviewed">Examinée</SelectItem>
+                <SelectItem value="completed">Terminée</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {loading ? (
@@ -138,77 +133,72 @@ export default function AdminApplicationsPage() {
             <Card className="border-2">
               <CardContent className="text-center py-12">
                 <p className="text-xl text-muted-foreground">
-                  {filter === "all" 
-                    ? "Aucune candidature pour le moment"
+                  {filterStatus === "all" 
+                    ? "Aucune candidature pour le moment" 
                     : "Aucune candidature avec ce statut"}
                 </p>
               </CardContent>
             </Card>
           ) : (
             <div className="space-y-4">
-              {filteredApplications.map((application) => (
-                <Card key={application.id} className="border-2 hover:border-accent transition-colors">
+              {filteredApplications.map((app) => (
+                <Card key={app.id} className="border-2 hover:border-accent transition-colors">
                   <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <h3 className="font-serif text-2xl font-semibold">
-                              {application.candidate_name}
-                            </h3>
-                            {getStatusBadge(application.status)}
-                          </div>
-                          {application.jobs && (
-                            <p className="text-lg text-muted-foreground mb-3">
-                              {application.jobs.title} chez {application.jobs.company_name}
-                            </p>
-                          )}
-                          <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                            <span className="flex items-center gap-2">
-                              <Mail size={14} />
-                              {application.candidate_email}
-                            </span>
-                            <span className="flex items-center gap-2">
-                              <Phone size={14} />
-                              {application.candidate_phone}
-                            </span>
-                            <span className="flex items-center gap-2">
-                              <Calendar size={14} />
-                              {new Date(application.created_at).toLocaleDateString("fr-FR")}
-                            </span>
-                          </div>
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="font-serif text-2xl font-semibold">{app.candidate_name}</h3>
+                          {getStatusBadge(app.status)}
                         </div>
-
-                        <div className="w-48">
-                          <Select 
-                            value={application.status} 
-                            onValueChange={(value) => updateStatus(application.id, value)}
-                          >
-                            <SelectTrigger>
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="pending">En attente</SelectItem>
-                              <SelectItem value="reviewed">Examinée</SelectItem>
-                              <SelectItem value="accepted">Acceptée</SelectItem>
-                              <SelectItem value="rejected">Refusée</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-
-                      {application.cover_letter && (
-                        <div className="pt-4 border-t">
-                          <div className="flex items-center gap-2 mb-2">
-                            <FileText size={16} className="text-accent" />
-                            <span className="font-semibold text-sm">Lettre de motivation</span>
-                          </div>
-                          <p className="text-sm text-foreground/80 whitespace-pre-line">
-                            {application.cover_letter}
+                        {app.jobs && (
+                          <p className="text-lg text-muted-foreground">
+                            {app.jobs.title} chez {app.jobs.company_name}
                           </p>
+                        )}
+                      </div>
+                      <Select 
+                        value={app.status} 
+                        onValueChange={(value) => updateStatus(app.id, value as StatusType)}
+                      >
+                        <SelectTrigger className="w-48">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="pending">En attente</SelectItem>
+                          <SelectItem value="reviewed">Examinée</SelectItem>
+                          <SelectItem value="completed">Terminée</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="flex flex-wrap gap-6 text-sm text-muted-foreground mb-4">
+                      <div className="flex items-center gap-2">
+                        <Mail size={16} />
+                        <span>{app.candidate_email}</span>
+                      </div>
+                      {app.candidate_phone && (
+                        <div className="flex items-center gap-2">
+                          <Phone size={16} />
+                          <span>{app.candidate_phone}</span>
                         </div>
                       )}
+                      <div className="flex items-center gap-2">
+                        <Calendar size={16} />
+                        <span>Reçue le {new Date(app.created_at).toLocaleDateString("fr-FR")}</span>
+                      </div>
                     </div>
+
+                    {app.cover_letter && (
+                      <div className="mt-4 p-4 bg-muted/30 rounded-lg">
+                        <div className="flex items-center gap-2 mb-2">
+                          <FileText size={16} className="text-accent" />
+                          <span className="font-medium text-sm">Lettre de motivation</span>
+                        </div>
+                        <p className="text-sm text-muted-foreground whitespace-pre-line">
+                          {app.cover_letter}
+                        </p>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               ))}
