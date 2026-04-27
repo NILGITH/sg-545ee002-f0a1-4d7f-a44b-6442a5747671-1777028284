@@ -368,6 +368,7 @@ export type Database = {
           responsibilities: string | null
           salary_range: string | null
           sector: string | null
+          status: string | null
           title: string
           updated_at: string | null
         }
@@ -386,6 +387,7 @@ export type Database = {
           responsibilities?: string | null
           salary_range?: string | null
           sector?: string | null
+          status?: string | null
           title: string
           updated_at?: string | null
         }
@@ -404,6 +406,7 @@ export type Database = {
           responsibilities?: string | null
           salary_range?: string | null
           sector?: string | null
+          status?: string | null
           title?: string
           updated_at?: string | null
         }

@@ -11,7 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { jobsService } from "@/services/jobsService";
-import { PlusCircle, Edit, Trash2, Eye, EyeOff, ArrowLeft, Loader2 } from "lucide-react";
+import { PlusCircle, Edit, Trash2, Eye, EyeOff, ArrowLeft, Loader2, CheckCircle, XCircle } from "lucide-react";
 import Link from "next/link";
 import type { Database } from "@/integrations/supabase/types";
 
@@ -35,6 +35,42 @@ export default function AdminJobsPage() {
     const { data } = await supabase.from("jobs").select("*").order("created_at", { ascending: false });
     setJobs(data || []);
     setLoading(false);
+  };
+
+  const approveJob = async (job: Job) => {
+    const { error } = await jobsService.updateJob(job.id, { status: "approved", is_active: true });
+    if (error) {
+      toast({
+        title: "Erreur",
+        description: "Impossible de valider l'offre",
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Offre validée",
+        description: "L'offre est maintenant visible sur le site",
+      });
+      loadJobs();
+    }
+  };
+
+  const rejectJob = async (job: Job) => {
+    if (!confirm("Êtes-vous sûr de vouloir rejeter cette offre ?")) return;
+
+    const { error } = await jobsService.updateJob(job.id, { status: "rejected", is_active: false });
+    if (error) {
+      toast({
+        title: "Erreur",
+        description: "Impossible de rejeter l'offre",
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Offre rejetée",
+        description: "L'offre a été rejetée",
+      });
+      loadJobs();
+    }
   };
 
   const toggleJobStatus = async (job: Job) => {
@@ -71,6 +107,19 @@ export default function AdminJobsPage() {
       });
       loadJobs();
     }
+  };
+
+  const getStatusBadge = (status?: string | null) => {
+    if (!status || status === "pending") {
+      return <Badge variant="secondary" className="bg-yellow-500/10 text-yellow-600 border-yellow-500/20">En attente</Badge>;
+    }
+    if (status === "approved") {
+      return <Badge variant="default" className="bg-green-500/10 text-green-600 border-green-500/20">Validée</Badge>;
+    }
+    if (status === "rejected") {
+      return <Badge variant="destructive" className="bg-red-500/10 text-red-600 border-red-500/20">Rejetée</Badge>;
+    }
+    return null;
   };
 
   if (authLoading || !isAdmin) {
@@ -154,9 +203,12 @@ export default function AdminJobsPage() {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start gap-3 mb-2">
                             <h3 className="font-serif text-2xl font-semibold">{job.title}</h3>
-                            <Badge variant={job.is_active ? "default" : "secondary"} className={job.is_active ? "bg-accent text-accent-foreground" : ""}>
-                              {job.is_active ? "Active" : "Inactive"}
-                            </Badge>
+                            <div className="flex gap-2">
+                              {getStatusBadge(job.status)}
+                              <Badge variant={job.is_active ? "default" : "secondary"} className={job.is_active ? "bg-accent text-accent-foreground" : ""}>
+                                {job.is_active ? "Active" : "Inactive"}
+                              </Badge>
+                            </div>
                           </div>
                           <p className="text-lg text-muted-foreground mb-2">{job.company_name}</p>
                           <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
@@ -174,14 +226,38 @@ export default function AdminJobsPage() {
                       </div>
 
                       <div className="flex gap-2 flex-shrink-0">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => toggleJobStatus(job)}
-                          title={job.is_active ? "Désactiver" : "Activer"}
-                        >
-                          {job.is_active ? <EyeOff size={16} /> : <Eye size={16} />}
-                        </Button>
+                        {(!job.status || job.status === "pending") && (
+                          <>
+                            <Button
+                              size="sm"
+                              className="bg-green-600 hover:bg-green-700 text-white"
+                              onClick={() => approveJob(job)}
+                              title="Valider"
+                            >
+                              <CheckCircle size={16} className="mr-1" />
+                              Valider
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              onClick={() => rejectJob(job)}
+                              title="Rejeter"
+                            >
+                              <XCircle size={16} className="mr-1" />
+                              Rejeter
+                            </Button>
+                          </>
+                        )}
+                        {job.status === "approved" && (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => toggleJobStatus(job)}
+                            title={job.is_active ? "Désactiver" : "Activer"}
+                          >
+                            {job.is_active ? <EyeOff size={16} /> : <Eye size={16} />}
+                          </Button>
+                        )}
                         <Button
                           size="sm"
                           variant="outline"
