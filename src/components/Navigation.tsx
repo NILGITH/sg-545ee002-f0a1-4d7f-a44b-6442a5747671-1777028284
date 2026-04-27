@@ -9,21 +9,21 @@ export function Navigation() {
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-52">
-          {/* Logo - 2 fois moins grand (w-48 h-48) */}
+        <div className="flex items-center justify-between h-28">
+          {/* Logo - 192x90 pixels */}
           <Link href="/" className="flex items-center space-x-4 group">
-            <div className="relative w-48 h-48">
-              <Image
-                src="/logo_hr_sans_fond.png"
-                alt="HR Talents Partners"
+            <div className="relative w-48 h-[90px]">
+              <Image 
+                src="/logo_hr_sans_fond.png" 
+                alt="HR Talents Partners" 
                 fill
                 className="object-contain transition-transform group-hover:scale-105"
-                priority />
-              
+                priority
+              />
             </div>
-            
-
-            
+            <span className="font-serif text-2xl md:text-3xl font-bold bg-gradient-to-r from-accent to-accent/70 bg-clip-text text-transparent">
+              HR Talents Partners
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -69,74 +69,74 @@ export function Navigation() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 rounded-lg hover:bg-accent/10 transition-colors"
-            aria-label="Menu">
-            
+            aria-label="Menu"
+          >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen &&
-        <div className="md:hidden py-4 space-y-2 border-t border-border">
-            <Link
-            href="/"
-            className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
-            onClick={() => setIsOpen(false)}>
-            
+        {isOpen && (
+          <div className="md:hidden py-4 space-y-2 border-t border-border">
+            <Link 
+              href="/" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
+              onClick={() => setIsOpen(false)}
+            >
               Accueil
             </Link>
-            <Link
-            href="/about"
-            className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
-            onClick={() => setIsOpen(false)}>
-            
+            <Link 
+              href="/about" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
+              onClick={() => setIsOpen(false)}
+            >
               À propos
             </Link>
-            <Link
-            href="/services"
-            className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
-            onClick={() => setIsOpen(false)}>
-            
+            <Link 
+              href="/services" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
+              onClick={() => setIsOpen(false)}
+            >
               Tous nos services
             </Link>
-            <Link
-            href="/services/entreprises"
-            className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium pl-8"
-            onClick={() => setIsOpen(false)}>
-            
+            <Link 
+              href="/services/entreprises" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium pl-8"
+              onClick={() => setIsOpen(false)}
+            >
               → Services Entreprises
             </Link>
-            <Link
-            href="/services/candidats"
-            className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium pl-8"
-            onClick={() => setIsOpen(false)}>
-            
+            <Link 
+              href="/services/candidats" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium pl-8"
+              onClick={() => setIsOpen(false)}
+            >
               → Services Candidats
             </Link>
-            <Link
-            href="/jobs"
-            className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
-            onClick={() => setIsOpen(false)}>
-            
+            <Link 
+              href="/jobs" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
+              onClick={() => setIsOpen(false)}
+            >
               Offres d'emploi
             </Link>
-            <Link
-            href="/contact"
-            className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
-            onClick={() => setIsOpen(false)}>
-            
+            <Link 
+              href="/contact" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
+              onClick={() => setIsOpen(false)}
+            >
               Contact
             </Link>
-            <Link
-            href="/candidate/login"
-            className="block px-4 py-2 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 transition-colors text-sm font-medium"
-            onClick={() => setIsOpen(false)}>
-            
+            <Link 
+              href="/candidate/login" 
+              className="block px-4 py-2 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 transition-colors text-sm font-medium"
+              onClick={() => setIsOpen(false)}
+            >
               Espace Candidat
             </Link>
           </div>
-        }
+        )}
       </div>
-    </nav>);
-
+    </nav>
+  );
 }
