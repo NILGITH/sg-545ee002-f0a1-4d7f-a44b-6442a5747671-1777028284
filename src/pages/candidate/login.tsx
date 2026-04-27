@@ -56,7 +56,7 @@ export default function CandidateLoginPage() {
           .from("admin_users")
           .select("id")
           .eq("id", data.user.id)
-          .single();
+          .maybeSingle();
 
         if (adminCheck) {
           await supabase.auth.signOut();
@@ -91,7 +91,10 @@ export default function CandidateLoginPage() {
     setLoading(true);
 
     try {
-      // 1. Créer le compte auth
+      console.log("🔐 Inscription candidat...");
+      console.log("📧 Email:", signupData.email);
+
+      // Créer le compte auth (le trigger créera automatiquement le profil)
       const { data, error } = await supabase.auth.signUp({
         email: signupData.email,
         password: signupData.password,
@@ -103,8 +106,10 @@ export default function CandidateLoginPage() {
         },
       });
 
+      console.log("✅ Réponse inscription:", { data, error });
+
       if (error) {
-        console.error("Signup error:", error);
+        console.error("❌ Erreur inscription:", error);
         toast({
           title: "Erreur d'inscription",
           description: error.message,
@@ -115,33 +120,23 @@ export default function CandidateLoginPage() {
       }
 
       if (data.user) {
-        // 2. Mettre à jour le profil avec les infos supplémentaires
-        const { error: profileError } = await supabase
-          .from("profiles")
-          .update({
-            full_name: signupData.fullName,
-            // phone est potentiellement manquant dans le type profiles si généré sans
-            // on l'omet s'il n'existe pas dans le type ou on utilise any pour contourner
-            ...(signupData.phone ? { phone: signupData.phone } as any : {})
-          })
-          .eq("id", data.user.id);
-
-        if (profileError) {
-          console.error("Profile update error:", profileError);
-        }
-
+        console.log("✅ Utilisateur créé:", data.user.id);
+        
         toast({
-          title: "Inscription réussie",
-          description: "Bienvenue ! Vous pouvez maintenant accéder à votre espace candidat",
+          title: "Inscription réussie !",
+          description: "Bienvenue ! Vous êtes maintenant connecté.",
         });
+        
+        // Attendre 1 seconde pour que le trigger crée le profil
+        await new Promise(resolve => setTimeout(resolve, 1000));
         
         router.push("/candidate/dashboard");
       }
     } catch (err) {
-      console.error("Unexpected error:", err);
+      console.error("💥 Erreur inattendue:", err);
       toast({
         title: "Erreur",
-        description: "Une erreur inattendue s'est produite",
+        description: "Une erreur inattendue s'est produite. Vérifiez la console.",
         variant: "destructive",
       });
       setLoading(false);
@@ -285,6 +280,10 @@ export default function CandidateLoginPage() {
                         "S'inscrire"
                       )}
                     </Button>
+
+                    <p className="text-xs text-center text-muted-foreground mt-4">
+                      ⚠️ Ouvrez la console (F12) pour voir les logs d'inscription
+                    </p>
                   </form>
                 </TabsContent>
               </Tabs>
