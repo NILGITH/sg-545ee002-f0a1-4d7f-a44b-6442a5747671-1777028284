@@ -1,85 +1,142 @@
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
-      <div className="container">
-        <div className="flex h-20 items-center justify-between">
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/logo_hr_sans_fond.png"
-              alt="HR Talents Partners"
-              width={240}
-              height={72}
-              className="h-16 w-auto"
-              priority
-            />
+    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="relative w-12 h-12">
+              <Image 
+                src="/logo_hr_sans_fond.png" 
+                alt="HR Talents Partners" 
+                fill
+                className="object-contain transition-transform group-hover:scale-105"
+                priority
+              />
+            </div>
+            <span className="font-serif text-xl font-bold bg-gradient-to-r from-accent to-accent/70 bg-clip-text text-transparent">
+              HR Talents Partners
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-sm font-medium hover:text-accent transition-colors">
+          <div className="hidden md:flex items-center space-x-1">
+            <Link href="/" className="px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium">
               Accueil
             </Link>
-            <Link href="/services" className="text-sm font-medium hover:text-accent transition-colors">
-              Services
-            </Link>
-            <Link href="/jobs" className="text-sm font-medium hover:text-accent transition-colors">
-              Offres d'emploi
-            </Link>
-            <Link href="/about" className="text-sm font-medium hover:text-accent transition-colors">
+            <Link href="/about" className="px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium">
               À propos
             </Link>
-            <Link href="/contact" className="text-sm font-medium hover:text-accent transition-colors">
+            
+            {/* Dropdown Services */}
+            <div className="relative group">
+              <button className="px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium flex items-center gap-1">
+                Services
+                <ChevronDown size={16} className="group-hover:rotate-180 transition-transform" />
+              </button>
+              <div className="absolute top-full left-0 mt-1 w-56 bg-background border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                <Link href="/services" className="block px-4 py-3 hover:bg-accent/10 transition-colors text-sm border-b border-border">
+                  Tous nos services
+                </Link>
+                <Link href="/services/entreprises" className="block px-4 py-3 hover:bg-accent/10 transition-colors text-sm border-b border-border">
+                  Services Entreprises
+                </Link>
+                <Link href="/services/candidats" className="block px-4 py-3 hover:bg-accent/10 transition-colors text-sm">
+                  Services Candidats
+                </Link>
+              </div>
+            </div>
+
+            <Link href="/jobs" className="px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium">
+              Offres d'emploi
+            </Link>
+            <Link href="/contact" className="px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium">
               Contact
             </Link>
-            <Button asChild variant="default" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-              <Link href="/candidate/login">Espace Candidat</Link>
-            </Button>
+            <Link href="/admin/login" className="ml-4 px-4 py-2 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 transition-colors text-sm font-medium">
+              Espace Admin
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2"
-            aria-label="Toggle menu">
-            
+            className="md:hidden p-2 rounded-lg hover:bg-accent/10 transition-colors"
+            aria-label="Menu"
+          >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen &&
-        <div className="md:hidden py-4 border-t border-border">
-            <div className="flex flex-col gap-4">
-              <Link href="/" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
-                Accueil
-              </Link>
-              <Link href="/services" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
-                Services
-              </Link>
-              <Link href="/jobs" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
-                Offres d'emploi
-              </Link>
-              <Link href="/about" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
-                À propos
-              </Link>
-              <Link href="/contact" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
-                Contact
-              </Link>
-              <Button asChild variant="default" className="bg-accent hover:bg-accent/90 text-accent-foreground w-full">
-                <Link href="/candidate/login" onClick={() => setIsOpen(false)}>Espace Candidat</Link>
-              </Button>
-            </div>
+        {isOpen && (
+          <div className="md:hidden py-4 space-y-2 border-t border-border">
+            <Link 
+              href="/" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Accueil
+            </Link>
+            <Link 
+              href="/about" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              À propos
+            </Link>
+            <Link 
+              href="/services" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Tous nos services
+            </Link>
+            <Link 
+              href="/services/entreprises" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium pl-8"
+              onClick={() => setIsOpen(false)}
+            >
+              → Services Entreprises
+            </Link>
+            <Link 
+              href="/services/candidats" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium pl-8"
+              onClick={() => setIsOpen(false)}
+            >
+              → Services Candidats
+            </Link>
+            <Link 
+              href="/jobs" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Offres d'emploi
+            </Link>
+            <Link 
+              href="/contact" 
+              className="block px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Contact
+            </Link>
+            <Link 
+              href="/admin/login" 
+              className="block px-4 py-2 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 transition-colors text-sm font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Espace Admin
+            </Link>
           </div>
-        }
+        )}
       </div>
-    </nav>);
-
+    </nav>
+  );
 }

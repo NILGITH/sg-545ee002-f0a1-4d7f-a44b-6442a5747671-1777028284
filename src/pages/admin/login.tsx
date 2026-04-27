@@ -24,15 +24,20 @@ export default function AdminLoginPage() {
     e.preventDefault();
     setLoading(true);
 
+    console.log("🔐 Tentative de connexion admin...");
+
     try {
       // 1. Tenter la connexion
+      console.log("📧 Email:", formData.email);
       const { data, error: signInError } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
       });
 
+      console.log("✅ Réponse auth:", { data, error: signInError });
+
       if (signInError) {
-        console.error("Sign in error:", signInError);
+        console.error("❌ Erreur de connexion:", signInError);
         toast({
           title: "Erreur de connexion",
           description: signInError.message === "Invalid login credentials" 
@@ -45,6 +50,7 @@ export default function AdminLoginPage() {
       }
 
       if (!data.user) {
+        console.error("❌ Pas d'utilisateur retourné");
         toast({
           title: "Erreur de connexion",
           description: "Impossible de récupérer les informations utilisateur",
@@ -54,15 +60,32 @@ export default function AdminLoginPage() {
         return;
       }
 
+      console.log("👤 Utilisateur authentifié:", data.user.id);
+
       // 2. Vérifier que l'utilisateur est dans admin_users
+      console.log("🔍 Vérification du rôle admin...");
       const { data: adminUser, error: adminError } = await supabase
         .from("admin_users")
         .select("role, is_active")
         .eq("id", data.user.id)
-        .single();
+        .maybeSingle();
 
-      if (adminError || !adminUser) {
-        console.error("Not an admin user:", adminError);
+      console.log("✅ Résultat vérification admin:", { adminUser, adminError });
+
+      if (adminError) {
+        console.error("❌ Erreur vérification admin:", adminError);
+        await supabase.auth.signOut();
+        toast({
+          title: "Erreur",
+          description: `Erreur lors de la vérification: ${adminError.message}`,
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      if (!adminUser) {
+        console.error("❌ Utilisateur non trouvé dans admin_users");
         await supabase.auth.signOut();
         toast({
           title: "Accès refusé",
@@ -75,11 +98,11 @@ export default function AdminLoginPage() {
 
       // 3. Vérifier que le compte est actif
       if (!adminUser.is_active) {
-        console.error("Admin account inactive");
+        console.error("❌ Compte admin inactif");
         await supabase.auth.signOut();
         toast({
           title: "Compte désactivé",
-          description: "Votre compte administrateur a été désactivé. Contactez le super administrateur.",
+          description: "Votre compte administrateur a été désactivé",
           variant: "destructive",
         });
         setLoading(false);
@@ -87,6 +110,7 @@ export default function AdminLoginPage() {
       }
 
       // 4. Connexion réussie
+      console.log("🎉 Connexion réussie ! Redirection vers dashboard...");
       toast({
         title: "Connexion réussie",
         description: "Bienvenue dans l'espace administrateur",
@@ -94,10 +118,10 @@ export default function AdminLoginPage() {
       
       router.push("/admin/dashboard");
     } catch (err) {
-      console.error("Unexpected error:", err);
+      console.error("💥 Erreur inattendue:", err);
       toast({
         title: "Erreur",
-        description: "Une erreur inattendue s'est produite",
+        description: "Une erreur inattendue s'est produite. Vérifiez la console.",
         variant: "destructive",
       });
       setLoading(false);
@@ -166,10 +190,13 @@ export default function AdminLoginPage() {
                   )}
                 </Button>
 
-                <div className="text-xs text-center text-muted-foreground mt-4 space-y-2">
-                  <p>Compte de test:</p>
-                  <p className="font-mono text-xs">admin@hrtalentspartners.com</p>
-                  <p className="font-mono text-xs">Admin123!</p>
+                <div className="text-xs text-center text-muted-foreground mt-4 space-y-2 p-3 bg-muted/50 rounded-lg">
+                  <p className="font-semibold text-foreground">Compte de test:</p>
+                  <p className="font-mono">admin@hrtalentspartners.com</p>
+                  <p className="font-mono">Admin123!</p>
+                  <p className="text-xs mt-2 text-muted-foreground">
+                    ⚠️ Ouvrez la console (F12) pour voir les logs de connexion
+                  </p>
                 </div>
               </form>
             </CardContent>
