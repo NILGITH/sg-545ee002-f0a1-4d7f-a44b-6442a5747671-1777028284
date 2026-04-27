@@ -38,22 +38,37 @@ export default function NewJobPage() {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await jobsService.createJob(formData);
+    console.log("📝 Form data:", formData);
 
-    if (error) {
-      toast({
-        title: "Erreur",
-        description: "Impossible de créer l'offre d'emploi",
-        variant: "destructive",
-      });
-    } else {
+    try {
+      const { data, error } = await jobsService.createJob(formData);
+
+      if (error) {
+        console.error("❌ Error creating job:", error);
+        toast({
+          title: "Erreur",
+          description: `Impossible de créer l'offre: ${error.message}`,
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      console.log("✅ Job created successfully:", data);
       toast({
         title: "Offre créée !",
         description: "L'offre d'emploi a été publiée avec succès",
       });
       router.push("/admin/jobs");
+    } catch (err) {
+      console.error("💥 Unexpected error:", err);
+      toast({
+        title: "Erreur",
+        description: "Une erreur inattendue s'est produite. Vérifiez la console (F12).",
+        variant: "destructive",
+      });
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   if (authLoading || !isAdmin) {
@@ -88,6 +103,9 @@ export default function NewJobPage() {
           <Card className="border-2">
             <CardHeader>
               <CardTitle className="text-3xl font-serif">Nouvelle offre d'emploi</CardTitle>
+              <p className="text-sm text-muted-foreground mt-2">
+                ⚠️ Ouvrez la console (F12) pour voir les logs de création
+              </p>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -119,7 +137,7 @@ export default function NewJobPage() {
                     <Input
                       id="location"
                       required
-                      placeholder="Ex: Kinshasa, RD Congo"
+                      placeholder="Ex: Abidjan, Côte d'Ivoire"
                       value={formData.location}
                       onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                     />

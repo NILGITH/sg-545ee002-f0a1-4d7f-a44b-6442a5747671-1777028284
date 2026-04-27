@@ -64,14 +64,39 @@ export const jobsService = {
   },
 
   async createJob(job: JobInsert) {
+    console.log("🔨 Creating job with data:", job);
+    
+    // Vérifier l'utilisateur connecté
+    const { data: { user } } = await supabase.auth.getUser();
+    console.log("👤 Current user:", user?.id, user?.email);
+    
+    // Vérifier si c'est un admin actif
+    if (user) {
+      const { data: adminCheck } = await supabase
+        .from("admin_users")
+        .select("id, email, is_active")
+        .eq("id", user.id)
+        .single();
+      
+      console.log("🔐 Admin check:", adminCheck);
+    }
+    
     const { data, error } = await supabase
       .from("jobs")
       .insert(job)
       .select()
       .single();
 
-    console.log("createJob:", { data, error });
-    if (error) console.error("Error:", error);
+    console.log("✅ Create job result:", { data, error });
+    if (error) {
+      console.error("❌ Create job error details:", {
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+        code: error.code
+      });
+    }
+    
     return { data, error };
   },
 
