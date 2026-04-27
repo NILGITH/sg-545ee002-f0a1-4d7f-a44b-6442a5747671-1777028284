@@ -11,9 +11,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { MapPin, Briefcase, DollarSign, Clock, Calendar, ArrowLeft, Send, Loader2 } from "lucide-react";
+import { MapPin, Briefcase, DollarSign, Clock, Calendar, ArrowLeft, Send, Loader2, Upload, FileText } from "lucide-react";
 import { jobsService } from "@/services/jobsService";
 import { applicationsService } from "@/services/applicationsService";
+import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import Link from "next/link";
 
@@ -27,6 +28,9 @@ export default function JobDetailPage() {
   const [job, setJob] = useState<Job | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [uploadingCV, setUploadingCV] = useState(false);
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [cvUrl, setCvUrl] = useState<string>("");
   
   const [formData, setFormData] = useState({
     full_name: "",
@@ -56,9 +60,84 @@ export default function JobDetailPage() {
     setLoading(false);
   };
 
+  const handleCVUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Vérifier le type de fichier
+    const allowedTypes = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+    if (!allowedTypes.includes(file.type)) {
+      toast({
+        title: "Format non supporté",
+        description: "Veuillez uploader un fichier PDF ou Word (.doc, .docx)",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Vérifier la taille (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "Fichier trop volumineux",
+        description: "Le CV ne doit pas dépasser 5 MB",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setUploadingCV(true);
+    setCvFile(file);
+
+    try {
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      const { error: uploadError, data } = await supabase.storage
+        .from("cvs")
+        .upload(filePath, file);
+
+      if (uploadError) {
+        console.error("Upload error:", uploadError);
+        toast({
+          title: "Erreur d'upload",
+          description: "Impossible d'uploader le CV. Veuillez réessayer.",
+          variant: "destructive",
+        });
+        setCvFile(null);
+      } else {
+        const { data: urlData } = supabase.storage.from("cvs").getPublicUrl(filePath);
+        setCvUrl(urlData.publicUrl);
+        toast({
+          title: "CV uploadé",
+          description: "Votre CV a été uploadé avec succès",
+        });
+      }
+    } catch (error) {
+      console.error("Upload error:", error);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue lors de l'upload",
+        variant: "destructive",
+      });
+      setCvFile(null);
+    }
+    
+    setUploadingCV(false);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!job) return;
+
+    if (!cvUrl) {
+      toast({
+        title: "CV requis",
+        description: "Veuillez uploader votre CV avant de soumettre votre candidature",
+        variant: "destructive",
+      });
+      return;
+    }
 
     setSubmitting(true);
     
@@ -69,6 +148,7 @@ export default function JobDetailPage() {
         candidate_email: formData.email,
         candidate_phone: formData.phone,
         cover_letter: formData.cover_letter,
+        cv_url: cvUrl,
         status: "pending",
         user_id: null,
       });
@@ -86,6 +166,8 @@ export default function JobDetailPage() {
           description: "Nous vous contacterons prochainement.",
         });
         setFormData({ full_name: "", email: "", phone: "", cover_letter: "" });
+        setCvFile(null);
+        setCvUrl("");
       }
     } catch (err) {
       console.error("Unexpected error:", err);
@@ -283,6 +365,43 @@ export default function JobDetailPage() {
                     </div>
 
                     <div>
+                      <Label htmlFor="cv">CV (PDF ou Word) *</Label>
+                      <div className="mt-2">
+                        <input
+                          type="file"
+                          id="cv"
+                          accept=".pdf,.doc,.docx"
+                          onChange={handleCVUpload}
+                          className="hidden"
+                        />
+                        <label
+                          htmlFor="cv"
+                          className="flex items-center justify-center gap-2 p-4 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-accent transition-colors"
+                        >
+                          {uploadingCV ? (
+                            <>
+                              <Loader2 className="animate-spin text-accent" size={20} />
+                              <span className="text-sm text-muted-foreground">Upload en cours...</span>
+                            </>
+                          ) : cvFile ? (
+                            <>
+                              <FileText className="text-accent" size={20} />
+                              <span className="text-sm font-medium">{cvFile.name}</span>
+                            </>
+                          ) : (
+                            <>
+                              <Upload className="text-muted-foreground" size={20} />
+                              <span className="text-sm text-muted-foreground">Cliquez pour uploader votre CV</span>
+                            </>
+                          )}
+                        </label>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Formats acceptés : PDF, DOC, DOCX (max 5 MB)
+                      </p>
+                    </div>
+
+                    <div>
                       <Label htmlFor="cover">Lettre de motivation</Label>
                       <Textarea
                         id="cover"
@@ -296,7 +415,7 @@ export default function JobDetailPage() {
                     <Button 
                       type="submit" 
                       className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
-                      disabled={submitting}
+                      disabled={submitting || uploadingCV || !cvUrl}
                     >
                       {submitting ? (
                         <>
