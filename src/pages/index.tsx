@@ -32,22 +32,22 @@ type Testimonial = {
 
 const heroSlides = [
   {
-    title: "Connecter les Talents aux Opportunités",
+    title: "Votre Capital Humain, Votre Premier Levier de Croissance",
     subtitle: "Expert en recrutement, conseil RH et développement des talents en Côte d'Ivoire",
     cta: "Découvrir nos services",
     ctaLink: "/services",
     image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80",
   },
   {
-    title: "Votre Partenaire RH de Confiance",
-    subtitle: "Accompagnement personnalisé pour entreprises et professionnels ivoiriens",
+    title: "Nous Développons des Potentiels Humains",
+    subtitle: "L'assurance d'un cabinet qui s'engage personnellement sur chaque mission",
     cta: "Nos services",
     ctaLink: "/services",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80",
   },
   {
     title: "Excellence et Innovation RH",
-    subtitle: "Plus de 8 ans d'expertise au service de votre réussite à Abidjan",
+    subtitle: "Avec la rigueur d'un partenaire stratégique et la proximité d'une équipe dédiée à votre succès",
     cta: "À propos de nous",
     ctaLink: "/about",
     image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&q=80",
@@ -199,7 +199,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Stats Section - VRAIES STATISTIQUES */}
+        {/* Stats Section - VRAIES STATISTIQUES DU PDF */}
         <section className="relative py-16 bg-primary text-primary-foreground overflow-hidden">
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
@@ -208,166 +208,236 @@ export default function Home() {
           <div className="container relative">
             <div className="text-center mb-12">
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Notre Force</h2>
-              <p className="text-white/80">Des connexions privilégiées qui transforment les ambitions en réalité</p>
+              <p className="text-white/80">Des chiffres qui témoignent de notre engagement</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.1s" }}>
                 <div className="flex justify-center mb-2">
                   <Award className="text-accent" size={40} />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">15</div>
-                <p className="text-sm md:text-base text-primary-foreground/80">Experts en capital humain</p>
+                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">7</div>
+                <p className="text-sm md:text-base text-primary-foreground/80">Domaines d'expertise</p>
               </div>
               <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.2s" }}>
                 <div className="flex justify-center mb-2">
-                  <Users className="text-accent" size={40} />
+                  <Target className="text-accent" size={40} />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">50 000+</div>
-                <p className="text-sm md:text-base text-primary-foreground/80">Talents dans notre réseau ivoirien</p>
+                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">100+</div>
+                <p className="text-sm md:text-base text-primary-foreground/80">Missions réalisées</p>
               </div>
               <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.3s" }}>
                 <div className="flex justify-center mb-2">
-                  <Building2 className="text-accent" size={40} />
+                  <BadgeCheck className="text-accent" size={40} />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">250+</div>
-                <p className="text-sm md:text-base text-primary-foreground/80">Entreprises accompagnées en conseil</p>
+                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">98%</div>
+                <p className="text-sm md:text-base text-primary-foreground/80">Satisfaction client</p>
               </div>
               <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.4s" }}>
                 <div className="flex justify-center mb-2">
-                  <MapPin className="text-accent" size={40} />
+                  <Building2 className="text-accent" size={40} />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">Abidjan</div>
-                <p className="text-sm md:text-base text-primary-foreground/80">Notre hub stratégique</p>
-              </div>
-              <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.5s" }}>
-                <div className="flex justify-center mb-2">
-                  <BadgeCheck className="text-accent" size={40} />
-                </div>
-                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">8</div>
-                <p className="text-sm md:text-base text-primary-foreground/80">Années d'excellence en Côte d'Ivoire</p>
+                <div className="text-3xl md:text-4xl font-bold font-serif text-accent">10+</div>
+                <p className="text-sm md:text-base text-primary-foreground/80">Secteurs d'activité</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Services Section - VRAIS SERVICES */}
+        {/* Services Section - 7 SERVICES DU PDF */}
         <section className="py-20 md:py-32">
           <div className="container">
             <div className="text-center mb-16 space-y-4">
-              <h2 className="font-serif text-3xl md:text-5xl font-bold">Nos Services</h2>
+              <h2 className="font-serif text-3xl md:text-5xl font-bold">Nos 7 Domaines d'Expertise</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Nous transformons vos besoins en success stories
+                Sept pôles d'excellence · Des solutions sur mesure pour chaque enjeu
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {/* 1. Recrutement */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* 1. Recrutement 360° */}
               <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
                 <CardContent className="pt-8 space-y-4">
                   <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                     <Users className="text-accent" size={28} />
                   </div>
-                  <h3 className="font-serif text-2xl font-semibold">Recrutement</h3>
+                  <h3 className="font-serif text-2xl font-semibold">Recrutement 360° — De A à Z</h3>
                   <p className="text-muted-foreground">
-                    Notre méthode signature en 3 temps garantit des recrutements précis et durables : 
-                    un rendez-vous initial pour cerner vos enjeux, une investigation approfondie...
+                    De l'élaboration du besoin à l'intégration réussie
                   </p>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Méthode en 3 temps : définition, recherche, sélection</span>
+                      <span>Analyse stratégique du poste et culture fit</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Accompagnement personnalisé jusqu'à l'intégration</span>
+                      <span>Sourcing multicanal + vivier de 1 000+ candidats pré-qualifiés</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Garantie de fidélisation exclusive</span>
+                      <span>Suivi post-intégration à 30, 60 et 90 jours</span>
                     </li>
                   </ul>
                 </CardContent>
               </Card>
 
-              {/* 2. Analyse salariale */}
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
-                <CardContent className="pt-8 space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                    <Target className="text-accent" size={28} />
-                  </div>
-                  <h3 className="font-serif text-2xl font-semibold">Analyse Salariale</h3>
-                  <p className="text-muted-foreground">
-                    Premier cabinet à publier un Guide des Salaires en Côte d'Ivoire. 
-                    Vision 360° des tendances salariales du marché ivoirien.
-                  </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Collecte de données via entretiens directs</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Analyse sectorielle pointue du marché ivoirien</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Benchmarking complet des politiques salariales</span>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              {/* 3. Team Building */}
-              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
-                <CardContent className="pt-8 space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                    <Handshake className="text-accent" size={28} />
-                  </div>
-                  <h3 className="font-serif text-2xl font-semibold">Team Building</h3>
-                  <p className="text-muted-foreground">
-                    Nous ne nous contentons pas d'organiser des activités pour vos équipes. 
-                    Nous concevons des expériences sur mesure adaptées à votre culture et objectifs.
-                  </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Méthode en 3 temps : définition, recherche, sélection</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Accompagnement personnalisé jusqu'à l'intégration</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Performance mesurable avec KPIs concrets</span>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              {/* 4. Formation */}
+              {/* 2. Formation Professionnelle */}
               <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
                 <CardContent className="pt-8 space-y-4">
                   <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                     <GraduationCap className="text-accent" size={28} />
                   </div>
-                  <h3 className="font-serif text-2xl font-semibold">Formation</h3>
+                  <h3 className="font-serif text-2xl font-semibold">Formation Professionnelle</h3>
                   <p className="text-muted-foreground">
-                    Boostez vos compétences ! Nous ne recrutons pas les meilleurs talents : 
-                    on les façonne pour l'avenir ! Leadership, IA, gestion de projet...
+                    Des parcours transformatifs, pas de simples formations
                   </p>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Leadership, prise de parole, IA, gestion de projet</span>
+                      <span>Ingénierie pédagogique 100% sur mesure</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Formations taillées pour le terrain</span>
+                      <span>Leadership, intelligence émotionnelle, soft skills</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Certification en fin de parcours</span>
+                      <span>Évaluation d'impact et mesure du ROI</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              {/* 3. Conseil RH · Audit Social · GEPP */}
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <Target className="text-accent" size={28} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold">Conseil RH · Audit Social · GEPP</h3>
+                  <p className="text-muted-foreground">
+                    Transformer votre fonction RH en levier stratégique
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Audit RH global et plan d'action priorisé</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Audit social : climat, bien-être, RPS</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>GEPP : cartographie et anticipation des besoins</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              {/* 4. Teambuilding & Cohésion */}
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <Handshake className="text-accent" size={28} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold">Teambuilding & Cohésion</h3>
+                  <p className="text-muted-foreground">
+                    Libérer le potentiel collectif de vos équipes
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Diagnostic des dynamiques d'équipe</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Séminaires de cohésion et leadership collectif</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Programmes immersifs sur mesure</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              {/* 5. Coaching Professionnel */}
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <Users className="text-accent" size={28} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold">Coaching Professionnel</h3>
+                  <p className="text-muted-foreground">
+                    Vous confronté à des situations complexes ?
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Coaching exécutif & dirigeant</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Développement du leadership authentique</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Gestion de la pression et des situations de crise</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              {/* 6. Externalisation RH */}
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <Briefcase className="text-accent" size={28} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold">Externalisation RH (RPO/BPO)</h3>
+                  <p className="text-muted-foreground">
+                    Concentrez-vous sur votre cœur de métier
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Administration du personnel · Gestion de la paie</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Recrutement externalisé (RPO) intégral ou partiel</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Reporting RH et tableaux de bord</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              {/* 7. Réorganisation & Structuration */}
+              <Card className="border-2 hover:border-accent transition-all duration-300 hover:-translate-y-1 group">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <TrendingUp className="text-accent" size={28} />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold">Réorganisation & Structuration</h3>
+                  <p className="text-muted-foreground">
+                    Anticiper, structurer et transformer
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Diagnostic organisationnel et analyse de performance</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Refonte des organigrammes · Redéfinition des rôles</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
+                      <span>Conduite du changement et restructuration sociale</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -513,6 +583,68 @@ export default function Home() {
                   </Link>
                 </Button>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Notre Méthodologie - 4 ÉTAPES DU PDF */}
+        <section className="py-20 md:py-32 bg-muted/30">
+          <div className="container">
+            <div className="text-center mb-16 space-y-4">
+              <h2 className="font-serif text-3xl md:text-5xl font-bold">Notre Méthodologie</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto italic">
+                « La précision du diagnostic détermine la qualité de la solution. L'engagement jusqu'à la fin détermine la réalité du résultat. »
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <Card className="border-2 border-accent/20 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center mx-auto font-serif text-2xl font-bold">
+                    01
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold text-center">ANALYSER</h3>
+                  <p className="text-muted-foreground text-center">
+                    Immersion dans votre réalité : entretiens approfondis, analyse documentaire, cartographie des enjeux RH.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 border-accent/20 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center mx-auto font-serif text-2xl font-bold">
+                    02
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold text-center">CONCEVOIR</h3>
+                  <p className="text-muted-foreground text-center">
+                    Solutions 100% sur mesure, co-construites et validées avec vous. Jamais standardisé. Toujours pertinent.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 border-accent/20 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center mx-auto font-serif text-2xl font-bold">
+                    03
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold text-center">EXÉCUTER</h3>
+                  <p className="text-muted-foreground text-center">
+                    Déploiement rigoureux avec KPIs définis en amont, jalons précis et communication transparente.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 border-accent/20 hover:border-accent transition-all duration-300">
+                <CardContent className="pt-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center mx-auto font-serif text-2xl font-bold">
+                    04
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold text-center">PÉRENNISER</h3>
+                  <p className="text-muted-foreground text-center">
+                    Mesure d'impact, ajustements continus et transfert de compétences pour ancrer la transformation.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
