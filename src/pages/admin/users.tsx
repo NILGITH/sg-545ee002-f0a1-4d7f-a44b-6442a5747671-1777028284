@@ -2,177 +2,183 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { SEO } from "@/components/SEO";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
-import { authService } from "@/services/authService";
 import { adminUsersService } from "@/services/adminUsersService";
-import { Users, UserPlus, Edit, Trash2, ShieldAlert, ShieldCheck, Calendar } from "lucide-react";
+import { ArrowLeft, UserPlus, Edit, Trash2, Shield, Calendar, Loader2 } from "lucide-react";
 import Link from "next/link";
-import type { Tables } from "@/integrations/supabase/types";
+import type { Database } from "@/integrations/supabase/types";
 
-type AdminUser = Tables<"admin_users">;
+type AdminUser = Database["public"]["Tables"]["admin_users"]["Row"];
 
-export default function AdminUsers() {
+export default function AdminUsersPage() {
   const router = useRouter();
-  const { loading: authLoading, isAdmin, isSuperAdmin } = useAdminAuth(true); // requireSuperAdmin = true
+  const { toast } = useToast();
+  const { loading: authLoading, isAdmin } = useAdminAuth();
+  
   const [users, setUsers] = useState<AdminUser[]>([]);
-  const [showCreateDialog, setShowCreateDialog] = useState(false);
-  const [showEditDialog, setShowEditDialog] = useState(false);
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
-  const [processing, setProcessing] = useState(false);
-
-  const [newUser, setNewUser] = useState({
+  const [loading, setLoading] = useState(true);
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [editingUser, setEditingUser] = useState<AdminUser | null>(null);
+  
+  const [createForm, setCreateForm] = useState({
     email: "",
     password: "",
-    fullName: "",
-    role: "admin" as "admin" | "manager" | "super_admin",
+    full_name: "",
+    role: "admin",
   });
 
-  const [editData, setEditData] = useState({
-    fullName: "",
-    role: "admin" as "admin" | "manager" | "super_admin",
-    isActive: true,
+  const [editForm, setEditForm] = useState({
+    email: "",
+    full_name: "",
+    role: "admin",
+    newPassword: "",
   });
-
-  // Handler pour le changement de rôle lors de la création
-  const handleNewRoleChange = (value: string) => {
-    setNewUser({ ...newUser, role: value as "admin" | "manager" | "super_admin" });
-  };
-
-  // Handler pour le changement de rôle lors de l'édition
-  const handleEditRoleChange = (value: string) => {
-    setEditData({ ...editData, role: value as "admin" | "manager" | "super_admin" });
-  };
 
   useEffect(() => {
-    if (!authLoading && isSuperAdmin) {
+    if (!authLoading && isAdmin) {
       loadUsers();
     }
-  }, [authLoading, isSuperAdmin]);
+  }, [authLoading, isAdmin]);
 
   const loadUsers = async () => {
-    try {
-      const data = await adminUsersService.getAllAdminUsers();
-      setUsers(data);
-    } catch (error) {
-      console.error("Error loading users:", error);
-    }
+    setLoading(true);
+    const { data } = await adminUsersService.getAllUsers();
+    setUsers(data || []);
+    setLoading(false);
   };
 
-  const handleCreateUser = async () => {
-    if (!newUser.email || !newUser.password || !newUser.fullName) {
-      alert("Veuillez remplir tous les champs");
-      return;
-    }
+  const handleCreateUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
 
-    setProcessing(true);
-    try {
-      await adminUsersService.createAdminUser(
-        newUser.email,
-        newUser.password,
-        newUser.fullName,
-        newUser.role
-      );
-      alert("Utilisateur créé avec succès !");
-      setShowCreateDialog(false);
-      setNewUser({ email: "", password: "", fullName: "", role: "admin" });
-      await loadUsers();
-    } catch (error: any) {
-      console.error("Create user error:", error);
-      alert(error.message || "Erreur lors de la création de l'utilisateur");
-    }
-    setProcessing(false);
-  };
+    const { data, error } = await adminUsersService.createUser(createForm);
 
-  const handleEditUser = async () => {
-    if (!selectedUser || !editData.fullName) {
-      alert("Veuillez remplir tous les champs");
-      return;
-    }
-
-    setProcessing(true);
-    try {
-      await adminUsersService.updateAdminUser(selectedUser.id, {
-        full_name: editData.fullName,
-        role: editData.role,
-        is_active: editData.isActive,
+    if (error) {
+      toast({
+        title: "Erreur",
+        description: error.message || "Impossible de créer l'utilisateur",
+        variant: "destructive",
       });
-      alert("Utilisateur modifié avec succès !");
-      setShowEditDialog(false);
-      setSelectedUser(null);
-      await loadUsers();
-    } catch (error: any) {
-      console.error("Edit user error:", error);
-      alert(error.message || "Erreur lors de la modification");
+    } else {
+      toast({
+        title: "Utilisateur créé",
+        description: "Le nouvel utilisateur a été créé avec succès",
+      });
+      setIsCreateDialogOpen(false);
+      setCreateForm({ email: "", password: "", full_name: "", role: "admin" });
+      loadUsers();
     }
-    setProcessing(false);
+    
+    setSubmitting(false);
   };
 
-  const handleDeleteUser = async () => {
-    if (!selectedUser) return;
+  const handleEditUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingUser) return;
 
-    setProcessing(true);
-    try {
-      await adminUsersService.deleteAdminUser(selectedUser.id);
-      alert("Utilisateur supprimé avec succès !");
-      setShowDeleteDialog(false);
-      setSelectedUser(null);
-      await loadUsers();
-    } catch (error: any) {
-      console.error("Delete user error:", error);
-      alert(error.message || "Erreur lors de la suppression");
+    setSubmitting(true);
+
+    // Mettre à jour les infos de base
+    const { error: updateError } = await adminUsersService.updateUser(editingUser.id, {
+      email: editForm.email,
+      full_name: editForm.full_name,
+      role: editForm.role,
+    });
+
+    if (updateError) {
+      toast({
+        title: "Erreur",
+        description: "Impossible de modifier l'utilisateur",
+        variant: "destructive",
+      });
+      setSubmitting(false);
+      return;
     }
-    setProcessing(false);
+
+    // Si un nouveau mot de passe est fourni, le mettre à jour
+    if (editForm.newPassword && editForm.newPassword.length >= 6) {
+      const { error: passwordError } = await adminUsersService.updateUserPassword(
+        editingUser.id,
+        editForm.newPassword
+      );
+
+      if (passwordError) {
+        toast({
+          title: "Erreur mot de passe",
+          description: "Informations mises à jour mais le mot de passe n'a pas pu être modifié",
+          variant: "destructive",
+        });
+      }
+    }
+
+    toast({
+      title: "Utilisateur modifié",
+      description: "Les informations ont été mises à jour avec succès",
+    });
+    
+    setIsEditDialogOpen(false);
+    setEditingUser(null);
+    setEditForm({ email: "", full_name: "", role: "admin", newPassword: "" });
+    loadUsers();
+    setSubmitting(false);
+  };
+
+  const openEditDialog = (user: AdminUser) => {
+    setEditingUser(user);
+    setEditForm({
+      email: user.email,
+      full_name: user.full_name || "",
+      role: user.role,
+      newPassword: "",
+    });
+    setIsEditDialogOpen(true);
+  };
+
+  const handleDeleteUser = async (id: string) => {
+    if (!confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?")) return;
+
+    const { error } = await adminUsersService.deleteUser(id);
+    
+    if (error) {
+      toast({
+        title: "Erreur",
+        description: "Impossible de supprimer l'utilisateur",
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Utilisateur supprimé",
+        description: "L'utilisateur a été supprimé avec succès",
+      });
+      loadUsers();
+    }
   };
 
   const getRoleBadge = (role: string) => {
-    const config: Record<string, { variant: "default" | "secondary" | "destructive"; label: string }> = {
-      super_admin: { variant: "destructive", label: "Super Admin" },
-      admin: { variant: "default", label: "Admin" },
-      manager: { variant: "secondary", label: "Manager" },
-    };
-
-    const { variant, label } = config[role] || { variant: "secondary", label: role };
-    return <Badge variant={variant}>{label}</Badge>;
+    return role === "super_admin" ? (
+      <Badge className="bg-accent text-accent-foreground">Super Admin</Badge>
+    ) : (
+      <Badge variant="secondary">Admin</Badge>
+    );
   };
 
-  if (authLoading || !isSuperAdmin) {
+  if (authLoading || !isAdmin) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Vérification des permissions Super Admin...</p>
+          <p className="text-muted-foreground">Vérification des permissions...</p>
         </div>
       </div>
     );
@@ -180,243 +186,258 @@ export default function AdminUsers() {
 
   return (
     <>
-      <SEO title="Gestion des utilisateurs - Admin" description="Gérer les utilisateurs administrateurs" />
+      <SEO 
+        title="Gestion des Utilisateurs - Admin - HR Talents Partners"
+        description="Gérez les utilisateurs administrateurs"
+      />
       
       <Navigation />
       
-      <main className="min-h-[calc(100vh-80px)] bg-muted/30 py-16">
-        <div className="container max-w-6xl">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <h1 className="font-serif text-4xl font-bold mb-2">Gestion des Utilisateurs</h1>
-              <p className="text-muted-foreground">
-                {users.length} utilisateur{users.length > 1 ? "s" : ""} administrateur{users.length > 1 ? "s" : ""}
-              </p>
-            </div>
-            <div className="flex gap-4">
-              <Button
-                onClick={() => setShowCreateDialog(true)}
-                className="bg-accent hover:bg-accent/90 text-accent-foreground"
-              >
-                <UserPlus className="mr-2" size={20} />
-                Nouvel utilisateur
+      <main className="min-h-screen py-12">
+        <div className="container">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <Button asChild variant="ghost">
+                <Link href="/admin/dashboard">
+                  <ArrowLeft size={18} className="mr-2" />
+                  Retour au tableau de bord
+                </Link>
               </Button>
-              <Button asChild variant="outline">
-                <Link href="/admin/dashboard">Retour au tableau de bord</Link>
-              </Button>
+              <div>
+                <h1 className="font-serif text-4xl font-bold">Gestion des Utilisateurs</h1>
+                <p className="text-muted-foreground mt-1">{users.length} utilisateur{users.length > 1 ? "s" : ""} administrateur{users.length > 1 ? "s" : ""}</p>
+              </div>
             </div>
+            <Button 
+              onClick={() => setIsCreateDialogOpen(true)}
+              className="bg-accent hover:bg-accent/90 text-accent-foreground"
+            >
+              <UserPlus size={18} className="mr-2" />
+              Nouvel utilisateur
+            </Button>
           </div>
 
-          {/* Users List */}
-          <div className="space-y-4">
-            {users.length === 0 ? (
-              <Card className="border-2">
-                <CardContent className="py-12 text-center">
-                  <Users className="mx-auto text-muted-foreground mb-4" size={48} />
-                  <p className="text-muted-foreground">Aucun utilisateur pour le moment</p>
-                </CardContent>
-              </Card>
-            ) : (
-              users.map((user) => (
-                <Card key={user.id} className="border-2">
-                  <CardContent className="pt-6">
+          {loading ? (
+            <div className="flex justify-center items-center py-20">
+              <Loader2 className="animate-spin text-accent" size={48} />
+            </div>
+          ) : users.length === 0 ? (
+            <Card className="border-2">
+              <CardContent className="text-center py-12">
+                <p className="text-xl text-muted-foreground">Aucun utilisateur pour le moment</p>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="space-y-4">
+              {users.map((user) => (
+                <Card key={user.id} className="border-2 hover:border-accent transition-colors">
+                  <CardContent className="p-6">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                          {user.role === "super_admin" ? (
-                            <ShieldAlert className="text-accent" size={24} />
-                          ) : (
-                            <ShieldCheck className="text-accent" size={24} />
-                          )}
+                        <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                          <Shield className="text-accent" size={24} />
                         </div>
                         <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <h3 className="font-semibold text-lg">{user.full_name}</h3>
+                          <div className="flex items-center gap-3 mb-1">
+                            <h3 className="font-serif text-xl font-semibold">{user.full_name || "Sans nom"}</h3>
                             {getRoleBadge(user.role)}
-                            {!user.is_active && <Badge variant="destructive">Inactif</Badge>}
                           </div>
-                          <p className="text-sm text-muted-foreground mb-1">{user.email}</p>
-                          <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                            <Calendar size={12} />
+                          <p className="text-muted-foreground">{user.email}</p>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                            <Calendar size={14} />
                             <span>Créé le {new Date(user.created_at).toLocaleDateString("fr-FR")}</span>
                           </div>
                         </div>
                       </div>
-
                       <div className="flex gap-2">
                         <Button
-                          variant="outline"
                           size="sm"
-                          onClick={() => {
-                            setSelectedUser(user);
-                            setEditData({
-                              fullName: user.full_name || "",
-                              role: user.role as "admin" | "manager" | "super_admin",
-                              isActive: user.is_active,
-                            });
-                            setShowEditDialog(true);
-                          }}
+                          variant="outline"
+                          onClick={() => openEditDialog(user)}
                         >
-                          <Edit className="mr-2" size={14} />
+                          <Edit size={16} className="mr-2" />
                           Modifier
                         </Button>
                         <Button
-                          variant="destructive"
                           size="sm"
-                          onClick={() => {
-                            setSelectedUser(user);
-                            setShowDeleteDialog(true);
-                          }}
+                          variant="outline"
+                          onClick={() => handleDeleteUser(user.id)}
                         >
-                          <Trash2 className="mr-2" size={14} />
-                          Supprimer
+                          <Trash2 size={16} />
                         </Button>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </main>
 
-      {/* Create User Dialog */}
-      <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
+      {/* Dialogue de création */}
+      <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Créer un nouvel utilisateur</DialogTitle>
-            <DialogDescription>
-              Ajouter un nouvel administrateur au système
-            </DialogDescription>
+            <p className="text-sm text-muted-foreground">Ajouter un nouvel administrateur au système</p>
           </DialogHeader>
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <Label htmlFor="new-email">Email *</Label>
+          <form onSubmit={handleCreateUser} className="space-y-4">
+            <div>
+              <Label htmlFor="create-email">Email *</Label>
               <Input
-                id="new-email"
+                id="create-email"
                 type="email"
-                value={newUser.email}
-                onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                placeholder="utilisateur@example.com"
+                required
+                value={createForm.email}
+                onChange={(e) => setCreateForm({ ...createForm, email: e.target.value })}
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="new-password">Mot de passe *</Label>
+
+            <div>
+              <Label htmlFor="create-password">Mot de passe *</Label>
               <Input
-                id="new-password"
+                id="create-password"
                 type="password"
-                value={newUser.password}
-                onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-                placeholder="Minimum 6 caractères"
+                required
+                minLength={6}
+                value={createForm.password}
+                onChange={(e) => setCreateForm({ ...createForm, password: e.target.value })}
               />
+              <p className="text-xs text-muted-foreground mt-1">Minimum 6 caractères</p>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="new-fullname">Nom complet *</Label>
+
+            <div>
+              <Label htmlFor="create-name">Nom complet *</Label>
               <Input
-                id="new-fullname"
-                value={newUser.fullName}
-                onChange={(e) => setNewUser({ ...newUser, fullName: e.target.value })}
-                placeholder="Jean Dupont"
+                id="create-name"
+                required
+                value={createForm.full_name}
+                onChange={(e) => setCreateForm({ ...createForm, full_name: e.target.value })}
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="new-role">Rôle *</Label>
-              <Select value={newUser.role} onValueChange={handleNewRoleChange}>
-                <SelectTrigger>
+
+            <div>
+              <Label htmlFor="create-role">Rôle *</Label>
+              <Select 
+                value={createForm.role} 
+                onValueChange={(value) => setCreateForm({ ...createForm, role: value })}
+              >
+                <SelectTrigger id="create-role">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="manager">Manager</SelectItem>
                   <SelectItem value="admin">Admin</SelectItem>
                   <SelectItem value="super_admin">Super Admin</SelectItem>
                 </SelectContent>
               </Select>
             </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setShowCreateDialog(false)}>
-              Annuler
-            </Button>
-            <Button onClick={handleCreateUser} disabled={processing}>
-              {processing ? "Création..." : "Créer l'utilisateur"}
-            </Button>
-          </DialogFooter>
+
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={() => setIsCreateDialogOpen(false)}>
+                Annuler
+              </Button>
+              <Button 
+                type="submit" 
+                className="bg-accent hover:bg-accent/90 text-accent-foreground"
+                disabled={submitting}
+              >
+                {submitting ? (
+                  <>
+                    <Loader2 className="mr-2 animate-spin" size={16} />
+                    Création...
+                  </>
+                ) : (
+                  "Créer l'utilisateur"
+                )}
+              </Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
 
-      {/* Edit User Dialog */}
-      <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
+      {/* Dialogue de modification */}
+      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Modifier l'utilisateur</DialogTitle>
-            <DialogDescription>
-              Modifier les informations de {selectedUser?.full_name}
-            </DialogDescription>
+            <p className="text-sm text-muted-foreground">Mettre à jour les informations de l'utilisateur</p>
           </DialogHeader>
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <Label htmlFor="edit-fullname">Nom complet *</Label>
+          <form onSubmit={handleEditUser} className="space-y-4">
+            <div>
+              <Label htmlFor="edit-email">Email *</Label>
               <Input
-                id="edit-fullname"
-                value={editData.fullName}
-                onChange={(e) => setEditData({ ...editData, fullName: e.target.value })}
+                id="edit-email"
+                type="email"
+                required
+                value={editForm.email}
+                onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
               />
             </div>
-            <div className="space-y-2">
+
+            <div>
+              <Label htmlFor="edit-name">Nom complet *</Label>
+              <Input
+                id="edit-name"
+                required
+                value={editForm.full_name}
+                onChange={(e) => setEditForm({ ...editForm, full_name: e.target.value })}
+              />
+            </div>
+
+            <div>
               <Label htmlFor="edit-role">Rôle *</Label>
-              <Select value={editData.role} onValueChange={handleEditRoleChange}>
-                <SelectTrigger>
+              <Select 
+                value={editForm.role} 
+                onValueChange={(value) => setEditForm({ ...editForm, role: value })}
+              >
+                <SelectTrigger id="edit-role">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="manager">Manager</SelectItem>
                   <SelectItem value="admin">Admin</SelectItem>
                   <SelectItem value="super_admin">Super Admin</SelectItem>
                 </SelectContent>
               </Select>
             </div>
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                id="edit-active"
-                checked={editData.isActive}
-                onChange={(e) => setEditData({ ...editData, isActive: e.target.checked })}
-                className="w-4 h-4"
+
+            <div>
+              <Label htmlFor="edit-password">Nouveau mot de passe</Label>
+              <Input
+                id="edit-password"
+                type="password"
+                placeholder="Laisser vide pour ne pas modifier"
+                minLength={6}
+                value={editForm.newPassword}
+                onChange={(e) => setEditForm({ ...editForm, newPassword: e.target.value })}
               />
-              <Label htmlFor="edit-active">Compte actif</Label>
+              <p className="text-xs text-muted-foreground mt-1">
+                Laisser vide si vous ne voulez pas changer le mot de passe. Sinon, minimum 6 caractères.
+              </p>
             </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setShowEditDialog(false)}>
-              Annuler
-            </Button>
-            <Button onClick={handleEditUser} disabled={processing}>
-              {processing ? "Modification..." : "Enregistrer"}
-            </Button>
-          </DialogFooter>
+
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+                Annuler
+              </Button>
+              <Button 
+                type="submit" 
+                className="bg-accent hover:bg-accent/90 text-accent-foreground"
+                disabled={submitting}
+              >
+                {submitting ? (
+                  <>
+                    <Loader2 className="mr-2 animate-spin" size={16} />
+                    Modification...
+                  </>
+                ) : (
+                  "Enregistrer"
+                )}
+              </Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
-
-      {/* Delete User Dialog */}
-      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Confirmer la suppression</AlertDialogTitle>
-            <AlertDialogDescription>
-              Êtes-vous sûr de vouloir supprimer l'utilisateur <strong>{selectedUser?.full_name}</strong> ?
-              Cette action est irréversible.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Annuler</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteUser} disabled={processing} className="bg-destructive text-destructive-foreground">
-              {processing ? "Suppression..." : "Supprimer"}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
 
       <Footer />
     </>

@@ -1,7 +1,9 @@
 import { supabase } from "@/integrations/supabase/client";
-import type { Tables } from "@/integrations/supabase/types";
+import type { Database } from "@/integrations/supabase/types";
 
-type AdminUser = Tables<"admin_users">;
+type AdminUser = Database["public"]["Tables"]["admin_users"]["Row"];
+type AdminUserInsert = Database["public"]["Tables"]["admin_users"]["Insert"];
+type AdminUserUpdate = Database["public"]["Tables"]["admin_users"]["Update"];
 
 export const adminUsersService = {
   /**
@@ -166,5 +168,105 @@ export const adminUsersService = {
     });
 
     if (error) throw error;
+  },
+
+  async getAllUsers() {
+    return await supabase
+      .from("admin_users")
+      .select("*")
+      .order("created_at", { ascending: false });
+  },
+
+  async getUserById(id: string) {
+    return await supabase
+      .from("admin_users")
+      .select("*")
+      .eq("id", id)
+      .single();
+  },
+
+  async createUser(userData: { email: string; password: string; full_name: string; role: string }) {
+    try {
+      // Créer l'utilisateur dans auth.users via l'API
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: userData.email,
+        password: userData.password,
+        options: {
+          data: {
+            full_name: userData.full_name,
+            role: userData.role,
+          },
+        },
+      });
+
+      if (authError) {
+        console.error("Auth error:", authError);
+        return { data: null, error: authError };
+      }
+
+      if (!authData.user) {
+        return { data: null, error: new Error("Utilisateur non créé") };
+      }
+
+      // Créer l'entrée dans admin_users
+      const { data: adminData, error: adminError } = await supabase
+        .from("admin_users")
+        .insert({
+          id: authData.user.id,
+          email: userData.email,
+          full_name: userData.full_name,
+          role: userData.role,
+        })
+        .select()
+        .single();
+
+      if (adminError) {
+        console.error("Admin user creation error:", adminError);
+        // Si échec, supprimer l'utilisateur auth
+        await supabase.auth.admin.deleteUser(authData.user.id);
+        return { data: null, error: adminError };
+      }
+
+      return { data: adminData, error: null };
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      return { data: null, error: error as Error };
+    }
+  },
+
+  async updateUser(id: string, updates: AdminUserUpdate) {
+    return await supabase
+      .from("admin_users")
+      .update(updates)
+      .eq("id", id)
+      .select()
+      .single();
+  },
+
+  async updateUserPassword(userId: string, newPassword: string) {
+    try {
+      // Mise à jour du mot de passe via l'API Supabase
+      const { data, error } = await supabase.auth.updateUser({
+        password: newPassword,
+      });
+
+      if (error) {
+        console.error("Password update error:", error);
+        return { error };
+      }
+
+      return { data, error: null };
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      return { error: error as Error };
+    }
+  },
+
+  async deleteUser(id: string) {
+    // Supprimer d'abord de admin_users, puis de auth.users sera supprimé automatiquement grâce à ON DELETE CASCADE
+    return await supabase
+      .from("admin_users")
+      .delete()
+      .eq("id", id);
   },
 };
