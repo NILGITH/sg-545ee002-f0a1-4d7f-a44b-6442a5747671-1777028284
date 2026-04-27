@@ -19,6 +19,7 @@ import {
 import { SEO } from "@/components/SEO";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { jobSubmissionService } from "@/services/jobSubmissionService";
+import { supabase } from "@/integrations/supabase/client";
 import { Building2, CheckCircle, XCircle, Eye, Search, Calendar } from "lucide-react";
 import Link from "next/link";
 
@@ -47,7 +48,6 @@ export default function AdminSubmissions() {
   const [showRejectDialog, setShowRejectDialog] = useState(false);
   const [rejectionReason, setRejectionReason] = useState("");
   const [processing, setProcessing] = useState(false);
-  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     if (!authLoading && isAdmin) {
@@ -80,28 +80,26 @@ export default function AdminSubmissions() {
     setLoading(false);
   };
 
-  if (authLoading || !isAdmin) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Vérification des permissions...</p>
-        </div>
-      </div>
-    );
-  }
-
   const handleApprove = async (submission: Submission) => {
     if (!confirm(`Approuver et publier l'offre "${submission.job_title}" ?`)) return;
 
     setProcessing(true);
     try {
-      await jobSubmissionService.approveSubmission(submission.id, userId);
+      // Récupérer l'ID de l'utilisateur connecté
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        alert("Erreur : utilisateur non authentifié");
+        setProcessing(false);
+        return;
+      }
+
+      await jobSubmissionService.approveSubmission(submission.id, user.id);
       alert("Offre approuvée et publiée avec succès !");
       await loadSubmissions();
     } catch (error) {
       console.error("Approval error:", error);
-      alert("Erreur lors de l'approbation");
+      alert("Erreur lors de l'approbation : " + (error as Error).message);
     }
     setProcessing(false);
   };
@@ -114,9 +112,18 @@ export default function AdminSubmissions() {
 
     setProcessing(true);
     try {
+      // Récupérer l'ID de l'utilisateur connecté
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        alert("Erreur : utilisateur non authentifié");
+        setProcessing(false);
+        return;
+      }
+
       await jobSubmissionService.rejectSubmission(
         selectedSubmission.id,
-        userId,
+        user.id,
         rejectionReason
       );
       alert("Offre rejetée");
@@ -126,7 +133,7 @@ export default function AdminSubmissions() {
       setSelectedSubmission(null);
     } catch (error) {
       console.error("Rejection error:", error);
-      alert("Erreur lors du rejet");
+      alert("Erreur lors du rejet : " + (error as Error).message);
     }
     setProcessing(false);
   };

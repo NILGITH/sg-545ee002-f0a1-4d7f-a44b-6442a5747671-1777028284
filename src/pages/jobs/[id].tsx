@@ -60,28 +60,42 @@ export default function JobDetailPage() {
     if (!job) return;
 
     setSubmitting(true);
-    const { error } = await applicationsService.submitApplication({
-      job_id: job.id,
-      candidate_name: formData.full_name,
-      candidate_email: formData.email,
-      candidate_phone: formData.phone,
-      cover_letter: formData.cover_letter,
-      status: "pending",
-    });
+    
+    try {
+      // Candidature anonyme - pas besoin de user_id
+      const { error } = await applicationsService.submitApplication({
+        job_id: job.id,
+        candidate_name: formData.full_name,
+        candidate_email: formData.email,
+        candidate_phone: formData.phone,
+        cover_letter: formData.cover_letter,
+        status: "pending",
+        user_id: null, // Candidature anonyme
+      });
 
-    if (error) {
+      if (error) {
+        console.error("Application error:", error);
+        toast({
+          title: "Erreur",
+          description: "Impossible d'envoyer votre candidature. Veuillez réessayer.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Candidature envoyée !",
+          description: "Nous vous contacterons prochainement.",
+        });
+        setFormData({ full_name: "", email: "", phone: "", cover_letter: "" });
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
       toast({
         title: "Erreur",
-        description: "Impossible d'envoyer votre candidature. Veuillez réessayer.",
+        description: "Une erreur inattendue s'est produite",
         variant: "destructive",
       });
-    } else {
-      toast({
-        title: "Candidature envoyée !",
-        description: "Nous vous contacterons prochainement.",
-      });
-      setFormData({ full_name: "", email: "", phone: "", cover_letter: "" });
     }
+    
     setSubmitting(false);
   };
 

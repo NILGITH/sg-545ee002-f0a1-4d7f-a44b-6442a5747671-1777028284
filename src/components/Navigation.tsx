@@ -60,8 +60,8 @@ export function Navigation() {
             <Link href="/contact" className="px-4 py-2 rounded-lg hover:bg-accent/10 transition-colors text-sm font-medium">
               Contact
             </Link>
-            <Link href="/admin/login" className="ml-4 px-4 py-2 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 transition-colors text-sm font-medium">
-              Espace Admin
+            <Link href="/candidate/login" className="ml-4 px-4 py-2 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 transition-colors text-sm font-medium">
+              Espace Candidat
             </Link>
           </div>
 
@@ -128,11 +128,11 @@ export function Navigation() {
               Contact
             </Link>
             <Link 
-              href="/admin/login" 
+              href="/candidate/login" 
               className="block px-4 py-2 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 transition-colors text-sm font-medium"
               onClick={() => setIsOpen(false)}
             >
-              Espace Admin
+              Espace Candidat
             </Link>
           </div>
         )}
