@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
@@ -62,7 +63,6 @@ export default function JobDetailPage() {
     setSubmitting(true);
     
     try {
-      // Candidature anonyme - pas besoin de user_id
       const { error } = await applicationsService.submitApplication({
         job_id: job.id,
         candidate_name: formData.full_name,
@@ -70,7 +70,7 @@ export default function JobDetailPage() {
         candidate_phone: formData.phone,
         cover_letter: formData.cover_letter,
         status: "pending",
-        user_id: null, // Candidature anonyme
+        user_id: null,
       });
 
       if (error) {
@@ -164,18 +164,31 @@ export default function JobDetailPage() {
           </Button>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Job Details */}
             <div className="lg:col-span-2 space-y-6">
               <div>
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <h1 className="font-serif text-3xl md:text-4xl font-bold">
-                    {job.title}
-                  </h1>
-                  <Badge className="bg-accent text-accent-foreground text-base px-4 py-1">
-                    {getContractTypeLabel(job.contract_type)}
-                  </Badge>
+                <div className="flex items-start gap-6 mb-6">
+                  {job.company_logo_url && (
+                    <div className="relative w-24 h-24 flex-shrink-0">
+                      <Image
+                        src={job.company_logo_url}
+                        alt={`Logo ${job.company_name}`}
+                        fill
+                        className="object-contain rounded-lg bg-white p-3 border-2"
+                      />
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <h1 className="font-serif text-3xl md:text-4xl font-bold">
+                        {job.title}
+                      </h1>
+                      <Badge className="bg-accent text-accent-foreground text-base px-4 py-1 flex-shrink-0">
+                        {getContractTypeLabel(job.contract_type)}
+                      </Badge>
+                    </div>
+                    <p className="text-xl text-muted-foreground font-medium mb-6">{job.company_name}</p>
+                  </div>
                 </div>
-                <p className="text-xl text-muted-foreground font-medium mb-6">{job.company_name}</p>
 
                 <div className="flex flex-wrap gap-6 text-muted-foreground">
                   <div className="flex items-center gap-2">
@@ -230,7 +243,6 @@ export default function JobDetailPage() {
               )}
             </div>
 
-            {/* Application Form */}
             <div>
               <Card className="border-2 sticky top-24">
                 <CardHeader>

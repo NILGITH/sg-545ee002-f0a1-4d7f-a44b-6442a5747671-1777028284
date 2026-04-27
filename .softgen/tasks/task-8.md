@@ -1,6 +1,6 @@
 ---
 title: Afficher images dans les offres
-status: todo
+status: done
 priority: high
 type: feature
 tags: [jobs, images]
@@ -16,10 +16,10 @@ Les images des offres d'emploi doivent s'afficher :
 - Dans le tableau admin des offres
 
 ## Checklist
-- [ ] Ajouter affichage image dans JobCard.tsx
-- [ ] Ajouter affichage image dans /jobs/[id].tsx
-- [ ] Ajouter affichage image dans /admin/jobs/index.tsx
-- [ ] Vérifier que les images uploadées s'affichent correctement
+- [x] Ajouter affichage image dans JobCard.tsx
+- [x] Ajouter affichage image dans /jobs/[id].tsx
+- [x] Ajouter affichage image dans /admin/jobs/index.tsx
+- [x] Vérifier que les images uploadées s'affichent correctement
 
 ## Acceptance
 - Les images des offres sont visibles partout où une offre est affichée

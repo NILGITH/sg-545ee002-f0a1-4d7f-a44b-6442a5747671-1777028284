@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Briefcase, DollarSign, Clock } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -31,13 +32,27 @@ export function JobCard({ job }: JobCardProps) {
   return (
     <Card className="hover:shadow-lg transition-shadow">
       <CardHeader>
-        <div className="flex items-start justify-between gap-2">
-          <CardTitle className="text-xl">{job.title}</CardTitle>
-          <Badge variant="default" className="bg-accent text-accent-foreground">
-            {getContractTypeLabel(job.contract_type)}
-          </Badge>
+        <div className="flex items-start gap-4">
+          {job.company_logo_url && (
+            <div className="relative w-16 h-16 flex-shrink-0">
+              <Image
+                src={job.company_logo_url}
+                alt={`Logo ${job.company_name}`}
+                fill
+                className="object-contain rounded-lg bg-white p-2 border"
+              />
+            </div>
+          )}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start justify-between gap-2">
+              <CardTitle className="text-xl">{job.title}</CardTitle>
+              <Badge variant="default" className="bg-accent text-accent-foreground flex-shrink-0">
+                {getContractTypeLabel(job.contract_type)}
+              </Badge>
+            </div>
+            <p className="text-muted-foreground font-medium">{job.company_name}</p>
+          </div>
         </div>
-        <p className="text-muted-foreground font-medium">{job.company_name}</p>
       </CardHeader>
       
       <CardContent className="space-y-3">

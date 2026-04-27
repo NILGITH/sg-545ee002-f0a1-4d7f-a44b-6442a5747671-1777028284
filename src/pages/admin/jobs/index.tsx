@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
@@ -139,28 +140,40 @@ export default function AdminJobsPage() {
                 <Card key={job.id} className="border-2 hover:border-accent transition-colors">
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-start gap-3 mb-2">
-                          <h3 className="font-serif text-2xl font-semibold">{job.title}</h3>
-                          <Badge variant={job.is_active ? "default" : "secondary"} className={job.is_active ? "bg-accent text-accent-foreground" : ""}>
-                            {job.is_active ? "Active" : "Inactive"}
-                          </Badge>
-                        </div>
-                        <p className="text-lg text-muted-foreground mb-2">{job.company_name}</p>
-                        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                          <span>{job.location}</span>
-                          <span>•</span>
-                          <span>{job.contract_type}</span>
-                          {job.sector && (
-                            <>
-                              <span>•</span>
-                              <span>{job.sector}</span>
-                            </>
-                          )}
+                      <div className="flex items-start gap-4 flex-1">
+                        {job.company_logo_url && (
+                          <div className="relative w-16 h-16 flex-shrink-0">
+                            <Image
+                              src={job.company_logo_url}
+                              alt={`Logo ${job.company_name}`}
+                              fill
+                              className="object-contain rounded-lg bg-white p-2 border"
+                            />
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start gap-3 mb-2">
+                            <h3 className="font-serif text-2xl font-semibold">{job.title}</h3>
+                            <Badge variant={job.is_active ? "default" : "secondary"} className={job.is_active ? "bg-accent text-accent-foreground" : ""}>
+                              {job.is_active ? "Active" : "Inactive"}
+                            </Badge>
+                          </div>
+                          <p className="text-lg text-muted-foreground mb-2">{job.company_name}</p>
+                          <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                            <span>{job.location}</span>
+                            <span>•</span>
+                            <span>{job.contract_type}</span>
+                            {job.sector && (
+                              <>
+                                <span>•</span>
+                                <span>{job.sector}</span>
+                              </>
+                            )}
+                          </div>
                         </div>
                       </div>
 
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 flex-shrink-0">
                         <Button
                           size="sm"
                           variant="outline"
