@@ -12,8 +12,8 @@ export default function About() {
     <>
       <SEO
         title="À propos - HR Talents Partners"
-        description="Découvrez HR Talents Partners : Faire de votre capital humain le moteur de votre performance en Côte d'Ivoire."
-      />
+        description="Découvrez HR Talents Partners : Faire de votre capital humain le moteur de votre performance en Côte d'Ivoire." />
+      
       
       <Navigation />
       
@@ -25,8 +25,8 @@ export default function About() {
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80"
               alt="À propos"
               fill
-              className="object-cover"
-            />
+              className="object-cover" />
+            
             <div className="absolute inset-0 bg-primary/85"></div>
           </div>
           <div className="container relative text-center space-y-6 text-white">
@@ -70,8 +70,8 @@ export default function About() {
                   src="/2147664377.jpg"
                   alt="Notre équipe à Abidjan"
                   fill
-                  className="object-cover rounded-lg"
-                />
+                  className="object-cover rounded-lg" />
+                
               </div>
             </div>
           </div>
@@ -321,9 +321,9 @@ export default function About() {
         {/* CTA */}
         <section className="relative py-20 md:py-32 overflow-hidden bg-muted/30">
           <div className="container relative text-center space-y-8">
-            <h2 className="font-serif text-3xl md:text-5xl font-bold max-w-3xl mx-auto">
-              Prêt à rejoindre l'aventure ?
-            </h2>
+            
+
+            
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto italic">
               « Les premières conversations ne coûtent rien. La décision de ne pas agir, si. »
             </p>
@@ -342,6 +342,6 @@ export default function About() {
       </main>
 
       <Footer />
-    </>
-  );
+    </>);
+
 }
