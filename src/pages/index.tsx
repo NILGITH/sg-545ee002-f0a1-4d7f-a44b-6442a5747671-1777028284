@@ -243,44 +243,44 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section Candidat/Entreprise */}
-        <section className="py-20 md:py-32">
+        {/* Section Candidat/Entreprise - Design basé sur les services */}
+        <section className="py-20 md:py-32 bg-secondary/30">
           <div className="container">
             <div className="grid md:grid-cols-2 gap-8">
               {/* Carte CANDIDAT */}
-              <div className="relative h-[650px] md:h-[750px] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden group shadow-2xl">
                 <Image
                   src="/419.jpg"
                   alt="Candidat - Je cherche un emploi"
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/80"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/90"></div>
                 
-                <div className="relative h-full flex flex-col justify-between p-6 md:p-10 text-white">
+                <div className="relative h-full flex flex-col justify-between p-8 md:p-12 text-white">
                   <div>
-                    <h2 className="font-serif text-5xl md:text-6xl font-bold mb-8 drop-shadow-2xl">
+                    <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight drop-shadow-lg">
                       CANDIDAT
                     </h2>
                     
-                    <div className="space-y-5">
-                      <div className="bg-black/40 backdrop-blur-md p-5 rounded-xl border border-white/10">
-                        <h3 className="text-accent font-bold text-xl mb-3">1. Rejoignez la Grey Team Entreprises</h3>
-                        <p className="text-white/95 leading-relaxed">
+                    <div className="space-y-6 mb-8">
+                      <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
+                        <h3 className="text-accent font-bold text-lg mb-3 drop-shadow-md">1. Rejoignez la Grey Team Entreprises</h3>
+                        <p className="text-white leading-relaxed drop-shadow-md">
                           Inscrivez-vous gratuitement et entrez dans le cercle privilégié des talents d'excellence en Afrique.
                         </p>
                       </div>
                       
-                      <div className="bg-black/40 backdrop-blur-md p-5 rounded-xl border border-white/10">
-                        <h3 className="text-accent font-bold text-xl mb-3">2. Brillez par votre Singularité</h3>
-                        <p className="text-white/95 leading-relaxed">
+                      <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
+                        <h3 className="text-accent font-bold text-lg mb-3 drop-shadow-md">2. Brillez par votre Singularité</h3>
+                        <p className="text-white leading-relaxed drop-shadow-md">
                           Dans votre espace privé, construisez votre profil qui dévoile tous vos atouts. CV, expériences, ambitions… Laissez votre talent s'exprimer !
                         </p>
                       </div>
                       
-                      <div className="bg-black/40 backdrop-blur-md p-5 rounded-xl border border-white/10">
-                        <h3 className="text-accent font-bold text-xl mb-3">3. Place au Match Parfait</h3>
-                        <p className="text-white/95 leading-relaxed">
+                      <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
+                        <h3 className="text-accent font-bold text-lg mb-3 drop-shadow-md">3. Place au Match Parfait</h3>
+                        <p className="text-white leading-relaxed drop-shadow-md">
                           Nos experts analysent votre profil et activent leur réseau pour dénicher les opportunités qui vous correspondent vraiment. Plus besoin de chercher – les meilleures opportunités viennent à vous.
                         </p>
                       </div>
@@ -290,7 +290,7 @@ export default function Home() {
                   <Button 
                     asChild 
                     size="lg"
-                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-lg py-7 w-full shadow-2xl hover:shadow-accent/50 transition-all mt-6"
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-base md:text-lg py-6 w-full shadow-xl hover:shadow-2xl transition-all"
                   >
                     <Link href="/jobs">Je cherche un job</Link>
                   </Button>
@@ -298,39 +298,39 @@ export default function Home() {
               </div>
 
               {/* Carte ENTREPRISE */}
-              <div className="relative h-[650px] md:h-[750px] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden group shadow-2xl">
                 <Image
                   src="/1762.jpg"
                   alt="Entreprise - Je cherche un talent"
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/80"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/90"></div>
                 
-                <div className="relative h-full flex flex-col justify-between p-6 md:p-10 text-white">
+                <div className="relative h-full flex flex-col justify-between p-8 md:p-12 text-white">
                   <div>
-                    <h2 className="font-serif text-5xl md:text-6xl font-bold mb-8 drop-shadow-2xl">
+                    <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight drop-shadow-lg">
                       ENTREPRISE
                     </h2>
                     
-                    <div className="space-y-5">
-                      <div className="bg-black/40 backdrop-blur-md p-5 rounded-xl border border-white/10">
-                        <h3 className="text-accent font-bold text-xl mb-3">1. Rejoignez la Grey Team Entreprises</h3>
-                        <p className="text-white/95 leading-relaxed">
+                    <div className="space-y-6 mb-8">
+                      <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
+                        <h3 className="text-accent font-bold text-lg mb-3 drop-shadow-md">1. Rejoignez la Grey Team Entreprises</h3>
+                        <p className="text-white leading-relaxed drop-shadow-md">
                           Inscrivez-vous gratuitement et accédez à notre réseau exclusif des talents parmi les plus prometteurs d'Afrique.
                         </p>
                       </div>
                       
-                      <div className="bg-black/40 backdrop-blur-md p-5 rounded-xl border border-white/10">
-                        <h3 className="text-accent font-bold text-xl mb-3">2. Définissez Vos Besoins Précisément</h3>
-                        <p className="text-white/95 leading-relaxed">
+                      <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
+                        <h3 className="text-accent font-bold text-lg mb-3 drop-shadow-md">2. Définissez Vos Besoins Précisément</h3>
+                        <p className="text-white leading-relaxed drop-shadow-md">
                           Dans votre espace dédié, partagez votre vision, vos valeurs et vos exigences. Plus vos critères seront précis, plus notre matching sera pertinent.
                         </p>
                       </div>
                       
-                      <div className="bg-black/40 backdrop-blur-md p-5 rounded-xl border border-white/10">
-                        <h3 className="text-accent font-bold text-xl mb-3">3. Découvrez Vos Talents Idéaux</h3>
-                        <p className="text-white/95 leading-relaxed">
+                      <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
+                        <h3 className="text-accent font-bold text-lg mb-3 drop-shadow-md">3. Découvrez Vos Talents Idéaux</h3>
+                        <p className="text-white leading-relaxed drop-shadow-md">
                           Nos experts analysent vos besoins et mobilisent leur réseau pour vous présenter uniquement des profils parfaitement adaptés à votre culture et vos ambitions. Fini les recrutements hasardeux – seuls les meilleurs talents vous sont proposés.
                         </p>
                       </div>
@@ -340,7 +340,7 @@ export default function Home() {
                   <Button 
                     asChild 
                     size="lg"
-                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-lg py-7 w-full shadow-2xl hover:shadow-accent/50 transition-all mt-6"
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-base md:text-lg py-6 w-full shadow-xl hover:shadow-2xl transition-all"
                   >
                     <Link href="/submit-job">Je cherche un talent</Link>
                   </Button>
