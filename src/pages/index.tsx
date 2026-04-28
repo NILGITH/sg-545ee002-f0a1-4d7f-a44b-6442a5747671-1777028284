@@ -253,8 +253,8 @@ export default function Home() {
                   src="/419.jpg"
                   alt="Candidat - Je cherche un emploi"
                   fill
-                  className="object-cover"
-                />
+                  className="object-cover" />
+                
                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/90"></div>
                 
                 <div className="relative h-full flex flex-col justify-between p-8 md:p-12 text-white">
@@ -287,11 +287,11 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  <Button 
-                    asChild 
+                  <Button
+                    asChild
                     size="lg"
-                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-base md:text-lg py-6 w-full shadow-xl hover:shadow-2xl transition-all"
-                  >
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-base md:text-lg py-6 w-full shadow-xl hover:shadow-2xl transition-all">
+                    
                     <Link href="/jobs">Je cherche un job</Link>
                   </Button>
                 </div>
@@ -303,8 +303,8 @@ export default function Home() {
                   src="/1762.jpg"
                   alt="Entreprise - Je cherche un talent"
                   fill
-                  className="object-cover"
-                />
+                  className="object-cover" />
+                
                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/90"></div>
                 
                 <div className="relative h-full flex flex-col justify-between p-8 md:p-12 text-white">
@@ -337,11 +337,11 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  <Button 
-                    asChild 
+                  <Button
+                    asChild
                     size="lg"
-                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-base md:text-lg py-6 w-full shadow-xl hover:shadow-2xl transition-all"
-                  >
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-base md:text-lg py-6 w-full shadow-xl hover:shadow-2xl transition-all">
+                    
                     <Link href="/submit-job">Je cherche un talent</Link>
                   </Button>
                 </div>
@@ -630,7 +630,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-primary/90"></div>
           </div>
           <div className="container relative text-center space-y-8 text-white">
-            <h2 className="font-serif text-3xl md:text-5xl font-bold max-w-3xl mx-auto">Prêt à nous rejoindre ?
+            <h2 className="font-serif text-3xl md:text-5xl font-bold max-w-3xl mx-auto">Prêt à rejoindre l'aventure ?
 
             </h2>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
