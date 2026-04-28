@@ -58,7 +58,7 @@ export default function ServicesEntreprises() {
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
                   <Users className="text-accent" size={36} />
                 </div>
-                <h2 className="font-serif text-3xl md:text-5xl font-bold">Recrutement</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold" style={{ fontSize: "32px" }}>Recrutement 360° - De A à Z</h2>
                 <p className="text-lg text-muted-foreground">
                   Nous transformons vos besoins en success stories. Notre méthode signature en 3 temps garantit des recrutements précis et durables en Côte d'Ivoire.
                 </p>
@@ -110,30 +110,31 @@ export default function ServicesEntreprises() {
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
                   <Target className="text-accent" size={36} />
                 </div>
-                <h2 className="font-serif text-3xl md:text-5xl font-bold">Analyse Salariale</h2>
-                <p className="text-lg text-muted-foreground">
-                  Premier cabinet à publier un Guide des Salaires en Côte d'Ivoire, offrant une vision 360° des tendances salariales du marché ivoirien.
+                <h2 className="font-serif text-3xl md:text-5xl font-bold" style={{ fontSize: "32px" }}>Conseil RH · Audit Social · GEPP</h2>
+                <p className="text-lg text-muted-foreground">Transformer votre fonction RH en levier stratégique
+
                 </p>
                 <div className="space-y-4">
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
-                      <h3 className="font-semibold mb-1">Collecte de données rigoureuse</h3>
-                      <p className="text-muted-foreground">Via des entretiens directs avec des professionnels clés à Abidjan</p>
+                      <h3 className="font-semibold mb-1">Audit RH global</h3>
+                      <p className="text-muted-foreground">ratiques, forces, risques et plan d'action priorisé</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
-                      <h3 className="font-semibold mb-1">Analyse sectorielle pointue</h3>
-                      <p className="text-muted-foreground">Adaptée aux réalités du marché ivoirien et international</p>
+                      <h3 className="font-semibold mb-1">Audit social</h3>
+                      <p className="text-muted-foreground">climat, bien-être, risques psychosociaux (RPS), conformité réglementaire</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle className="text-accent flex-shrink-0 mt-1" size={24} />
                     <div>
-                      <h3 className="font-semibold mb-1">Benchmarking complet</h3>
-                      <p className="text-muted-foreground">Politiques salariales et avantages compétitifs en Côte d'Ivoire</p>
+                      <h3 className="font-semibold mb-1">GEPP & Politiques RH stratégiques</h3>
+                      <p className="text-muted-foreground">cartographie des compétences, plans de développement, anticipation des besoins futurs
+Déploiement SIRH, Mise en conformité juridique</p>
                     </div>
                   </div>
                 </div>
@@ -146,7 +147,7 @@ export default function ServicesEntreprises() {
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
                   <Handshake className="text-accent" size={36} />
                 </div>
-                <h2 className="font-serif text-3xl md:text-5xl font-bold">Team Building</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold" style={{ fontSize: "32px" }}>Teambuilding & Cohésion d'Équipe</h2>
                 <p className="text-lg text-muted-foreground">
                   Nous ne nous contentons pas d'organiser des activités. Nous concevons des expériences sur mesure adaptées à votre culture d'entreprise et vos objectifs en Côte d'Ivoire.
                 </p>
@@ -175,11 +176,10 @@ export default function ServicesEntreprises() {
                 </div>
               </div>
               <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20 shadow-lg">
-                <Image
-                  src="/2149603484.jpg"
-                  alt="Équipe collaborative en team building"
-                  fill
-                  className="object-cover" />
+                <Image src="/2149603484.jpg"
+                alt="Équipe collaborative en team building"
+                fill
+                className="object-cover" />
                 
               </div>
             </div>
@@ -198,7 +198,7 @@ export default function ServicesEntreprises() {
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
                   <GraduationCap className="text-accent" size={36} />
                 </div>
-                <h2 className="font-serif text-3xl md:text-5xl font-bold">Formation</h2>
+                <h2 className="font-serif text-3xl md:text-5xl font-bold" style={{ fontSize: "32px" }}>Formation Professionnelle</h2>
                 <p className="text-lg text-muted-foreground">
                   Boostez vos compétences ! Nous ne recrutons pas les meilleurs talents : on les façonne pour l'avenir de la Côte d'Ivoire !
                 </p>
