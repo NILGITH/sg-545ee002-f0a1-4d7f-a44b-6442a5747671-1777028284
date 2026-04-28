@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <img src="/ogo_hr_blanc.png" alt="HR Talents Partners" className="h-20 w-auto" />
+            <img src="/ChatGPT_Image_Apr_28_2026_05_55_50_PM.png" alt="HR Talents Partners" className="h-20 w-auto" />
             <p className="text-sm text-primary-foreground/80">
               Ambassadeur de Talents et d'Excellence
             </p>
