@@ -46,7 +46,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <Mail size={16} className="mt-1 flex-shrink-0" />
-                <span>rh@hrtalentspartners.com</span>
+                <span>contact@hrtalentspartners.com</span>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="mt-1 flex-shrink-0" />
@@ -72,6 +72,6 @@ export function Footer() {
           <p>&copy; {new Date().getFullYear()} HR Talents Partners. Tous droits réservés.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 }
