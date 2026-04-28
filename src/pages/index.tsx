@@ -250,37 +250,37 @@ export default function Home() {
               {/* Carte CANDIDAT */}
               <div className="relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden group shadow-2xl">
                 <Image
-                  src="/2149300718.jpg"
+                  src="/419.jpg"
                   alt="Candidat - Je cherche un emploi"
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/90"></div>
                 
                 <div className="relative h-full flex flex-col justify-between p-8 md:p-12 text-white">
                   <div>
-                    <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+                    <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight drop-shadow-lg">
                       CANDIDAT
                     </h2>
                     
                     <div className="space-y-6 mb-8">
-                      <div>
-                        <h3 className="text-accent font-bold text-lg mb-3">1. Rejoignez la Grey Team Entreprises</h3>
-                        <p className="text-white/90 leading-relaxed">
+                      <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
+                        <h3 className="text-accent font-bold text-lg mb-3 drop-shadow-md">1. Rejoignez la Grey Team Entreprises</h3>
+                        <p className="text-white leading-relaxed drop-shadow-md">
                           Inscrivez-vous gratuitement et entrez dans le cercle privilégié des talents d'excellence en Afrique.
                         </p>
                       </div>
                       
-                      <div>
-                        <h3 className="text-accent font-bold text-lg mb-3">2. Brillez par votre Singularité</h3>
-                        <p className="text-white/90 leading-relaxed">
+                      <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
+                        <h3 className="text-accent font-bold text-lg mb-3 drop-shadow-md">2. Brillez par votre Singularité</h3>
+                        <p className="text-white leading-relaxed drop-shadow-md">
                           Dans votre espace privé, construisez votre profil qui dévoile tous vos atouts. CV, expériences, ambitions… Laissez votre talent s'exprimer !
                         </p>
                       </div>
                       
-                      <div>
-                        <h3 className="text-accent font-bold text-lg mb-3">3. Place au Match Parfait</h3>
-                        <p className="text-white/90 leading-relaxed">
+                      <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
+                        <h3 className="text-accent font-bold text-lg mb-3 drop-shadow-md">3. Place au Match Parfait</h3>
+                        <p className="text-white leading-relaxed drop-shadow-md">
                           Nos experts analysent votre profil et activent leur réseau pour dénicher les opportunités qui vous correspondent vraiment. Plus besoin de chercher – les meilleures opportunités viennent à vous.
                         </p>
                       </div>
@@ -290,7 +290,7 @@ export default function Home() {
                   <Button 
                     asChild 
                     size="lg"
-                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-base md:text-lg py-6 w-full shadow-lg hover:shadow-xl transition-all"
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-base md:text-lg py-6 w-full shadow-xl hover:shadow-2xl transition-all"
                   >
                     <Link href="/jobs">Je cherche un job</Link>
                   </Button>
@@ -300,37 +300,37 @@ export default function Home() {
               {/* Carte ENTREPRISE */}
               <div className="relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden group shadow-2xl">
                 <Image
-                  src="/2149603484.jpg"
+                  src="/1762.jpg"
                   alt="Entreprise - Je cherche un talent"
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/90"></div>
                 
                 <div className="relative h-full flex flex-col justify-between p-8 md:p-12 text-white">
                   <div>
-                    <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+                    <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight drop-shadow-lg">
                       ENTREPRISE
                     </h2>
                     
                     <div className="space-y-6 mb-8">
-                      <div>
-                        <h3 className="text-accent font-bold text-lg mb-3">1. Rejoignez la Grey Team Entreprises</h3>
-                        <p className="text-white/90 leading-relaxed">
+                      <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
+                        <h3 className="text-accent font-bold text-lg mb-3 drop-shadow-md">1. Rejoignez la Grey Team Entreprises</h3>
+                        <p className="text-white leading-relaxed drop-shadow-md">
                           Inscrivez-vous gratuitement et accédez à notre réseau exclusif des talents parmi les plus prometteurs d'Afrique.
                         </p>
                       </div>
                       
-                      <div>
-                        <h3 className="text-accent font-bold text-lg mb-3">2. Définissez Vos Besoins Précisément</h3>
-                        <p className="text-white/90 leading-relaxed">
+                      <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
+                        <h3 className="text-accent font-bold text-lg mb-3 drop-shadow-md">2. Définissez Vos Besoins Précisément</h3>
+                        <p className="text-white leading-relaxed drop-shadow-md">
                           Dans votre espace dédié, partagez votre vision, vos valeurs et vos exigences. Plus vos critères seront précis, plus notre matching sera pertinent.
                         </p>
                       </div>
                       
-                      <div>
-                        <h3 className="text-accent font-bold text-lg mb-3">3. Découvrez Vos Talents Idéaux</h3>
-                        <p className="text-white/90 leading-relaxed">
+                      <div className="bg-black/20 backdrop-blur-sm p-4 rounded-lg">
+                        <h3 className="text-accent font-bold text-lg mb-3 drop-shadow-md">3. Découvrez Vos Talents Idéaux</h3>
+                        <p className="text-white leading-relaxed drop-shadow-md">
                           Nos experts analysent vos besoins et mobilisent leur réseau pour vous présenter uniquement des profils parfaitement adaptés à votre culture et vos ambitions. Fini les recrutements hasardeux – seuls les meilleurs talents vous sont proposés.
                         </p>
                       </div>
@@ -340,7 +340,7 @@ export default function Home() {
                   <Button 
                     asChild 
                     size="lg"
-                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-base md:text-lg py-6 w-full shadow-lg hover:shadow-xl transition-all"
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold text-base md:text-lg py-6 w-full shadow-xl hover:shadow-2xl transition-all"
                   >
                     <Link href="/submit-job">Je cherche un talent</Link>
                   </Button>
