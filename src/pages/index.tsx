@@ -31,28 +31,28 @@ type Testimonial = {
 };
 
 const heroSlides = [
-  {
-    title: "Votre Capital Humain, Votre Premier Levier de Croissance",
-    subtitle: "Expert en recrutement, conseil RH et développement des talents en Côte d'Ivoire",
-    cta: "Découvrir nos services",
-    ctaLink: "/services",
-    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80",
-  },
-  {
-    title: "Nous Développons des Potentiels Humains",
-    subtitle: "L'assurance d'un cabinet qui s'engage personnellement sur chaque mission",
-    cta: "Nos services",
-    ctaLink: "/services",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80",
-  },
-  {
-    title: "Excellence et Innovation RH",
-    subtitle: "Avec la rigueur d'un partenaire stratégique et la proximité d'une équipe dédiée à votre succès",
-    cta: "À propos de nous",
-    ctaLink: "/about",
-    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&q=80",
-  },
-];
+{
+  title: "Votre Capital Humain, Votre Premier Levier de Croissance",
+  subtitle: "Expert en recrutement, conseil RH et développement des talents en Côte d'Ivoire",
+  cta: "Découvrir nos services",
+  ctaLink: "/services",
+  image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80"
+},
+{
+  title: "Nous Développons des Potentiels Humains",
+  subtitle: "L'assurance d'un cabinet qui s'engage personnellement sur chaque mission",
+  cta: "Nos services",
+  ctaLink: "/services",
+  image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80"
+},
+{
+  title: "Excellence et Innovation RH",
+  subtitle: "Avec la rigueur d'un partenaire stratégique et la proximité d'une équipe dédiée à votre succès",
+  cta: "À propos de nous",
+  ctaLink: "/about",
+  image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&q=80"
+}];
+
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -65,25 +65,25 @@ export default function Home() {
   }, []);
 
   const loadPartnerships = async () => {
-    const { data } = await supabase
-      .from("partnerships")
-      .select("id, company_name, logo_url, website_url, category, display_order")
-      .eq("is_active", true)
-      .order("display_order", { ascending: true });
-    
+    const { data } = await supabase.
+    from("partnerships").
+    select("id, company_name, logo_url, website_url, category, display_order").
+    eq("is_active", true).
+    order("display_order", { ascending: true });
+
     if (data) {
       setPartnerships(data);
     }
   };
 
   const loadTestimonials = async () => {
-    const { data } = await supabase
-      .from("testimonials")
-      .select("id, author_name, author_position, author_company, author_photo_url, content, rating, is_featured, display_order")
-      .eq("is_active", true)
-      .order("display_order", { ascending: true })
-      .limit(6);
-    
+    const { data } = await supabase.
+    from("testimonials").
+    select("id, author_name, author_position, author_company, author_photo_url, content, rating, is_featured, display_order").
+    eq("is_active", true).
+    order("display_order", { ascending: true }).
+    limit(6);
+
     if (data) {
       setTestimonials(data);
     }
@@ -99,10 +99,10 @@ export default function Home() {
 
   return (
     <>
-      <SEO 
+      <SEO
         title="HR Talents Partners - Ambassadeur de Talents et d'Excellence"
-        description="Premier cabinet de recrutement et conseil RH en Côte d'Ivoire. +50 000 talents, +250 entreprises accompagnées à Abidjan."
-      />
+        description="Premier cabinet de recrutement et conseil RH en Côte d'Ivoire. +50 000 talents, +250 entreprises accompagnées à Abidjan." />
+      
       
       <Navigation />
       
@@ -110,21 +110,21 @@ export default function Home() {
         {/* Hero Slider Section */}
         <section className="relative overflow-hidden">
           <div className="relative h-[600px] md:h-[700px]">
-            {heroSlides.map((slide, index) => (
-              <div
-                key={index}
-                className={`absolute inset-0 transition-opacity duration-700 ${
-                  index === currentSlide ? "opacity-100" : "opacity-0"
-                }`}
-              >
+            {heroSlides.map((slide, index) =>
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-700 ${
+              index === currentSlide ? "opacity-100" : "opacity-0"}`
+              }>
+              
                 <div className="absolute inset-0">
                   <Image
-                    src={slide.image}
-                    alt={slide.title}
-                    fill
-                    className="object-cover"
-                    priority={index === 0}
-                  />
+                  src={slide.image}
+                  alt={slide.title}
+                  fill
+                  className="object-cover"
+                  priority={index === 0} />
+                
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/50"></div>
                 </div>
 
@@ -137,15 +137,15 @@ export default function Home() {
                     </div>
                     
                     <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-tight animate-in fade-in slide-in-from-bottom-4 duration-700">
-                      {slide.title.split(" ").map((word, i) => (
-                        <span key={i}>
-                          {word === "Opportunités" || word === "Confiance" || word === "Innovation" ? (
-                            <span className="text-accent">{word}</span>
-                          ) : (
-                            word
-                          )}{" "}
+                      {slide.title.split(" ").map((word, i) =>
+                    <span key={i}>
+                          {word === "Opportunités" || word === "Confiance" || word === "Innovation" ?
+                      <span className="text-accent">{word}</span> :
+
+                      word
+                      }{" "}
                         </span>
-                      ))}
+                    )}
                     </h1>
                     
                     <p className="text-lg md:text-xl text-white/90 max-w-2xl animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: "0.2s" }}>
@@ -165,36 +165,36 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            ))}
+            )}
 
             <button
               onClick={prevSlide}
               className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur border-2 border-accent hover:bg-accent hover:text-white transition-all flex items-center justify-center z-10"
-              aria-label="Previous slide"
-            >
+              aria-label="Previous slide">
+              
               <ChevronLeft size={24} />
             </button>
             <button
               onClick={nextSlide}
               className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur border-2 border-accent hover:bg-accent hover:text-white transition-all flex items-center justify-center z-10"
-              aria-label="Next slide"
-            >
+              aria-label="Next slide">
+              
               <ChevronRight size={24} />
             </button>
 
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
-              {heroSlides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`h-3 rounded-full transition-all ${
-                    index === currentSlide
-                      ? "bg-accent w-8"
-                      : "bg-white/50 hover:bg-white/70 w-3"
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
+              {heroSlides.map((_, index) =>
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`h-3 rounded-full transition-all ${
+                index === currentSlide ?
+                "bg-accent w-8" :
+                "bg-white/50 hover:bg-white/70 w-3"}`
+                }
+                aria-label={`Go to slide ${index + 1}`} />
+
+              )}
             </div>
           </div>
         </section>
@@ -471,39 +471,39 @@ export default function Home() {
               <div className="flex gap-8 animate-scroll">
                 {/* First set of logos from database */}
                 <div className="flex gap-8 min-w-max">
-                  {partnerships.map((partner) => (
-                    <div key={partner.id} className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                      {partner.logo_url ? (
-                        <img 
-                          src={partner.logo_url} 
-                          alt={partner.company_name}
-                          className="h-12 w-auto object-contain group-hover:scale-110 transition-transform"
-                        />
-                      ) : (
-                        <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">
+                  {partnerships.map((partner) =>
+                  <div key={partner.id} className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                      {partner.logo_url ?
+                    <img
+                      src={partner.logo_url}
+                      alt={partner.company_name}
+                      className="h-12 w-auto object-contain group-hover:scale-110 transition-transform" /> :
+
+
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">
                           {partner.company_name}
                         </span>
-                      )}
+                    }
                     </div>
-                  ))}
+                  )}
                 </div>
                 {/* Duplicate set for seamless infinite loop */}
                 <div className="flex gap-8 min-w-max">
-                  {partnerships.map((partner) => (
-                    <div key={`dup-${partner.id}`} className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
-                      {partner.logo_url ? (
-                        <img 
-                          src={partner.logo_url} 
-                          alt={partner.company_name}
-                          className="h-12 w-auto object-contain group-hover:scale-110 transition-transform"
-                        />
-                      ) : (
-                        <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">
+                  {partnerships.map((partner) =>
+                  <div key={`dup-${partner.id}`} className="group bg-card border-2 border-border hover:border-accent transition-all duration-300 rounded-lg px-8 py-6 min-w-[240px] flex items-center justify-center shadow-sm hover:shadow-md">
+                      {partner.logo_url ?
+                    <img
+                      src={partner.logo_url}
+                      alt={partner.company_name}
+                      className="h-12 w-auto object-contain group-hover:scale-110 transition-transform" /> :
+
+
+                    <span className="text-xl font-bold text-foreground/60 group-hover:text-accent transition-colors whitespace-nowrap">
                           {partner.company_name}
                         </span>
-                      )}
+                    }
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
             </div>
@@ -518,136 +518,136 @@ export default function Home() {
         </section>
 
         {/* Guide des Salaires Section - IMAGE LOCALE */}
-        <section className="py-20 md:py-32 bg-white">
-          <div className="container">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border-2 border-accent/20 shadow-lg">
-                <Image
-                  src="/15685.jpg"
-                  alt="Guide des Salaires en Côte d'Ivoire - Analyse de données salariales"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="space-y-6">
-                <div className="inline-block border-2 border-accent px-4 py-2">
-                  <span className="font-serif text-sm font-semibold uppercase tracking-wider text-accent">
-                    Premier Observatoire RH
-                  </span>
-                </div>
-                <h2 className="font-serif text-3xl md:text-5xl font-bold">
-                  Guide des Salaires en Côte d'Ivoire
-                </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Pionnier de l'intelligence RH en Côte d'Ivoire, nous avons été le premier cabinet 
-                  à publier un Guide des Salaires, offrant une vision 360° des tendances salariales 
-                  du marché ivoirien basée sur une méthodologie rigoureuse.
-                </p>
-                
-                {/* Méthodologie */}
-                <div className="bg-muted/30 border-l-4 border-accent p-6 space-y-3">
-                  <h4 className="font-serif text-lg font-semibold">Notre méthodologie</h4>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Collecte de données confidentielles via des entretiens directs avec des professionnels clés</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Analyse sectorielle pointue, adaptée aux réalités du marché ivoirien</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-accent flex-shrink-0 mt-0.5" size={16} />
-                      <span>Benchmarking complet des politiques salariales et avantages compétitifs</span>
-                    </li>
-                  </ul>
-                </div>
+        
 
-                <div className="grid grid-cols-3 gap-4 pt-4">
-                  <div className="text-center p-4 bg-accent/5 rounded-lg border border-accent/20">
-                    <div className="text-3xl font-bold font-serif text-accent mb-1">5000+</div>
-                    <p className="text-xs text-muted-foreground">Répondants au sondage</p>
-                  </div>
-                  <div className="text-center p-4 bg-accent/5 rounded-lg border border-accent/20">
-                    <div className="text-3xl font-bold font-serif text-accent mb-1">20</div>
-                    <p className="text-xs text-muted-foreground">Index publiés</p>
-                  </div>
-                  <div className="text-center p-4 bg-accent/5 rounded-lg border border-accent/20">
-                    <div className="text-3xl font-bold font-serif text-accent mb-1">CI</div>
-                    <p className="text-xs text-muted-foreground">Marché couvert</p>
-                  </div>
-                </div>
-                <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                  <Link href="/contact">
-                    Télécharger le Guide GSA <ArrowRight className="ml-2" size={20} />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
 
         {/* Notre Méthodologie - 4 ÉTAPES DU PDF */}
-        <section className="py-20 md:py-32 bg-muted/30">
-          <div className="container">
-            <div className="text-center mb-16 space-y-4">
-              <h2 className="font-serif text-3xl md:text-5xl font-bold">Notre Méthodologie</h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto italic">
-                « La précision du diagnostic détermine la qualité de la solution. L'engagement jusqu'à la fin détermine la réalité du résultat. »
-              </p>
-            </div>
+        
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <Card className="border-2 border-accent/20 hover:border-accent transition-all duration-300">
-                <CardContent className="pt-8 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center mx-auto font-serif text-2xl font-bold">
-                    01
-                  </div>
-                  <h3 className="font-serif text-2xl font-semibold text-center">ANALYSER</h3>
-                  <p className="text-muted-foreground text-center">
-                    Immersion dans votre réalité : entretiens approfondis, analyse documentaire, cartographie des enjeux RH.
-                  </p>
-                </CardContent>
-              </Card>
 
-              <Card className="border-2 border-accent/20 hover:border-accent transition-all duration-300">
-                <CardContent className="pt-8 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center mx-auto font-serif text-2xl font-bold">
-                    02
-                  </div>
-                  <h3 className="font-serif text-2xl font-semibold text-center">CONCEVOIR</h3>
-                  <p className="text-muted-foreground text-center">
-                    Solutions 100% sur mesure, co-construites et validées avec vous. Jamais standardisé. Toujours pertinent.
-                  </p>
-                </CardContent>
-              </Card>
 
-              <Card className="border-2 border-accent/20 hover:border-accent transition-all duration-300">
-                <CardContent className="pt-8 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center mx-auto font-serif text-2xl font-bold">
-                    03
-                  </div>
-                  <h3 className="font-serif text-2xl font-semibold text-center">EXÉCUTER</h3>
-                  <p className="text-muted-foreground text-center">
-                    Déploiement rigoureux avec KPIs définis en amont, jalons précis et communication transparente.
-                  </p>
-                </CardContent>
-              </Card>
 
-              <Card className="border-2 border-accent/20 hover:border-accent transition-all duration-300">
-                <CardContent className="pt-8 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center mx-auto font-serif text-2xl font-bold">
-                    04
-                  </div>
-                  <h3 className="font-serif text-2xl font-semibold text-center">PÉRENNISER</h3>
-                  <p className="text-muted-foreground text-center">
-                    Mesure d'impact, ajustements continus et transfert de compétences pour ancrer la transformation.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
 
         {/* Testimonials Section */}
         <section className="py-20 md:py-32 bg-muted/30">
@@ -660,37 +660,37 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.length > 0 ? (
-                testimonials.map((testimonial) => (
-                  <Card key={testimonial.id} className="border-2 hover:border-accent transition-all duration-300">
+              {testimonials.length > 0 ?
+              testimonials.map((testimonial) =>
+              <Card key={testimonial.id} className="border-2 hover:border-accent transition-all duration-300">
                     <CardContent className="pt-8 space-y-4">
                       <div className="flex gap-4 items-center mb-4">
                         <div className="relative w-16 h-16 rounded-full overflow-hidden bg-muted">
-                          {testimonial.author_photo_url ? (
-                            <Image
-                              src={testimonial.author_photo_url}
-                              alt={testimonial.author_name}
-                              fill
-                              className="object-cover"
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center bg-accent/10 text-accent font-bold text-xl">
+                          {testimonial.author_photo_url ?
+                      <Image
+                        src={testimonial.author_photo_url}
+                        alt={testimonial.author_name}
+                        fill
+                        className="object-cover" /> :
+
+
+                      <div className="w-full h-full flex items-center justify-center bg-accent/10 text-accent font-bold text-xl">
                               {testimonial.author_name.charAt(0)}
                             </div>
-                          )}
+                      }
                         </div>
                         <MessageSquare className="text-accent" size={32} />
                       </div>
                       
                       {/* Rating stars */}
                       <div className="flex gap-1">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            size={16}
-                            className={i < testimonial.rating ? "fill-accent text-accent" : "text-muted"}
-                          />
-                        ))}
+                        {[...Array(5)].map((_, i) =>
+                    <Star
+                      key={i}
+                      size={16}
+                      className={i < testimonial.rating ? "fill-accent text-accent" : "text-muted"} />
+
+                    )}
                       </div>
 
                       <p className="text-muted-foreground italic">
@@ -704,12 +704,12 @@ export default function Home() {
                       </div>
                     </CardContent>
                   </Card>
-                ))
-              ) : (
-                <div className="col-span-3 text-center text-muted-foreground py-12">
+              ) :
+
+              <div className="col-span-3 text-center text-muted-foreground py-12">
                   Aucun témoignage pour le moment
                 </div>
-              )}
+              }
             </div>
           </div>
         </section>
@@ -721,13 +721,13 @@ export default function Home() {
               src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1920&q=80"
               alt="Background"
               fill
-              className="object-cover"
-            />
+              className="object-cover" />
+            
             <div className="absolute inset-0 bg-primary/90"></div>
           </div>
           <div className="container relative text-center space-y-8 text-white">
-            <h2 className="font-serif text-3xl md:text-5xl font-bold max-w-3xl mx-auto">
-              Prêt à rejoindre la Grey Team ?
+            <h2 className="font-serif text-3xl md:text-5xl font-bold max-w-3xl mx-auto">Prêt à nous rejoindre ?
+
             </h2>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
               Découvrez nos offres d'emploi ou contactez-nous pour discuter de vos besoins en recrutement
@@ -747,6 +747,6 @@ export default function Home() {
       </main>
 
       <Footer />
-    </>
-  );
+    </>);
+
 }
