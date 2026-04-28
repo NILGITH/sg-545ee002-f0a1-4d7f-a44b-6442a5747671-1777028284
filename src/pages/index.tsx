@@ -245,7 +245,7 @@ export default function Home() {
 
         {/* Section Candidat/Entreprise - Design basé sur les services */}
         <section className="py-20 md:py-32 bg-secondary/30">
-          <div className="container">
+          <div className="container" style={{ padding: "0px" }}>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Carte CANDIDAT */}
               <div className="relative h-[600px] md:h-[700px] rounded-2xl overflow-hidden group shadow-2xl">
