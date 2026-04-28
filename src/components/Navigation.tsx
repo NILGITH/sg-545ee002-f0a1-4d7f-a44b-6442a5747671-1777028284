@@ -14,7 +14,7 @@ export function Navigation() {
           <Link href="/" className="flex items-center space-x-4 group">
             <div className="relative w-48 h-[90px]">
               <Image
-                src="/logo_hr_sans_fond.png"
+                src="/WhatsApp_Image_2026-04-28_at_17.52.24.jpeg"
                 alt="HR Talents Partners"
                 fill
                 className="object-contain transition-transform group-hover:scale-105"
